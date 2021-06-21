@@ -1,8 +1,5 @@
 # DOTS
-
-![Image](https://imgur.com/dpfCsT4)
-
-![Alt Text](https://imgur.com/dpfCsT4)
+[Imgur](https://imgur.com/dpfCsT4)
 
 ## Includes
 * i3wm
