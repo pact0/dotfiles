@@ -1,6 +1,6 @@
 # DOTS
 
-![](https://imgur.com/dpfCsT4)
+![Image](https://imgur.com/dpfCsT4)
 ## Includes
 * i3wm
 * compton (rather outdated, soon will be switching to picom)
