@@ -2,7 +2,7 @@
 
 ![Image](https://imgur.com/dpfCsT4)
 
-![Alt Text](https://i.imgur.com/eciVwr5.gif)
+![Alt Text](https://imgur.com/dpfCsT4)
 
 ## Includes
 * i3wm
