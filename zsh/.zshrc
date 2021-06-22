@@ -3,7 +3,7 @@ autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 export EDITOR=nvim
 export VISUAL=nvim
-
+export TERM=termite
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
