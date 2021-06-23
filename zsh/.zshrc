@@ -15,7 +15,7 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
-source /usr/share/zsh/plugins/sudo-plugin/sudo.plugin.zsh 2>/dev/null
+source ~/dotfiles/config/.config/zsh/plugins/sudo-plugin/sudo.plugin.zsh 2>/dev/null
 
 # vi mode
 
@@ -47,7 +47,7 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source ~/dotfiles/config/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 [[ -s /home/pacto/.autojump/etc/profile.d/autojump.sh ]] && source /home/pacto/.autojump/etc/profile.d/autojump.sh
 
 
@@ -74,9 +74,9 @@ man() {
 			man "$@"
 }
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-z/zsh-z.plugin.zsh
+source ~/dotfiles/config/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source ~/dotfiles/config/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/dotfiles/config/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh
 
 
 autoload -U promptinit; promptinit
