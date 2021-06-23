@@ -18,7 +18,15 @@ nnoremap <leader>u :UndotreeToggle<CR>
 " jump to definition and to reference 
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-reference)
+
+" toggle markdown preview
+nmap <leader>mp <Plug>MarkdownPreviewToggle
 " map tab to trigger completion
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :

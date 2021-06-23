@@ -59,9 +59,9 @@ alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=au
 alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
 alias ltag='ls -t | ag'
 alias dev="cd ~/Documents/dev"
-
+alias ra='ranger'
+alias h='history'
 alias grep='grep --color=tty -d skip'
-
 
 man() {
 	env \
@@ -75,5 +75,9 @@ man() {
 }
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-z/zsh-z.plugin.zsh
+
+
 autoload -U promptinit; promptinit
 prompt spaceship
