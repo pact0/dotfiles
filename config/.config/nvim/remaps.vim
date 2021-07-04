@@ -113,3 +113,26 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 EOF
+
+nnoremap <silent> <S-Up>    :<C-U>exec "exec 'norm m`' \| move -" . (1+v:count1)<CR>``
+nnoremap <silent> <S-Down>  :<C-U>exec "exec 'norm m`' \| move +" . (0+v:count1)<CR>``
+
+inoremap <silent> <S-Up>    <C-O>m`<C-O>:move -2<CR><C-O>``
+inoremap <silent> <S-Down>  <C-O>m`<C-O>:move +1<CR><C-O>``
+
+vnoremap <silent> <S-Down>  :<C-U>exec "'<,'>move '>+" . (0+v:count1)<CR>gv
+vnoremap <silent> <S-Up>    :<C-U>exec "'<,'>move '<-" . (1+v:count1)<CR>gv
+
+" open header/source file
+nnoremap <silent> <A-o> :FSHere<cr>
+" Extra hotkeys to open header/source in the split
+nnoremap <silent> <leader>oh :FSSplitLeft<cr>
+nnoremap <silent> <leader>oj :FSSplitBelow<cr>
+nnoremap <silent> <leader>ok :FSSplitAbove<cr>
+nnoremap <silent> <leader>ol :FSSplitRight<cr>
+
+
+" vv selects till end of line not including new line
+vnoremap v $h
+"Y in v mode copiers to selection
+vnoremap Y "*y
