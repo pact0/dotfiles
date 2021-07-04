@@ -14,12 +14,11 @@ source $HOME/.config/nvim/remaps.vim
 source $HOME/.config/nvim/plugins/telescope.vim
 source $HOME/.config/nvim/plugins/dashboard.vim
 source $HOME/.config/nvim/plugins/lsp.vim
+source $HOME/.config/nvim/plugins/vimspector.vim
 
 let g:webdevicons_enable_startify = 1
 let g:NERDCreateDefaultMappings = 1
-" Use <C-l> for trigger snippet expand.
 let NERDTreeShowHidden=1
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " bar setup
 lua require('lualine').setup{options = {theme = 'gruvbox'}}

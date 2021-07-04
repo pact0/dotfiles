@@ -1,5 +1,5 @@
 "######################################################################
-" PLUGINS 
+" PLUGINS
 "######################################################################
 
 call plug#begin('~/.vim/plugged')
@@ -53,10 +53,10 @@ Plug 'tpope/vim-commentary'
 " pretty
 Plug 'sbdchd/neoformat'
 
-" file tree and comments 
+" file tree and comments
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
-" debugging leader p 
+" debugging leader p
 Plug 'meain/vim-printer'
 " autocomplete and snippets
 "Plug 'neoclide/coc-snippets'
@@ -74,10 +74,10 @@ Plug 'hoob3rt/lualine.nvim'
 "Plug 'Yggdroot/indentLine'
 " Plug 'lukas-reineke/indent-blankline.nvim'
 
-" segreate python imports 
+" segreate python imports
 "Plug 'fisadev/vim-isort'
 
-" scientific notation 
+" scientific notation
 Plug 'jbyuki/nabla.nvim'
 
 " edit jupyter notebooks
@@ -86,14 +86,28 @@ Plug 'goerz/jupytext.vim'
 " markdown-preview in browser
 Plug 'iamcco/markdown-preview.nvim'
 
+"Switch true to false etc
+Plug 'AndrewRadev/switch.vim'
+
+Plug 'tpope/vim-surround'
+"Plug 'mfussenegger/nvim-dap'
+"" Plug 'rcarriga/nvim-dap-ui'
+"Plug 'nvim-telescope/telescope-dap.nvim'
+"Plug 'theHamsta/nvim-dap-virtual-text'
+
 Plug 'tpope/vim-dispatch'
 Plug 'szw/vim-maximizer'
 Plug 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
   \ }
 " ranger in vim
+"gs
+Plug 'AndrewRadev/switch.vim' 
+" cs'"
+Plug 'tpope/vim-surround'
 "Plug 'kevinhwang91/rnvimr'
-
+Plug 'derekwyatt/vim-fswitch'
+Plug 'tyru/open-browser.vim'
 " pretty icons
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'

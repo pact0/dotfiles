@@ -1,3 +1,5 @@
 [user]
-	email = kuba.kowalski21331@mail.com
+	email = kuba.kowalski21331@gmail.com
 	name = pact0
+[credential]
+	helper = store
