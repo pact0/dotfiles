@@ -1,6 +1,4 @@
 #!/bin/bash
-pacman -S yay
-
-yay -S $(cat dependencies)
-
+pacman -S yay git base-devel
+yay -S $(cat dependencies | awk '{print $1}') 
 stow config tmux zsh
