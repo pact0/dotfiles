@@ -14,18 +14,14 @@ Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ThePrimeagen/git-worktree.nvim'
 
-
+Plug 'akinsho/nvim-toggleterm.lua'
 
 " undo tree
 Plug 'mbbill/undotree'
 
-
-
 " Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
-
-
 
 " telescope
 Plug 'nvim-telescope/telescope-media-files.nvim'
@@ -35,33 +31,54 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 
-
+" adds colors #fff
+Plug 'norcalli/nvim-colorizer.lua'
 
 " lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
 Plug 'anott03/nvim-lspinstall'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'glepnir/lspsaga.nvim'
+
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+Plug 'hrsh7th/vim-vsnip-integ'
+
+Plug 'hrsh7th/nvim-compe'
 Plug 'simrat39/symbols-outline.nvim'
 
+Plug 'styled-components/vim-styled-components'
 Plug 'rafamadriz/friendly-snippets'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
+
 Plug 'nvim-lua/diagnostic-nvim'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'tpope/vim-commentary'
+
+
+"Plug 'tpope/vim-commentary'
 
 " pretty
 Plug 'sbdchd/neoformat'
 
 " file tree and comments
-Plug 'preservim/nerdtree'
+"Plug 'preservim/nerdtree'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'preservim/nerdcommenter'
 " debugging leader p
 Plug 'meain/vim-printer'
+Plug 'jiangmiao/auto-pairs' 
 " autocomplete and snippets
 "Plug 'neoclide/coc-snippets'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 Plug 'adelarsq/vim-matchit'
 
 " Pretty start
@@ -89,7 +106,6 @@ Plug 'iamcco/markdown-preview.nvim'
 "Switch true to false etc
 Plug 'AndrewRadev/switch.vim'
 
-Plug 'tpope/vim-surround'
 "Plug 'mfussenegger/nvim-dap'
 "" Plug 'rcarriga/nvim-dap-ui'
 "Plug 'nvim-telescope/telescope-dap.nvim'
@@ -101,15 +117,13 @@ Plug 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
   \ }
 " ranger in vim
-"gs
-Plug 'AndrewRadev/switch.vim' 
+"Plug 'kevinhwang91/rnvimr'
 " cs'"
 Plug 'tpope/vim-surround'
-"Plug 'kevinhwang91/rnvimr'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'tyru/open-browser.vim'
+Plug 'ilyachur/cmake4vim'
 " pretty icons
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'ryanoasis/vim-devicons'
 call plug#end()
 

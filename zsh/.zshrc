@@ -7,7 +7,7 @@ export TERM=termite
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=~/.zsh_history
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -53,10 +53,12 @@ source ~/dotfiles/config/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-
 
 
 
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
-alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
-alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
-alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
+#alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
+#alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
+#alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
+#alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
+alias ls='exa --icons --colour always -F '
+alias ll='exa --icons --colour always -F --long --git -b '
 alias ltag='ls -t | ag'
 alias dev="cd ~/Documents/dev"
 alias ra='ranger'
