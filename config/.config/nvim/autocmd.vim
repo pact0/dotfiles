@@ -21,3 +21,8 @@ au BufEnter *.h  let b:fswitchdst = "c,cpp,cc,m"
 au BufEnter *.cc let b:fswitchdst = "h,hpp"
 
 au BufEnter *.h let b:fswitchdst = 'c,cpp,m,cc' | let b:fswitchlocs = 'reg:|include.*|src/**|'
+"
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+autocmd VimEnter * hi! Normal ctermbg=NONE guibg=NONE

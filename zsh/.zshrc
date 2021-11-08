@@ -3,7 +3,7 @@ autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 export EDITOR=nvim
 export VISUAL=nvim
-export TERM=termite
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -46,24 +46,23 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
-# Load zsh-syntax-highlighting; should be last.
-source ~/dotfiles/config/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-[[ -s /home/pacto/.autojump/etc/profile.d/autojump.sh ]] && source /home/pacto/.autojump/etc/profile.d/autojump.sh
 
 
 
 
-#alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
-#alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
-#alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
-#alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
-alias ls='exa --icons --colour always -F '
-alias ll='exa --icons --colour always -F --long --git -b '
-alias ltag='ls -t | ag'
+alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
+alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
+alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
+alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
+#alias ls='exa --icons --colour always -F '
+#alias ll='exa --icons --colour always -F --long --git -b '
+#alias ltag='ls -t | ag'
 alias dev="cd ~/Documents/dev"
 alias ra='ranger'
 alias h='history'
 alias grep='grep --color=tty -d skip'
+alias v="nvim"
+alias tat="~/dotfiles/tmux/tat"
 
 man() {
 	env \
@@ -80,6 +79,9 @@ source ~/dotfiles/config/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source ~/dotfiles/config/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/dotfiles/config/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh
 
+# starship
+eval "$(starship init zsh)"
 
-autoload -U promptinit; promptinit
-prompt spaceship
+# Load zsh-syntax-highlighting; should be last.
+source ~/dotfiles/config/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+[[ -s /home/pacto/.autojump/etc/profile.d/autojump.sh ]] && source /home/pacto/.autojump/etc/profile.d/autojump.sh

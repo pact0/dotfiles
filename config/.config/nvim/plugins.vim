@@ -7,6 +7,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 
 
+Plug 'alexzanderr/nvim-treesitter-statusline'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'MunifTanjim/nui.nvim'
 
 " git in vim
 Plug 'tpope/vim-fugitive'
@@ -96,6 +99,7 @@ Plug 'hoob3rt/lualine.nvim'
 
 " scientific notation
 Plug 'jbyuki/nabla.nvim'
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 
 " edit jupyter notebooks
 Plug 'goerz/jupytext.vim'
@@ -125,5 +129,8 @@ Plug 'tyru/open-browser.vim'
 Plug 'ilyachur/cmake4vim'
 " pretty icons
 Plug 'kyazdani42/nvim-web-devicons'
+"Plug 'ryanoasis/vim-devicons'
+
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 

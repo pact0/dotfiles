@@ -20,10 +20,10 @@ nnoremap <leader>vsd :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.ut
 nnoremap <leader>vn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>vll :call LspLocationList()<CR>
 
-augroup AA_LSP
-    autocmd!
-    autocmd! BufWrite,BufEnter,InsertLeave * :call LspLocationList()
-augroup END
+"augroup AA_LSP
+"    autocmd!
+"    autocmd! BufWrite,BufEnter,InsertLeave * :call LspLocationList()
+"augroup END
 
 "local opts = {
     "-- whether to highlight the currently hovered symbol

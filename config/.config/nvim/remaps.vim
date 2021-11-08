@@ -135,3 +135,7 @@ nnoremap <silent> <leader>ol :FSSplitRight<cr>
 vnoremap v $h
 "Y in v mode copiers to selection
 vnoremap Y "*y
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>

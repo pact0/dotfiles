@@ -20,8 +20,6 @@ let g:webdevicons_enable_startify = 1
 let g:NERDCreateDefaultMappings = 1
 let NERDTreeShowHidden=1
 
-" bar setup
-lua require('lualine').setup{options = {theme = 'gruvbox'}}
 
 " treesitter
 lua << EOF
@@ -317,4 +315,57 @@ nnoremap    <C-m>bd   :Dispatch! make -C build/Debug<CR>
 nnoremap    <C-m>br   :Dispatch! make -C build/Release<CR>
 
 
+" bar setup
 
+lua require('lualine').setup{options = {theme = 'gruvbox'}}
+lua << EOF
+local current_treesitter_context = function()
+  local f = require'nvim-treesitter'.statusline({
+    indicator_size = 300,
+    type_patterns = {"class", "function", "method", "interface", "type_spec", "table", "if_statement", "for_statement", "for_in_statement"}
+  })
+  local fun_name = string.format("%s", f) -- convert to string, it may be a empty ts node
+  if fun_name == "vim.NIL" then
+    return " "
+  end
+  return " " .. fun_name
+end
+
+require'lualine'.setup {
+options = {
+  icons_enabled = true,
+  theme = 'auto',
+  component_separators = { left = '', right = ''},
+  section_separators = { left = '', right = ''},
+  disabled_filetypes = {},
+  always_divide_middle = true,
+},
+sections = {
+  lualine_a = {'mode'},
+  lualine_b = {'branch', 'diff',
+                {'diagnostics', sources={'nvim_lsp'}}},
+                lualine_c = {'filename', current_treesitter_context},
+  lualine_x = {'encoding', 'fileformat', 'filetype'},
+  lualine_y = {'progress'},
+  lualine_z = {'location'}
+},
+inactive_sections = {
+  lualine_a = {},
+  lualine_b = {},
+  lualine_c = {'filename'},
+  lualine_x = {'location'},
+  lualine_y = {},
+  lualine_z = {}
+},
+tabline = {},
+extensions = {}
+}
+EOF
+
+augroup formatting 
+  autocmd!
+  autocmd FileType markdown setlocal formatprg=prettier\ --parser\ markdown
+  autocmd FileType css setlocal formatprg=prettier\ --parser\ css
+  autocmd FileType html setlocal formatprg=prettier\ --parser\ html
+  autocmd FileType json setlocal formatprg=prettier\ --parser\ json
+augroup END
