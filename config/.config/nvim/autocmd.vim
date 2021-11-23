@@ -25,4 +25,17 @@ au BufEnter *.h let b:fswitchdst = 'c,cpp,m,cc' | let b:fswitchlocs = 'reg:|incl
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-autocmd VimEnter * hi! Normal ctermbg=NONE guibg=NONE
+autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE
+
+" quickscope 
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#af3a03' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#076678' gui=underline ctermfg=81 cterm=underline
+augroup END
+
+highlight QuickScopePrimary guifg='#af3a03' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#076678' gui=underline ctermfg=81 cterm=underline
+
+
+au FileType rst let b:presenting_slide_separator = '\v(^|\n)\~{4,}'

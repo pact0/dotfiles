@@ -1,4 +1,3 @@
-"######################################################################
 " PLUGINS
 "######################################################################
 
@@ -7,15 +6,26 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 
 
+Plug 'ggandor/lightspeed.nvim'
+
+
+Plug 'gelguy/wilder.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'romgrk/fzy-lua-native'
+
 Plug 'alexzanderr/nvim-treesitter-statusline'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'MunifTanjim/nui.nvim'
+Plug 'p00f/nvim-ts-rainbow'
 
 " git in vim
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ThePrimeagen/git-worktree.nvim'
+
+Plug 'kevinhwang91/nvim-bqf'
 
 Plug 'akinsho/nvim-toggleterm.lua'
 
@@ -34,6 +44,9 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 
+Plug 'ThePrimeagen/harpoon'
+"Plug 'unblevable/quick-scope'  
+
 " adds colors #fff
 Plug 'norcalli/nvim-colorizer.lua'
 
@@ -47,6 +60,8 @@ Plug 'glepnir/lspsaga.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-nvim-lsp'
 
 Plug 'hrsh7th/cmp-vsnip'
@@ -106,6 +121,7 @@ Plug 'goerz/jupytext.vim'
 
 " markdown-preview in browser
 Plug 'iamcco/markdown-preview.nvim'
+"Plug 'lervag/vimtex'
 
 "Switch true to false etc
 Plug 'AndrewRadev/switch.vim'
@@ -124,6 +140,8 @@ Plug 'puremourning/vimspector', {
 "Plug 'kevinhwang91/rnvimr'
 " cs'"
 Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
+
 Plug 'derekwyatt/vim-fswitch'
 Plug 'tyru/open-browser.vim'
 Plug 'ilyachur/cmake4vim'

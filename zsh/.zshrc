@@ -4,10 +4,13 @@ PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magent
 export EDITOR=nvim
 export VISUAL=nvim
 
-# History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
+# set history
+HISTFILESIZE=1000000000
+HISTSIZE=1000000000
 HISTFILE=~/.zsh_history
+SAVEHIST=1000000000
+setopt appendhistory
+setopt share_history
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -15,8 +18,38 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
-source ~/dotfiles/config/.config/zsh/plugins/sudo-plugin/sudo.plugin.zsh 2>/dev/null
 
+setopt hist_ignore_all_dups # remove older duplicate entries from history
+setopt hist_reduce_blanks # remove superfluous blanks from history items
+setopt inc_append_history # save history entries as soon as they are entered
+setopt share_history # share history between different instances of the shell
+setopt auto_cd # cd by typing directory name if it's not a command
+setopt correct_all # autocorrect commands
+setopt auto_list # automatically list choices on ambiguous completion
+setopt auto_menu # automatically use menu completion
+setopt always_to_end # move cursor to end if word had one match
+# +---------+
+# | HISTORY |
+# +---------+
+
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
+setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+
+
+# +---------+
+# | ALIASES |
+# +---------+
+
+source ~/dotfiles/zsh/scripts/fzf_scripts.zsh
+source ~/dotfiles/zsh/aliases
+#
 # vi mode
 
 # Use vim keys in tab complete menu:
@@ -48,8 +81,6 @@ bindkey '^e' edit-command-line
 
 
 
-
-
 alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
 alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
 alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
@@ -64,6 +95,18 @@ alias grep='grep --color=tty -d skip'
 alias v="nvim"
 alias tat="~/dotfiles/tmux/tat"
 
+
+# Add this to your zshrc or bzshrc file
+_not_inside_tmux() { [[ -z "$TMUX" ]] }
+
+ensure_tmux_is_running() {
+  if _not_inside_tmux; then
+    tat
+  fi
+}
+
+ensure_tmux_is_running
+
 man() {
 	env \
 		LESS_TERMCAP_md=$'\e[1;36m' \
@@ -74,14 +117,23 @@ man() {
 		LESS_TERMCAP_us=$'\e[1;32m' \
 			man "$@"
 }
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-source ~/dotfiles/config/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source ~/dotfiles/config/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/dotfiles/config/.config/zsh/plugins/zsh-z/zsh-z.plugin.zsh
 
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
+
+plugins=(... sudo autojump )
+#plugin+=(zsh-vi-mode)
 # starship
 eval "$(starship init zsh)"
 
-# Load zsh-syntax-highlighting; should be last.
-source ~/dotfiles/config/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-[[ -s /home/pacto/.autojump/etc/profile.d/autojump.sh ]] && source /home/pacto/.autojump/etc/profile.d/autojump.sh
+
+# bind k j in vim mode to fuzzy search and arrows in normal mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+source ~/dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/dotfiles/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

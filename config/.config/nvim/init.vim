@@ -36,6 +36,22 @@ require('nvim-treesitter.configs').setup{
         "python",
         "cpp"
         },
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    colors = {
+'#fb4934',
+'#b8bb26',
+'#fabd2f',
+'#83a598',
+'#d3869b',
+'#8ec07c',
+'#fe8019',
+        }, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  },
 }
 EOF
 "######################################################################
@@ -169,9 +185,9 @@ lua << EOF
 -- following options are the default
 require'nvim-tree'.setup {
   -- disables netrw completely
-  disable_netrw       = false,
+  disable_netrw       = true,
   -- hijack netrw window on startup
-  hijack_netrw        = false,
+  hijack_netrw        = true,
   -- open the tree when running this setup function
   open_on_setup       = false,
   -- will not open on setup if the filetype is in this list
@@ -369,3 +385,133 @@ augroup formatting
   autocmd FileType html setlocal formatprg=prettier\ --parser\ html
   autocmd FileType json setlocal formatprg=prettier\ --parser\ json
 augroup END
+
+" harpoon
+lua << EOF
+require("harpoon").setup({
+    global_settings = {
+        save_on_toggle = false,
+        save_on_change = true,
+        enter_on_sendcmd = false,
+        excluded_filetypes = { "harpoon" }
+    },
+})
+EOF
+
+nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
+
+nnoremap <silent> <leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent> <leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent> <leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent> <leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
+nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
+nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
+
+"let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+
+
+lua << EOF
+vim.cmd([[
+    hi BqfPreviewBorder guifg=#d65d0e ctermfg=6
+    hi link BqfPreviewRange Search
+]])
+EOF
+
+lua << EOF
+require('bqf').setup({
+    auto_enable = true,
+    preview = {
+        win_height = 12,
+        win_vheight = 12,
+        delay_syntax = 80,
+        border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'},
+        should_preview_cb = function(bufnr)
+            local ret = true
+            local filename = vim.api.nvim_buf_get_name(bufnr)
+            local fsize = vim.fn.getfsize(filename)
+            -- file size greater than 100k can't be previewed automatically
+            if fsize > 100 * 1024 then
+                ret = false
+            end
+            return ret
+        end
+    },
+    func_map = {
+        vsplit = '',
+        ptogglemode = 'z,',
+        stoggleup = ''
+    },
+    filter = {
+        fzf = {
+            action_for = {['ctrl-s'] = 'split'},
+            extra_opts = {'--bind', 'ctrl-o:toggle-all', '--prompt', '> '}
+        }
+    }
+})
+EOF
+
+
+call wilder#setup({'modes': [':', '/', '?']})
+call wilder#set_option('use_python_remote_plugin', 0)
+
+call wilder#set_option('pipeline', [
+      \   wilder#branch(
+      \     wilder#cmdline_pipeline({
+      \       'fuzzy': 1,
+      \       'fuzzy_filter': wilder#lua_fzy_filter(),
+      \     }),
+      \     wilder#vim_search_pipeline(),
+      \   ),
+      \ ])
+
+call wilder#set_option('renderer', wilder#renderer_mux({
+      \ ':': wilder#popupmenu_renderer({
+      \   'highlighter': wilder#lua_fzy_highlighter(),
+      \   'left': [
+      \   ' ',
+      \   wilder#popupmenu_devicons(),
+      \   wilder#popupmenu_buffer_flags({
+      \     'flags': ' a + ',
+      \     'icons': {'+': '', 'a': '', 'h': ''},
+      \   }),
+      \   ],
+      \   'right': [
+      \     ' ',
+      \     wilder#popupmenu_scrollbar(),
+      \   ],
+      \ }),
+      \ '/': wilder#wildmenu_renderer({
+      \   'highlighter': wilder#lua_fzy_highlighter(),
+      \ }),
+      \ }))
+
+
+lua << EOF
+require'lightspeed'.setup {
+  exit_after_idle_msecs = { labeled = 1500, unlabeled = 1000 },
+
+  -- s/x
+  grey_out_search_area = true,
+  highlight_unique_chars = true,
+  match_only_the_start_of_same_char_seqs = true,
+  jump_on_partial_input_safety_timeout = 400,
+  substitute_chars = { ['\r'] = '¬' },
+  -- Leaving the appropriate list empty effectively disables
+  -- "smart" mode, and forces auto-jump to be on or off.
+  safe_labels = { ... },
+  labels = { ... },
+  cycle_group_fwd_key = '<space>',
+  cycle_group_bwd_key = '<tab>',
+  x_mode_prefix_key = '<c-x>',
+
+  -- f/t
+  limit_ft_matches = 4,
+  instant_repeat_fwd_key = nil,
+  instant_repeat_bwd_key = nil,
+}
+EOF

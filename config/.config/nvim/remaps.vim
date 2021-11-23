@@ -33,7 +33,7 @@ nnoremap <C-q> :call ToggleQFList(1)<CR>
 nnoremap <leader>q :call ToggleQFList(0)<CR>
 
 " Function to rename the variable under the cursor
-nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+"nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " call replace all
 nnoremap <leader>rr :call Rnvar()<CR>

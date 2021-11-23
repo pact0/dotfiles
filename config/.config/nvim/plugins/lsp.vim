@@ -5,9 +5,9 @@
 set completeopt=menuone,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-fun! LspLocationList()
-     lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
-endfun
+"fun! LspLocationList()
+"     lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
+"endfun
 
 nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
@@ -72,7 +72,7 @@ lua <<EOF
     snippet = {
       expand = function(args)
         -- For `vsnip` user.
-        vim.fn["vsnip#anonymous"](args.body)
+       -- vim.fn["vsnip#anonymous"](args.body)
 
         -- For `luasnip` user.
         require('luasnip').lsp_expand(args.body)
@@ -90,11 +90,11 @@ mapping = {
   ['<C-f>'] = cmp.mapping.scroll_docs(4),
   ['<C-Space>'] = cmp.mapping.complete(),
   ['<C-e>'] = cmp.mapping.close(),
-  ['<CR>'] = cmp.mapping.confirm({    behavior = cmp.ConfirmBehavior.Replace,
-    select = true}),
-  ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-
-
+  ['<CR>'] = cmp.mapping({
+    i = cmp.mapping.confirm({ select = true }),
+    c = cmp.mapping.confirm({ select = false }),
+  }),
+ ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
 },
     sources = {
       { name = 'nvim_lsp' },
@@ -103,10 +103,10 @@ mapping = {
       { name = 'vsnip' },
 
       -- For luasnip user.
-      { name = 'luasnip' },
+      -- { name = 'luasnip' },
 
       -- For ultisnips user.
-      -- { name = 'ultisnips' },
+       -- { name = 'ultisnips' },
 
       { name = 'buffer' },
     }
