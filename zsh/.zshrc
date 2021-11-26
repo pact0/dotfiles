@@ -93,7 +93,7 @@ alias ra='ranger'
 alias h='history'
 alias grep='grep --color=tty -d skip'
 alias v="nvim"
-alias tat="~/dotfiles/tmux/tat"
+alias tat="~/dotfiles/zsh/tat"
 
 
 # Add this to your zshrc or bzshrc file
