@@ -48,8 +48,8 @@
     - neovim
     - nvim
 - name: Install vim Plugins
-  ignore_errors: yes
-  shell: sudo nvim -u ~/.config/nvim/plugins.vim +PlugInstall +qall
+  ignore_errors: no
+  shell: nvim +silent! +PlugInstall! +qall!
   tags:
     - install
     - terminal

@@ -7,14 +7,14 @@
 #- stow
 #- gitconfig
 
-#- name: stow git bin
-#shell: cd ~/devtainer && stow bin
-#tags:
-#- install
-#- terminal
-#- core
-#- stow
-#- bin
+- name: stow git bin
+  shell: cd /devtainer && stow bin
+  tags:
+    - install
+    - terminal
+    - core
+    - stow
+    - bin
 
 - name: stow nvim
   shell: cd /devtainer && stow nvim

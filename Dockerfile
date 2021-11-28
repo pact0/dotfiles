@@ -23,9 +23,14 @@ RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t cor
 # -d DIR, --dir=DIR     Set stow dir to DIR (default is current dir)
 # -t DIR, --target=DIR  Set target to DIR (default is parent of stow dir)
 # -S, --stow            Stow the package names that follow this option
-RUN stow -d /devtainer -t /home/dockeruser --stow zsh tmux nvim bin
+RUN stow -d /devtainer -t /home/dockeruser --stow zsh tmux nvim bin ranger
+RUN sudo chmod 777 /home/dockeruser/.local/bin/tat
 
-RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t "nvim, zsh"
+RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t zsh
+
+RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t nvim
+
+RUN nvim -u ~/.config/nvim/plugins.vim +PlugInstall +RnvimrSync +qall
 
 WORKDIR /home/dockeruser
 

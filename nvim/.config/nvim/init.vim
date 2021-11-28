@@ -14,11 +14,10 @@ source $HOME/.config/nvim/remaps.vim
 source $HOME/.config/nvim/plugins/telescope.vim
 source $HOME/.config/nvim/plugins/dashboard.vim
 source $HOME/.config/nvim/plugins/lsp.vim
-source $HOME/.config/nvim/plugins/vimspector.vim
 
 let g:webdevicons_enable_startify = 1
-let g:NERDCreateDefaultMappings = 1
-let NERDTreeShowHidden=1
+"let g:NERDCreateDefaultMappings = 1
+"let NERDTreeShowHidden=1
 
 
 " treesitter
@@ -515,3 +514,10 @@ require'lightspeed'.setup {
   instant_repeat_bwd_key = nil,
 }
 EOF
+
+lua require('Comment').setup()
+
+map <leader>r :Ranger<CR>
+let g:NERDTreeHijackNetrw = 0 
+let g:ranger_replace_netrw = 1 
+let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'

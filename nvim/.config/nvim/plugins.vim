@@ -3,8 +3,8 @@
 
 call plug#begin('~/.vim/plugged')
 " theme
-Plug 'gruvbox-community/gruvbox'
-
+Plug 'rktjmp/lush.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
 
 Plug 'ggandor/lightspeed.nvim'
 
@@ -81,15 +81,16 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'nvim-lua/diagnostic-nvim'
 
 
-"Plug 'tpope/vim-commentary'
-
 " pretty
 Plug 'sbdchd/neoformat'
 
 " file tree and comments
 "Plug 'preservim/nerdtree'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'preservim/nerdcommenter'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+
+Plug 'numToStr/Comment.nvim'
 " debugging leader p
 Plug 'meain/vim-printer'
 Plug 'jiangmiao/auto-pairs' 
@@ -133,9 +134,6 @@ Plug 'AndrewRadev/switch.vim'
 
 Plug 'tpope/vim-dispatch'
 Plug 'szw/vim-maximizer'
-Plug 'puremourning/vimspector', {
-  \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
-  \ }
 " ranger in vim
 "Plug 'kevinhwang91/rnvimr'
 " cs'"
