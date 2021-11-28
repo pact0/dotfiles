@@ -9,6 +9,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER dockeruser
 COPY . /devtainer
+COPY . /home/dockeruser/dotfiles
 workdir /devtainer
 
 # make it as the dockeruser otherwise it becomes owned by root
@@ -22,7 +23,7 @@ RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t cor
 # -d DIR, --dir=DIR     Set stow dir to DIR (default is current dir)
 # -t DIR, --target=DIR  Set target to DIR (default is parent of stow dir)
 # -S, --stow            Stow the package names that follow this option
-RUN stow -d /devtainer -t /home/dockeruser --stow zsh tmux nvim
+RUN stow -d /devtainer -t /home/dockeruser --stow zsh tmux nvim bin
 
 RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t "nvim, zsh"
 

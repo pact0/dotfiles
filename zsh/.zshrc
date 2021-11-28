@@ -3,6 +3,9 @@ autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 export EDITOR=nvim
 export VISUAL=nvim
+export PATH="$HOME/.local/bin:$PATH"
+
+~/.local/bin/tat
 
 # set history
 HISTFILESIZE=1000000000
@@ -93,7 +96,6 @@ alias ra='ranger'
 alias h='history'
 alias grep='grep --color=tty -d skip'
 alias v="nvim"
-alias tat="~/dotfiles/zsh/tat"
 
 
 # Add this to your zshrc or bzshrc file
