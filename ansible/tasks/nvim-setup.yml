@@ -8,6 +8,7 @@
     - terminal
     - neovim
     - nvim
+
 - name: Build neovim
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make"
   tags:
@@ -22,6 +23,7 @@
     - terminal
     - neovim
     - nvim
+
 - name: Neovim Plugin Development 1
   become_user: root
   apt: name=luarocks
@@ -30,6 +32,7 @@
     - terminal
     - neovim
     - nvim
+
 - name: Neovim Plugin Development 2 luacheck
   shell: luarocks install luacheck
   become_user: root
@@ -38,6 +41,7 @@
     - terminal
     - neovim
     - nvim
+
 - name: Install Vim-Plug
   shell: curl -fLo {{ lookup('env', 'HOME') }}/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   tags:
@@ -47,6 +51,7 @@
     - plugged
     - neovim
     - nvim
+
 - name: Install vim Plugins
   ignore_errors: no
   shell: nvim +silent! +PlugInstall! +qall!
@@ -56,30 +61,73 @@
     - dotfiles
     - neovim
     - nvim
-#- name: Setup python-lsp-server
-#shell: pipx install 'python-lsp-server[all]' --force
-#tags:
-#- install
-#- terminal
-#- dotfiles
-#- neovim
-#- nvim
-#- python-lsp
-#- name: Setup pylsp-mypy
-#shell: pipx inject python-lsp-server pylsp-mypy --force
-#tags:
-#- install
-#- terminal
-#- dotfiles
-#- neovim
-#- nvim
-#- python-lsp
-#- name: Setup jedi-language-server
-#shell: pipx install jedi-language-server --force
-#tags:
-#- install
-#- terminal
-#- dotfiles
-#- neovim
-#- nvim
-#- python-lsp
+
+- name: Setup python-lsp-server
+  shell: pipx install 'python-lsp-server[all]' --force
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - python-lsp
+- name: Setup pylsp-mypy
+  shell: pipx inject python-lsp-server pylsp-mypy --force
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - python-lsp
+- name: Setup jedi-language-server
+  shell: pipx install jedi-language-server --force
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - python-lsp
+- name: Setup yaml language server
+  shell: npm i -g yaml-language-server@latest
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - yaml-lsp
+
+
+- name: Setup typescript language server
+  shell: npm i -g typescript-language-server
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - typescript-lsp
+
+- name: Setup html language server
+  shell: npm i -g vscode-langservers-extracted
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - html-lsp
+
+- name: Install yarn
+  shell: npm i -g yarn
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - yarn
+
+

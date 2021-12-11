@@ -26,11 +26,13 @@ RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t cor
 RUN stow -d /devtainer -t /home/dockeruser --stow zsh tmux nvim bin ranger
 RUN sudo chmod 777 /home/dockeruser/.local/bin/tat
 
+RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t node
+
 RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t zsh
 
 RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t nvim
 
-RUN nvim -u ~/.config/nvim/plugins.vim +PlugInstall +RnvimrSync +qall
+RUN nvim -u ~/.config/nvim/plugins.vim +PlugInstall +UpdateRemotePlugins +RnvimrSync +qall
 
 WORKDIR /home/dockeruser
 

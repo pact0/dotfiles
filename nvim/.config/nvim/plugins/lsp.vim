@@ -5,20 +5,24 @@
 set completeopt=menuone,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-"fun! LspLocationList()
-"     lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
-"endfun
+fun! LspLocationList()
+     lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
+endfun
 
-nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>vi :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>vsh :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>vrr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>vrn :lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>vh :lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>vca :lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>vsd :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
-nnoremap <leader>vn :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>gD :lua vim.lsp.buf.declaration()<CR>
+nnoremap <leader>gi :lua vim.lsp.buf.implementation()<CR>
+nnoremap <C-k> :lua vim.lsp.buf.signature_help()<CR>
+inoremap <C-k> <cmd>:lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>rr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>rn :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>gh :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>ca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>d :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap ]d :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap [d :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>vll :call LspLocationList()<CR>
+nnoremap <leader>= :lua vim.lsp.buf.formatting()<CR>
 
 "augroup AA_LSP
 "    autocmd!
@@ -40,31 +44,34 @@ nnoremap <leader>vll :call LspLocationList()<CR>
 "require('symbols-outline').setup(opts)
 
 
-lua << EOF
-local nvim_lsp = require('lspconfig')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver', "clangd" ,"cmake", "phpactor" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
-EOF
+" lua << EOF
+"
+"
+" "
+" " -- Use an on_attach function to only map the following keys
+" " -- after the language server attaches to the current buffer
+" " local on_attach = function(client, bufnr)
+" "   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+" "   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+" "   -- Enable completion triggered by <c-x><c-o>
+" "   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')end
+" "
+" " -- Use a loop to conveniently call 'setup' on multiple servers and
+" " -- map buffer local keybindings when the language server attaches
+" " local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'clangd' ,'cmake', 'phpactor' }
+" " for _, lsp in ipairs(servers) do
+" "   nvim_lsp[lsp].setup {
+" "     on_attach = on_attach,
+" "     flags = {
+" "       debounce_text_changes = 150,
+" "     }
+" "   }
+" " end
+" EOF
 
 lua <<EOF
+
+local nvim_lsp = require('lspconfig')
   -- Setup nvim-cmp.
   local cmp = require'cmp'
 
@@ -108,7 +115,10 @@ mapping = {
       -- For ultisnips user.
        -- { name = 'ultisnips' },
 
+       { name = 'path' },
       { name = 'buffer' },
+      { name = 'calc' },
+      { name = 'tmux' },
     }
   })
 
@@ -128,6 +138,76 @@ mapping = {
   require('lspconfig')["phpactor"].setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   }
+  require('lspconfig')["yamlls"].setup{
+  on_attach=on_attach,
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  settings = {
+      yaml = {
+          schemas = {
+              ["https://raw.githubusercontent.com/quantumblacklabs/kedro/develop/static/jsonschema/kedro-catalog-0.17.json"]= "conf/**/*catalog*",
+              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+              }
+          }
+      }
+  }
+
+
+
+local lspconfig = require 'lspconfig'
+local handle_lsp = function(opts) return opts end
+
+-- Formatting via efm
+local prettier = require "efm/prettier"
+local eslint = require "efm/eslint"
+-- local autopep = require "efm/autopep8"
+
+local languages = {
+    typescript = {prettier, eslint},
+    javascript = {prettier},
+    typescriptreact = {prettier, eslint},
+    javascriptreact = {prettier, eslint},
+    yaml = {prettier},
+    json = {prettier},
+    html = {prettier},
+    scss = {prettier},
+    css = {prettier},
+    markdown = {prettier},
+}
+
+
+vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
+    if err ~= nil or result == nil then
+        return
+    end
+    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+        local view = vim.fn.winsaveview()
+        vim.lsp.util.apply_text_edits(result, bufnr)
+        vim.fn.winrestview(view)
+        if bufnr == vim.api.nvim_get_current_buf() then
+            vim.api.nvim_command("noautocmd :update")
+        end
+    end
+end
+
+local on_attach = function(client)
+    if client.resolved_capabilities.document_formatting then
+        vim.api.nvim_command [[augroup Format]]
+        vim.api.nvim_command [[autocmd! * <buffer>]]
+        vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
+        vim.api.nvim_command [[augroup END]]
+    end
+end
+
+lspconfig.efm.setup {
+    root_dir = lspconfig.util.root_pattern("yarn.lock", "lerna.json", ".git"),
+    filetypes = vim.tbl_keys(languages),
+    init_options = {documentFormatting = true, codeAction = true},
+    settings = {languages = languages, log_level = 1, log_file = '~/efm.log'},
+    on_attach = on_attach
+}
+
+
+
 
 EOF
 
@@ -158,9 +238,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = false,
   }
 )
+
+
+
 EOF
 
-" lsp signature 
+
+
+
+" lsp signature
 lua << EOF
  cfg = {
   debug = false, -- set to true to enable debug logging
@@ -214,4 +300,46 @@ require'lsp_signature'.setup(cfg) -- no need to specify bufnr if you don't use t
 -- You can also do this inside lsp on_attach
 -- note: on_attach deprecated
 require'lsp_signature'.on_attach(cfg, bufnr) -- no need to specify bufnr if you don't use toggle_key
+EOF
+
+
+
+
+lua << EOF
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.settings({
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
+})
+local lsp_installer = require "nvim-lsp-installer"
+
+-- Include the servers you want to have installed by default below
+local servers = {
+    'bashls',
+    'pyright',
+    'vuels',
+    'yamlls',
+    'pyright',
+    'rust_analyzer',
+    'tsserver', 
+    'clangd',
+}
+
+
+for _, name in pairs(servers) do
+  local server_is_found, server = lsp_installer.get_server(name)
+  if server_is_found then
+    if not server:is_installed() then
+      print("Installing " .. name)
+      server:install()
+    end
+  end
+end
+
 EOF

@@ -99,16 +99,22 @@
     - zsh
     - forgit
 
-- name: Install GitUI
-  shell: |
-    GITUI_VERSION=$(curl --silent https://github.com/extrawurst/gitui/releases/latest | tr -d '"' | sed 's/^.*tag\///g' | sed 's/>.*$//g' | sed 's/^v//')
-    wget https://github.com/extrawurst/gitui/releases/download/v${GITUI_VERSION}/gitui-linux-musl.tar.gz -O- -q | tar -zxf - -C ~/.local/bin
-  tags:
-    - install
-    - terminal
-    - dotfiles
-    - zsh
-    - gitui
+
+# - name: Install brew
+#   become_user: root
+#   shell: |
+#     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+#     brew install jesseduffield/lazygit/lazygit 
+#     brew install efm-langserver
+#   tags:
+#     - install
+#     - terminal
+#     - dotfiles
+#     - zsh
+#     - brew
+
+
 
 - name: Install GH
   shell: |
@@ -159,6 +165,7 @@
     - dotfiles
     - zsh
     - tmux
+
 
 - name: install brow.sh
   shell: |

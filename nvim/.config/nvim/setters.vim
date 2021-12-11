@@ -43,15 +43,20 @@ set wildignore+=**/.git/*
 set rtp +=~/.config/nvim
 set mouse=a
 
-function! MyFoldText()
-    let line = getline(v:foldstart)
-    let foldedlinecount = v:foldend - v:foldstart + 1
-    return ' ⭐️ '. foldedlinecount . line
-endfunction
-set foldtext=MyFoldText()
-set fillchars=fold:\
+" function! MyFoldText()
+"     let line = getline(v:foldstart)
+"     let foldedlinecount = v:foldend - v:foldstart + 1
+"     return ' ⭐️ '. foldedlinecount . line
+" endfunction
+"set foldtext=MyFoldText()
+
+
+" start with unfolded
+" if this stops working try au BufRead * normal zR
+set foldlevelstart=99
 set encoding=UTF-8
 
 " transparent background
 hi! Normal ctermbg=NONE
 hi! Normal guibg=NONE
+

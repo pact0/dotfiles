@@ -39,3 +39,10 @@ highlight QuickScopeSecondary guifg='#076678' gui=underline ctermfg=81 cterm=und
 
 
 au FileType rst let b:presenting_slide_separator = '\v(^|\n)\~{4,}'
+
+
+augroup autosource
+    autocmd!
+    autocmd bufwritepost .tmux.conf execute ':!tmux source-file %' autocmd bufwritepost .tmux.local.conf execute ':!tmux source-file %'
+    autocmd bufwritepost *.vim execute ':source %'
+augroup end

@@ -2,9 +2,27 @@
 "######################################################################
 
 call plug#begin('~/.vim/plugged')
-" theme
+Plug 'numToStr/Navigator.nvim'
+Plug 'numToStr/Comment.nvim'
+
+Plug 'Shatur/neovim-cmake'
+Plug 'mattn/efm-langserver'
+
+Plug 'lukas-reineke/format.nvim'
+" Navigator
+Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+Plug 'ray-x/navigator.lua'
+
+" register management
+Plug 'AckslD/nvim-neoclip.lua'
+
+"auto close html tags
+Plug 'windwp/nvim-ts-autotag'
+"theme
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
+
 
 Plug 'ggandor/lightspeed.nvim'
 
@@ -14,19 +32,23 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'romgrk/fzy-lua-native'
 
+
 Plug 'alexzanderr/nvim-treesitter-statusline'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'tree-sitter/tree-sitter-cpp'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'p00f/nvim-ts-rainbow'
 
 " git in vim
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'ThePrimeagen/git-worktree.nvim'
 
 Plug 'kevinhwang91/nvim-bqf'
 
+
+Plug 'numToStr/FTerm.nvim'
 Plug 'akinsho/nvim-toggleterm.lua'
 
 " undo tree
@@ -52,7 +74,8 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 " lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'anott03/nvim-lspinstall'
+" Plug 'anott03/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'glepnir/lspsaga.nvim'
 
@@ -85,12 +108,10 @@ Plug 'nvim-lua/diagnostic-nvim'
 Plug 'sbdchd/neoformat'
 
 " file tree and comments
-"Plug 'preservim/nerdtree'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
-Plug 'numToStr/Comment.nvim'
 " debugging leader p
 Plug 'meain/vim-printer'
 Plug 'jiangmiao/auto-pairs' 
@@ -100,18 +121,11 @@ Plug 'jiangmiao/auto-pairs'
 "Plug 'honza/vim-snippets'
 Plug 'adelarsq/vim-matchit'
 
-" Pretty start
-"Plug 'mhinz/vim-startify'
 " pretty start menu
 Plug 'glepnir/dashboard-nvim'
+
 " bar
 Plug 'hoob3rt/lualine.nvim'
-
-"Plug 'Yggdroot/indentLine'
-" Plug 'lukas-reineke/indent-blankline.nvim'
-
-" segreate python imports
-"Plug 'fisadev/vim-isort'
 
 " scientific notation
 Plug 'jbyuki/nabla.nvim'
@@ -122,31 +136,33 @@ Plug 'goerz/jupytext.vim'
 
 " markdown-preview in browser
 Plug 'iamcco/markdown-preview.nvim'
-"Plug 'lervag/vimtex'
 
 "Switch true to false etc
 Plug 'AndrewRadev/switch.vim'
 
-"Plug 'mfussenegger/nvim-dap'
-"" Plug 'rcarriga/nvim-dap-ui'
-"Plug 'nvim-telescope/telescope-dap.nvim'
-"Plug 'theHamsta/nvim-dap-virtual-text'
+" debugger
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'theHamsta/nvim-dap-virtual-text'
+
+" tests
+Plug 'vim-test/vim-test'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'tpope/vim-dispatch'
 Plug 'szw/vim-maximizer'
-" ranger in vim
-"Plug 'kevinhwang91/rnvimr'
-" cs'"
-Plug 'tpope/vim-surround'
+
+" surround
 Plug 'machakann/vim-sandwich'
 
 Plug 'derekwyatt/vim-fswitch'
 Plug 'tyru/open-browser.vim'
 Plug 'ilyachur/cmake4vim'
+
+
 " pretty icons
 Plug 'kyazdani42/nvim-web-devicons'
-"Plug 'ryanoasis/vim-devicons'
-
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 

@@ -5,6 +5,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+lua require('setters')
 
 source $HOME/.config/nvim/setters.vim
 source $HOME/.config/nvim/plugins.vim
@@ -14,6 +15,11 @@ source $HOME/.config/nvim/remaps.vim
 source $HOME/.config/nvim/plugins/telescope.vim
 source $HOME/.config/nvim/plugins/dashboard.vim
 source $HOME/.config/nvim/plugins/lsp.vim
+" source $HOME/.config/nvim/plugins/dap.vim
+
+
+set completeopt=menuone,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 let g:webdevicons_enable_startify = 1
 "let g:NERDCreateDefaultMappings = 1
@@ -23,6 +29,9 @@ let g:webdevicons_enable_startify = 1
 " treesitter
 lua << EOF
 require('nvim-treesitter.configs').setup{
+  autotag = {
+    enable = true,
+  },
     highlight = {enable = true, use_languagetree = true},
     indent = {enable = true},
     ensure_installed = {
@@ -62,6 +71,7 @@ set clipboard=unnamedplus
 "######################################################################
 " THEME
 "######################################################################
+
 colorscheme gruvbox
 highlight Normal ctermbg=NONE
 
@@ -256,64 +266,64 @@ require'nvim-tree'.setup {
 EOF
 
 
-lua << EOF
-require'nvim-web-devicons'.setup {
- -- your personnal icons can go here (to override)
- -- DevIcon will be appended to `name`
- override = {
-  zsh = {
-    icon = "",
-    color = "#428850",
-    name = "Zsh"
-  }
- };
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
-}
-
-require("toggleterm").setup{
-  -- size can be a number or function which is passed the current terminal
-  size = 20,
-  -- open_mapping = [[<c-\>]],
-  hide_numbers = true, -- hide the number column in toggleterm buffers
-  shade_filetypes = {},
-  shade_terminals = true,
-  -- shading_factor = '<number>', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
-  start_in_insert = true,
-  insert_mappings = true, -- whether or not the open mapping applies in insert mode
-  persist_size = true,
-  direction = 'float',
-  close_on_exit = true, -- close the terminal window when the process exits
-  shell = vim.o.shell, -- change the default shell
-  -- This field is only relevant if direction is set to 'float'
-  float_opts = {
-    -- The border key is *almost* the same as 'nvim_win_open'
-    -- see :h nvim_win_open for details on borders however
-    -- the 'curved' border is a custom border type
-    -- not natively supported but implemented in this plugin.
-    border = 'single',
-    -- width = <value>,
-    -- height = <value>,
-    winblend = 3,
-    highlights = {
-      border = "Normal",
-      background = "Normal",
-    }
-  }
-}
-EOF
-" set
-let g:toggleterm_terminal_mapping = '<C-t>'
-" or manually...
-autocmd TermEnter term://*toggleterm#*
-      \ tnoremap <silent><c-t> <C-\><C-n>:exe v:count1 . "ToggleTerm"<CR>
-
-" By applying the mappings this way you can pass a count to your
-" mapping to open a specific window.
-" For example: 2<C-t> will open terminal 2
-nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
-inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
+" lua << EOF
+" require'nvim-web-devicons'.setup {
+"  -- your personnal icons can go here (to override)
+"  -- DevIcon will be appended to `name`
+"  override = {
+"   zsh = {
+"     icon = "",
+"     color = "#428850",
+"     name = "Zsh"
+"   }
+"  };
+"  -- globally enable default icons (default to false)
+"  -- will get overriden by `get_icons` option
+"  default = true;
+" }
+"
+" require("toggleterm").setup{
+"   -- size can be a number or function which is passed the current terminal
+"   size = 20,
+"   -- open_mapping = [[<c-\>]],
+"   hide_numbers = true, -- hide the number column in toggleterm buffers
+"   shade_filetypes = {},
+"   shade_terminals = true,
+"   -- shading_factor = '<number>', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+"   start_in_insert = true,
+"   insert_mappings = true, -- whether or not the open mapping applies in insert mode
+"   persist_size = true,
+"   direction = 'float',
+"   close_on_exit = true, -- close the terminal window when the process exits
+"   shell = vim.o.shell, -- change the default shell
+"   -- This field is only relevant if direction is set to 'float'
+"   float_opts = {
+"     -- The border key is *almost* the same as 'nvim_win_open'
+"     -- see :h nvim_win_open for details on borders however
+"     -- the 'curved' border is a custom border type
+"     -- not natively supported but implemented in this plugin.
+"     border = 'single',
+"     -- width = <value>,
+"     -- height = <value>,
+"     winblend = 3,
+"     highlights = {
+"       border = "Normal",
+"       background = "Normal",
+"     }
+"   }
+" }
+" EOF
+" " set
+" let g:toggleterm_terminal_mapping = '<C-t>'
+" " or manually...
+" autocmd TermEnter term://*toggleterm#*
+"       \ tnoremap <silent><c-t> <C-\><C-n>:exe v:count1 . "ToggleTerm"<CR>
+"
+" " By applying the mappings this way you can pass a count to your
+" " mapping to open a specific window.
+" " For example: 2<C-t> will open terminal 2
+" nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+" inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 lua require'colorizer'.setup()
 
@@ -358,7 +368,7 @@ options = {
 sections = {
   lualine_a = {'mode'},
   lualine_b = {'branch', 'diff',
-                {'diagnostics', sources={'nvim_lsp'}}},
+                {'diagnostics', sources={'nvim_diagnostic'}}},
                 lualine_c = {'filename', current_treesitter_context},
   lualine_x = {'encoding', 'fileformat', 'filetype'},
   lualine_y = {'progress'},
@@ -377,13 +387,6 @@ extensions = {}
 }
 EOF
 
-augroup formatting 
-  autocmd!
-  autocmd FileType markdown setlocal formatprg=prettier\ --parser\ markdown
-  autocmd FileType css setlocal formatprg=prettier\ --parser\ css
-  autocmd FileType html setlocal formatprg=prettier\ --parser\ html
-  autocmd FileType json setlocal formatprg=prettier\ --parser\ json
-augroup END
 
 " harpoon
 lua << EOF
@@ -410,7 +413,6 @@ nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
 nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
 nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>
 
-"let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 
 
@@ -506,7 +508,6 @@ require'lightspeed'.setup {
   labels = { ... },
   cycle_group_fwd_key = '<space>',
   cycle_group_bwd_key = '<tab>',
-  x_mode_prefix_key = '<c-x>',
 
   -- f/t
   limit_ft_matches = 4,
@@ -515,9 +516,259 @@ require'lightspeed'.setup {
 }
 EOF
 
-lua require('Comment').setup()
+lua << EOF
+require('Comment').setup()
+EOF
 
 map <leader>r :Ranger<CR>
-let g:NERDTreeHijackNetrw = 0 
-let g:ranger_replace_netrw = 1 
+let g:NERDTreeHijackNetrw = 0
+let g:ranger_replace_netrw = 1
 let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
+
+
+lua << EOF
+require('Navigator').setup()
+
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+map('n', "<A-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
+map('n', "<A-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
+map('n', "<A-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
+map('n', "<A-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
+map('n', "<A-p>", "<CMD>lua require('Navigator').previous()<CR>", opts)
+EOF
+
+
+lua << EOF
+ require('neoclip').setup({
+      history = 1000,
+      enable_persistant_history = false,
+      db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
+      filter = nil,
+      preview = true,
+      default_register = '"',
+      content_spec_column = false,
+      on_paste = {
+        set_reg = false,
+      },
+      keys = {
+        i = {
+          select = '<cr>',
+          paste = '<c-p>',
+          paste_behind = '<c-k>',
+          custom = {},
+        },
+        n = {
+          select = '<cr>',
+          paste = 'p',
+          paste_behind = 'P',
+          custom = {
+      },
+        },
+      },
+    })
+EOF
+
+nnoremap <silent> <leader>bb :Telescope neoclip a extra=star,plus,"<CR>
+
+
+
+" make test commands execute using dispatch.vim
+let test#strategy = "dispatch"
+
+let g:dispatch_compilers = {}
+let g:dispatch_compilers['./vendor/bin/'] = ''
+let g:dispatch_compilers['phpunit'] = 'phpunit2'
+
+nnoremap <F9> :Dispatch<CR>
+autocmd FileType cpp let b:dispatch = 'clang++ % -std=c++11 -g'
+
+
+lua << EOF
+require'FTerm'.setup({
+    border = 'double',
+    dimensions  = {
+        height = 0.8,
+        width = 0.8,
+    },
+})
+
+-- Example keybindings
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+map('n', '<C-t>', '<CMD>lua require("FTerm").toggle()<CR>', opts)
+map('t', '<C-t>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
+
+
+
+local fterm = require("FTerm")
+
+local gitui = fterm:new({
+    ft = 'fterm_lazygit', -- You can also override the default filetype, if you want
+    cmd = "lazygit",
+    dimensions = {
+        height = 0.8,
+        width = 0.8
+    }
+})
+
+ -- Use this to toggle gitui in a floating terminal
+function _G.__fterm_gitui()
+    gitui:toggle()
+end
+
+map('n', '<A-i>', '<CMD>lua _G.__fterm_gitui()<CR>', opts)
+EOF
+
+
+
+" lua <<EOF
+" require'navigator'.setup()
+" EOF
+"
+
+
+"
+" lua << EOF
+" require "format".setup {
+"     ["*"] = {
+"         {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
+"     },
+"     vim = {
+"         {
+"             cmd = {"luafmt -w replace"},
+"             start_pattern = "^lua << EOF$",
+"             end_pattern = "^EOF$"
+"         }
+"     },
+"     vimwiki = {
+"         {
+"             cmd = {"prettier -w --parser babel"},
+"             start_pattern = "^{{{javascript$",
+"             end_pattern = "^}}}$"
+"         }
+"     },
+"     lua = {
+"         {
+"             cmd = {
+"                 function(file)
+"                     return string.format("luafmt -l %s -w replace %s", vim.bo.textwidth, file)
+"                 end
+"             }
+"         }
+"     },
+"     go = {
+"         {
+"             cmd = {"gofmt -w", "goimports -w"},
+"             tempfile_postfix = ".tmp"
+"         }
+"     },
+"     javascript = {
+"         {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
+"     },
+"     markdown = {
+"         {cmd = {"prettier -w"}},
+"         {
+"             cmd = {"black"},
+"             start_pattern = "^```python$",
+"             end_pattern = "^```$",
+"             target = "current"
+"         }
+"     }
+" }
+" EOF
+"
+" augroup Format
+"     autocmd!
+"     autocmd BufWritePost * FormatWrite
+" augroup END
+"
+
+let g:cmake_link_compile_commands = 1
+nmap <leader>cg :CMakeGenerate<cr>
+nmap <leader>cb :CMakeBuild<cr>
+
+lua << EOF
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  keymaps = {
+    -- Default keymap options
+    noremap = true,
+
+    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'"},
+    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'"},
+
+    ['n <leader>hs'] = '<cmd>Gitsigns stage_hunk<CR>',
+    ['v <leader>hs'] = ':Gitsigns stage_hunk<CR>',
+    ['n <leader>hu'] = '<cmd>Gitsigns undo_stage_hunk<CR>',
+    ['n <leader>hr'] = '<cmd>Gitsigns reset_hunk<CR>',
+    ['v <leader>hr'] = ':Gitsigns reset_hunk<CR>',
+    ['n <leader>hR'] = '<cmd>Gitsigns reset_buffer<CR>',
+    ['n <leader>hp'] = '<cmd>Gitsigns preview_hunk<CR>',
+    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
+    ['n <leader>hS'] = '<cmd>Gitsigns stage_buffer<CR>',
+    ['n <leader>hU'] = '<cmd>Gitsigns reset_buffer_index<CR>',
+
+    -- Text objects
+    ['o ih'] = ':<C-U>Gitsigns select_hunk<CR>',
+    ['x ih'] = ':<C-U>Gitsigns select_hunk<CR>'
+  },
+  watch_gitdir = {
+    interval = 1000,
+    follow_files = true
+  },
+  attach_to_untracked = true,
+  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false,
+  },
+  current_line_blame_formatter_opts = {
+    relative_time = false
+  },
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000,
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
+}
+EOF
+
+" lua << EOF
+" local Path = require('plenary.path')
+" require('cmake').setup({
+"   parameters_file = 'neovim.json', -- JSON file to store information about selected target, run arguments and build type.
+"   build_dir = tostring(Path:new('{cwd}', 'build', '{os}-{build_type}')), -- Build directory. The expressions `{cwd}`, `{os}` and `{build_type}` will be expanded with the corresponding text values.
+"   samples_path = tostring(script_path:parent():parent():parent() / 'samples'), -- Folder with samples. `samples` folder from the plugin directory is used by default.
+"   default_projects_path = tostring(Path:new(vim.loop.os_homedir(), 'Projects')), -- Default folder for creating project.
+"   configure_args = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1' }, -- Default arguments that will be always passed at cmake configure step. By default tells cmake to generate `compile_commands.json`.
+"   build_args = {}, -- Default arguments that will be always passed at cmake build step.
+"   quickfix_height = 10, -- Height of the opened quickfix.
+"   dap_configuration = { type = 'cpp', request = 'launch' }, -- DAP configuration. By default configured to work with `lldb-vscode`.
+"   dap_open_command = require('dap').repl.open, -- Command to run after starting DAP session. You can set it to `false` if you don't want to open anything or `require('dapui').open` if you are using https://github.com/rcarriga/nvim-dap-ui
+" })
+" EOF

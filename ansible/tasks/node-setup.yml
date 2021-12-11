@@ -8,6 +8,7 @@
     - node
     - nvim
     - neovim
+
 - name: Set Global npm directory
   shell: |
     mkdir ~/.local/.npm-global
@@ -29,6 +30,7 @@
     - node
     - nvim
     - neovim
+
 - name: Install correct version of Node
   shell: |
     export N_PREFIX=~/.local/.n

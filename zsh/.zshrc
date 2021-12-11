@@ -3,10 +3,10 @@ autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 export EDITOR=nvim
 export VISUAL=nvim
-export PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm-256color
 
-~/.local/bin/tat
+
+alias tat="~/.local/bin/tat"
 
 # set history
 HISTFILESIZE=1000000000
@@ -50,6 +50,11 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # +---------+
 # | ALIASES |
 # +---------+
+
+alias cat="bat"
+# fuzzy select file to edit
+alias p='nvim `fzf --preview="bat --color always {}"`'
+
 
 source ~/dotfiles/zsh/scripts/fzf_scripts.zsh
 source ~/dotfiles/zsh/aliases
@@ -97,6 +102,7 @@ alias ra='ranger'
 alias h='history'
 alias grep='grep --color=tty -d skip'
 alias v="nvim"
+alias se="sudoedit"
 
 
 # Add this to your zshrc or bzshrc file

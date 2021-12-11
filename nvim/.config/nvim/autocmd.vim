@@ -8,13 +8,11 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " run pretty on save
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * undojoin | Neoformat
+" augroup END
 
-" quit if nerdtree is the last open window
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 
 au BufEnter *.h  let b:fswitchdst = "c,cpp,cc,m"
@@ -27,7 +25,7 @@ autocmd VimResized * :wincmd =
 
 autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE
 
-" quickscope 
+" quickscope
 augroup qs_colors
   autocmd!
   autocmd ColorScheme * highlight QuickScopePrimary guifg='#af3a03' gui=underline ctermfg=155 cterm=underline
@@ -39,3 +37,15 @@ highlight QuickScopeSecondary guifg='#076678' gui=underline ctermfg=81 cterm=und
 
 
 au FileType rst let b:presenting_slide_separator = '\v(^|\n)\~{4,}'
+
+
+
+" augroup formatting
+"   autocmd!
+"   autocmd FileType markdown setlocal formatprg=prettier\ --parser\ markdown
+"   autocmd FileType js setlocal formatprg=prettier\ --parser\ js
+"   autocmd FileType ts setlocal formatprg=prettier\ --parser\ js
+"   autocmd FileType css setlocal formatprg=prettier\ --parser\ css
+"   autocmd FileType html setlocal formatprg=prettier\ --parser\ html
+"   autocmd FileType json setlocal formatprg=prettier\ --parser\ json
+" augroup END
