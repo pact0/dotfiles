@@ -11,8 +11,9 @@
 
 - name: Set Global npm directory
   shell: |
-    mkdir ~/.local/.npm-global
-    npm config set prefix '~/.local/.npm-global'
+    mkdir {{ lookup('env', 'HOME') }}/.local/.npm-global
+    npm config set prefix '{{ lookup('env', 'HOME') }}/.local/.npm-global'
+    echo 'export PATH=$PATH:{{ lookup('env', 'HOME') }}/.local/.npm-global' >> {{ lookup('env', 'HOME') }}/.zprofile
   tags:
     - install
     - terminal
@@ -33,8 +34,8 @@
 
 - name: Install correct version of Node
   shell: |
-    export N_PREFIX=~/.local/.n
-    sudo ~/.local/.npm-global/bin/n 14 
+    export N_PREFIX={{ lookup('env', 'HOME') }}/.local/.n
+    sudo {{ lookup('env', 'HOME') }}/.local/.npm-global/bin/n 14 
   tags:
     - install
     - terminal

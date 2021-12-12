@@ -2,124 +2,141 @@
 "######################################################################
 
 call plug#begin('~/.vim/plugged')
+
 Plug 'numToStr/Navigator.nvim'
 Plug 'numToStr/Comment.nvim'
 
-Plug 'Shatur/neovim-cmake'
 Plug 'mattn/efm-langserver'
 
-Plug 'lukas-reineke/format.nvim'
-" Navigator
-Plug 'neovim/nvim-lspconfig'
-Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
-Plug 'ray-x/navigator.lua'
 
-" register management
-Plug 'AckslD/nvim-neoclip.lua'
-
-"auto close html tags
-Plug 'windwp/nvim-ts-autotag'
 "theme
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
 
 
-Plug 'ggandor/lightspeed.nvim'
+"Switch true to false etc
+Plug 'machakann/vim-sandwich'
+Plug 'tpope/vim-surround'
 
+Plug 'tpope/vim-repeat'
+Plug 'ggandor/lightspeed.nvim'
+Plug 'vim-scripts/UnconditionalPaste'
+Plug 'bkad/CamelCaseMotion'
 
 Plug 'gelguy/wilder.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'romgrk/fzy-lua-native'
 
-
-Plug 'alexzanderr/nvim-treesitter-statusline'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'tree-sitter/tree-sitter-cpp'
-Plug 'MunifTanjim/nui.nvim'
-Plug 'p00f/nvim-ts-rainbow'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " git in vim
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'ThePrimeagen/git-worktree.nvim'
+Plug 'rhysd/git-messenger.vim'
 
-Plug 'kevinhwang91/nvim-bqf'
 
 
 Plug 'numToStr/FTerm.nvim'
 Plug 'akinsho/nvim-toggleterm.lua'
 
 " undo tree
-Plug 'mbbill/undotree'
+Plug 'simnalamburt/vim-mundo'
 
 " Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
+Plug 'tree-sitter/tree-sitter-cpp'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'David-Kunz/treesitter-unit'
+Plug 'windwp/nvim-ts-autotag'
+Plug 'p00f/nvim-ts-rainbow'
+Plug 'spywhere/detect-language.nvim'
+"auto close html tags
+" <div></div>    ciwspan<esc>   <span></span>
+Plug 'windwp/nvim-autopairs'
+Plug 'MunifTanjim/nui.nvim'
+" more text object 
+Plug 'wellle/targets.vim'
+Plug 'michaeljsmith/vim-indent-object'
+
+" paste without newline gcp
+Plug 'vim-scripts/UnconditionalPaste'
+" inc search
+Plug 'haya14busa/incsearch.vim'
 
 " telescope
-Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-telescope/telescope-fzf-writer.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-fzf-writer.nvim' 
+Plug 'nvim-telescope/telescope-media-files.nvim' 
+Plug 'nvim-telescope/telescope-project.nvim' 
 
 Plug 'ThePrimeagen/harpoon'
-"Plug 'unblevable/quick-scope'  
 
 " adds colors #fff
-Plug 'norcalli/nvim-colorizer.lua'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " lsp Plugins
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'onsails/lspkind-nvim'
 Plug 'neovim/nvim-lspconfig'
-" Plug 'anott03/nvim-lspinstall'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'glepnir/lspsaga.nvim'
 
+" lsp helpers
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+" better quickfix
+Plug 'romainl/vim-qf'
+Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
+Plug 'kevinhwang91/nvim-bqf' 
+Plug 'mileszs/ack.vim'
 
+" gS gJ
+Plug 'AndrewRadev/splitjoin.vim'
+
+" completion
+" snippets
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'andersevenrud/compe-tmux'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
 
-Plug 'hrsh7th/vim-vsnip-integ'
 
-Plug 'hrsh7th/nvim-compe'
-Plug 'simrat39/symbols-outline.nvim'
+" A tree like view for symbols in Neovim using the Language Server Protocol.
+" Plug 'simrat39/symbols-outline.nvim'
 
 Plug 'styled-components/vim-styled-components'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'hrsh7th/cmp-nvim-lsp'
-
 Plug 'nvim-lua/diagnostic-nvim'
 
 
-" pretty
-Plug 'sbdchd/neoformat'
-
-" file tree and comments
+" file tree 
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'francoiscabrol/ranger.vim'
+" Plug 'francoiscabrol/ranger.vim'
+Plug 'Shougo/defx.nvim'
+Plug 'kristijanhusak/defx-git'
+Plug 'kristijanhusak/defx-icons'
 Plug 'rbgrouleff/bclose.vim'
 
 " debugging leader p
 Plug 'meain/vim-printer'
-Plug 'jiangmiao/auto-pairs' 
-" autocomplete and snippets
-"Plug 'neoclide/coc-snippets'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'honza/vim-snippets'
-Plug 'adelarsq/vim-matchit'
 
 " pretty start menu
 Plug 'glepnir/dashboard-nvim'
@@ -127,18 +144,12 @@ Plug 'glepnir/dashboard-nvim'
 " bar
 Plug 'hoob3rt/lualine.nvim'
 
-" scientific notation
-Plug 'jbyuki/nabla.nvim'
-Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
-
 " edit jupyter notebooks
 Plug 'goerz/jupytext.vim'
 
 " markdown-preview in browser
 Plug 'iamcco/markdown-preview.nvim'
 
-"Switch true to false etc
-Plug 'AndrewRadev/switch.vim'
 
 " debugger
 Plug 'mfussenegger/nvim-dap'
@@ -152,13 +163,6 @@ Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'tpope/vim-dispatch'
 Plug 'szw/vim-maximizer'
-
-" surround
-Plug 'machakann/vim-sandwich'
-
-Plug 'derekwyatt/vim-fswitch'
-Plug 'tyru/open-browser.vim'
-Plug 'ilyachur/cmake4vim'
 
 
 " pretty icons
