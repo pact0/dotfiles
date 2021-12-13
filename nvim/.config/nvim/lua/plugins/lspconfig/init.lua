@@ -113,16 +113,16 @@ local on_attach = function(client, bufnr)
                   ":lua require('lists').change_active('Quickfix')<CR>:lua vim.lsp.buf.references()<CR>",
                   {buffer = true})
     end
-    if client.resolved_capabilities.rename then
-        utils.map("n", "<Space>rn", "<cmd>lua require'lsp.rename'.rename()<CR>",
-                  {silent = true, buffer = true})
-    end
+    -- if client.resolved_capabilities.rename then
+    --     utils.map("n", "<Space>rn", "<cmd>lua require'plugins.lspconfig.rename'.rename()<CR>",
+    --               {silent = true, buffer = true})
+    -- end
     if client.resolved_capabilities.signature_help then
         utils.map("n", "<Space>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>",
                   {silent = true, buffer = true})
     end
     utils.map("n", "<Space><CR>",
-              "<cmd>lua require'diagnostics'.line_diagnostics()<CR>",
+              "<cmd>lua require'plugins.lspconfig.diagnostics'.line_diagnostics()<CR>",
               {buffer = true})
 
     local function buf_set_keymap(...)
@@ -137,18 +137,17 @@ local on_attach = function(client, bufnr)
     local opts = {noremap = true, silent = true}
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    -- buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                    opts)
     buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                    opts)
-    -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     -- buf_set_keymap('n', '<space>rr', '<cmd>lua vim.lsp.buf.references()<CR>',
     --                opts)
-    buf_set_keymap('n', '<space>d',
-                   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
-                   opts)
+    -- buf_set_keymap('n', '<space>d',
+    --                '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
+    --                opts)
     buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
                    opts)
     buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
@@ -184,6 +183,10 @@ local ts_utils_attach = require 'plugins.lsp-ts-utils'
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
                                                                      .protocol
                                                                      .make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {"documentation", "detail", "additionalTextEdits"}
+}
 
 lsp_installer.on_server_ready(function(server)
     local default_opts = {

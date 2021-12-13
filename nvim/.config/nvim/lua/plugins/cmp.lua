@@ -2,16 +2,23 @@
 local cmp = require 'cmp'
 local npairs = require("nvim-autopairs")
 
+vim.opt.spell = true
+vim.opt.spelllang = {'en_us'}
 npairs.setup({
     check_ts = true,
     map_c_w = true -- map <c-w> to delete a pair if possible
 })
 
-local luasnip = require 'luasnip'
+require("luasnip").config.set_config({
+    history = true,
+    updateevents = "TextChanged,TextChangedI"
+})
+require("luasnip.loaders.from_vscode").load()
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done',
              cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
+cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -77,8 +84,17 @@ cmp.setup({
         {name = "path", priority_weight = 110},
         {name = "nvim_lsp", max_item_count = 20, priority_weight = 100},
         {name = "nvim_lua", priority_weight = 90},
-        {name = "luasnip", priority_weight = 80},
-        {name = "buffer", max_item_count = 5, priority_weight = 70}, {
+        {name = "luasnip", priority_weight = 80}, {name = 'spell'},
+        {name = 'treesitter'}, {
+            name = "buffer",
+            max_item_count = 5,
+            priority_weight = 70,
+            option = {
+                get_bufnrs = function()
+                    return vim.api.nvim_list_bufs()
+                end
+            }
+        }, {
             name = "tmux",
             max_item_count = 5,
             options = {all_panes = false},
@@ -110,7 +126,8 @@ cmp.setup({
                 luasnip = "[Snip]",
                 tmux = "[Tmux]",
                 look = "[Look]",
-                rg = "[RG]"
+                rg = "[RG]",
+                treesitter = '[TS]'
             }
             vim_item.menu = menu_map[entry.source.name] or
                                 string.format("[%s]", entry.source.name)

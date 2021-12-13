@@ -11,6 +11,8 @@ map("n", "g*", "<Plug>(incsearch-nohl-g*)", {noremap = false})
 map("n", "g#", "<Plug>(incsearch-nohl-g#)", {noremap = false})
 
 map("n", "x", '"_x')
+map("n", leader .. "oo", "o<esc>k")
+map("n", leader .. "O", "O<esc>j")
 
 -- #region Navigator
 map("n", "<A-h>", "<CMD>lua require('Navigator').left()<CR>")
@@ -19,8 +21,15 @@ map("n", "<A-k>", "<CMD>lua require('Navigator').up()<CR>")
 map("n", "<A-l>", "<CMD>lua require('Navigator').right()<CR>")
 -- ###
 
+-- Remap for dealing with word wrap
+vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'",
+                        {noremap = true, expr = true, silent = true})
+vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'",
+                        {noremap = true, expr = true, silent = true})
 map({"n", "o", "v"}, "H", "^")
 map({"n", "o", "v"}, "L", "$")
+map({ "n", "v" }, "J", "5j")
+map({ "n", "v" }, "K", "5k")
 
 map("n", leader .. "gd",
     ":set nosplitright<CR>:execute 'Gvdiffsplit ' .. g:git_base<CR>:set splitright<CR>")
@@ -33,7 +42,6 @@ map("n", leader .. "gn",
     ":lua require('lists').change_active('Quickfix')<CR>:Git mergetool<CR>")
 map("n", leader .. "gh", ":diffget //2<CR> :diffupdate<CR>")
 map("n", leader .. "gl", ":diffget //3<CR> :diffupdate<CR>")
-
 
 -- #visual mode
 map("v", "<", "<gv")
@@ -55,9 +63,9 @@ map("n", leader .. "v",
     {noremap = false, silent = true})
 map("n", leader .. "b", ":lua require('lists').toggle_active()<CR>")
 
-map("n", leader .. "a",
-
-    ":lua require('lists').change_active('Quickfix')<CR>:Ack<space>")
+-- map("n", leader .. "a",
+--
+--     ":lua require('lists').change_active('Quickfix')<CR>:Ack<space>")
 -- # end quickfix
 
 map("x", "iu", ':lua require"treesitter-unit".select()<CR>', {noremap = true})
@@ -85,3 +93,13 @@ map("n", "<CLEAR-7>", "<Plug>VimwikiIncrementListItem", {noremap = false})
 map("n", "<CLEAR-8>", "<Plug>VimwikiDecrementListItem", {noremap = false})
 map("n", "glp", "<Plug>UnconditionalPasteIndentedAfter", {noremap = false})
 map("n", "glP", "<Plug>UnconditionalPasteIndentedBefore", {noremap = false})
+
+------
+map("n", leader .. leader,
+    ":<C-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<CR>",
+    {silent = true})
+map("n", leader .. "<C-o>", ":lua require 'buffers'.close_others()<CR>")
+map("n", leader .. "q", ":lua require 'buffers'.close()<CR>")
+map("n", leader .. "w", ":update<CR>")
+map("n", "]b", "<Cmd>bnext<CR>")
+map("n", "[b", "<Cmd>bprev<CR>")

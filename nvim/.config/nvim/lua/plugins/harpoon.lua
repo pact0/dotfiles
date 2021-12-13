@@ -1,6 +1,5 @@
-local function buf_set_keymap(...)
-vim.api.nvim_buf_set_keymap(bufnr, ...)
-end
+local map = require'utils'.map
+local leader = "<space>"
 
 local opts = {noremap = true, silent = true}
 
@@ -9,25 +8,16 @@ require("harpoon").setup({
         save_on_toggle = false,
         save_on_change = true,
         enter_on_sendcmd = false,
-        excluded_filetypes = { "harpoon" }
-    },
+        excluded_filetypes = {"harpoon"}
+    }
 })
 
+map('n', leader .. '1', ':lua require("harpoon.ui").nav_file(1)<CR>', opts)
+map('n', leader .. '2', ':lua require("harpoon.ui").nav_file(2)<CR>', opts)
+map('n', leader .. '3', ':lua require("harpoon.ui").nav_file(3)<CR>', opts)
+map('n', leader .. '4', ':lua require("harpoon.ui").nav_file(4)<CR>', opts)
+map('n', leader .. '5', ':lua require("harpoon.ui").nav_file(4)<CR>', opts)
 
-buf_set_keymap('n', '<leader>1', ':lua require("harpoon.ui").nav_file(1)<CR>', opts)
-buf_set_keymap('n', '<leader>2', ':lua require("harpoon.ui").nav_file(2)<CR>', opts)
-buf_set_keymap('n', '<leader>3', ':lua require("harpoon.ui").nav_file(3)<CR>', opts)
-buf_set_keymap('n', '<leader>4', ':lua require("harpoon.ui").nav_file(4)<CR>', opts)
-buf_set_keymap('n', '<leader>5', ':lua require("harpoon.ui").nav_file(5)<CR>', opts)
+map('n', leader .. 'a', ':lua require("harpoon.mark").add_file()<CR>', opts)
+map('n', '<C-e>', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
 
-buf_set_keymap('n', '<leader>a', ':lua require("harpoon.ui").add_file()<CR>', opts)
-buf_set_keymap('n', '<C-e>', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
-
--- nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
--- nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
--- nnoremap <leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
--- 
--- nnoremap <silent> <leader>tu :lua require("harpoon.term").gotoTerminal(1)<CR>
--- nnoremap <silent> <leader>te :lua require("harpoon.term").gotoTerminal(2)<CR>
--- nnoremap <silent> <leader>cu :lua require("harpoon.term").sendCommand(1, 1)<CR>
--- nnoremap <silent> <leader>ce :lua require("harpoon.term").sendCommand(1, 2)<CR>

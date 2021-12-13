@@ -4,16 +4,13 @@ local M = {}
 local quickfix = "Quickfix"
 local location = "Location"
 
-M.setup = function()
-    vim.g.active_list = quickfix
-end
+M.setup = function() vim.g.active_list = quickfix end
 
-M.change_active = function(list)
-    vim.g.active_list = list
-end
+M.change_active = function(list) vim.g.active_list = list end
 
 M.toggle_active = function()
-    vim.g.active_list = utils._if(vim.g.active_list == quickfix, location, quickfix)
+    vim.g.active_list = utils._if(vim.g.active_list == quickfix, location,
+                                  quickfix)
     print(string.format("%s list", vim.g.active_list))
 end
 
@@ -21,9 +18,7 @@ M.move = function(direction)
     local wrap
     wrap = function(cmd, backup)
         local status = pcall(vim.cmd, cmd)
-        if not status then
-            wrap(backup, "echo 'No Errors'")
-        end
+        if not status then wrap(backup, "echo 'No Errors'") end
     end
 
     if direction == "up" then

@@ -3,8 +3,13 @@
 
 call plug#begin('~/.vim/plugged')
 
+" faster startup
+Plug 'nathom/filetype.nvim'
+Plug 'lewis6991/impatient.nvim'
+
 Plug 'numToStr/Navigator.nvim'
 Plug 'numToStr/Comment.nvim'
+Plug 'folke/todo-comments.nvim'
 
 Plug 'mattn/efm-langserver'
 
@@ -27,6 +32,7 @@ Plug 'gelguy/wilder.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'romgrk/fzy-lua-native'
+Plug 'junegunn/fzf'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 
@@ -62,6 +68,7 @@ Plug 'MunifTanjim/nui.nvim'
 " more text object 
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'andymass/vim-matchup'
 
 " paste without newline gcp
 Plug 'vim-scripts/UnconditionalPaste'
@@ -113,10 +120,13 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'f3fora/cmp-spell'
+Plug 'ray-x/cmp-treesitter'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
+Plug 'vim-scripts/CmdlineComplete'
 
 
 
@@ -143,6 +153,7 @@ Plug 'glepnir/dashboard-nvim'
 
 " bar
 Plug 'hoob3rt/lualine.nvim'
+Plug 'SmiteshP/nvim-gps'
 
 " edit jupyter notebooks
 Plug 'goerz/jupytext.vim'

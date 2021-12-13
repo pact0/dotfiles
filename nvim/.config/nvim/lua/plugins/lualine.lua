@@ -1,4 +1,5 @@
 local lualine = require('lualine')
+local gps = require("nvim-gps")
 local get_modified = function() return '%m' or '' end
 local get_readonly = function()
     if not vim.bo.readonly then return '' end
@@ -51,8 +52,10 @@ lualine.setup {
             'branch', 'diff', {'diagnostics', sources = {'nvim_diagnostic'}}
         },
         lualine_c = {
+
             {'filename', file_status = false}, {get_readonly}, {get_modified},
-            {get_spell}, {get_session}
+            {get_spell}, {get_session},
+            {gps.get_location, cond = gps.is_available}
         },
         lualine_x = {'encoding', 'fileformat', 'filetype'},
         lualine_y = {'progress'},
@@ -66,7 +69,6 @@ lualine.setup {
         lualine_y = {},
         lualine_z = {}
     },
-    tabline = {
-    },
+    tabline = {},
     extensions = {'fugitive', minimal_extension, 'symbols-outline'}
 }

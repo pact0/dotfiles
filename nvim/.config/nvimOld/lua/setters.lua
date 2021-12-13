@@ -5,3 +5,7 @@ vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'
 vim.opt.fillchars = "fold: "
 vim.wo.foldnestmax = 3
 vim.wo.foldminlines = 1
+
+vim.g.ackprg = "rg --vimgrep --no-heading --hidden --smart-case"
+
+vim.g.SignatureForceRemoveGlobal = true

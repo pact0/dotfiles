@@ -1,3 +1,6 @@
+" needs to be first before plugins
+"lua require('impatient')
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -5,8 +8,10 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 source $HOME/.config/nvim/plugins.vim
+
 source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/autocmd.vim
+
 source $HOME/.config/nvim/remaps.vim
 source $HOME/.config/nvim/plugins/dashboard.vim
 source $HOME/.config/nvim/setters.vim
@@ -14,6 +19,7 @@ source $HOME/.config/nvim/setters.vim
 lua require'setters'
 lua require'autocmd'
 lua require'mappings'
+lua require'snippets'
 lua require("lists").setup()
 lua require("git").setup()
 let g:Hexokinase_highlighters = ['foregroundfull']
@@ -30,6 +36,7 @@ lua require'plugins.lspkind'
 lua require'plugins.lualine'
 lua require'plugins.bqf'
 lua require'plugins.treesitter'
+lua require'plugins.harpoon'
 lua require'plugins.telescope'
 lua require'plugins.dap'
 lua require'plugins.navigator'
@@ -37,8 +44,10 @@ lua require'plugins.comment'
 lua require'plugins.lightspeed'
 lua require'plugins.luasnip'
 lua require'plugins.indent-blankline'
+lua require'plugins.todo-comments'
 lua require'plugins.defx'
 
+nnoremap <leader>b :ls<cr>:b<space>
 nnoremap <leader>u :MundoToggle<CR>
 nnoremap <silent><leader>m :MaximizerToggle<CR>
 let g:mundo_width = 60

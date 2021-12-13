@@ -1,16 +1,16 @@
 -- fixes folds when opening file with felescope
 local telescope_actions = require("telescope.actions.set")
+local map = require("utils").map
+local leader = "<space>"
 
 local fixfolds = {
     hidden = true,
     attach_mappings = function(_)
         telescope_actions.select:enhance({
-            post = function()
-                vim.cmd(":normal! zx")
-            end,
+            post = function() vim.cmd(":normal! zx") end
         })
         return true
-    end,
+    end
 }
 
 local actions = require('telescope.actions')
@@ -23,10 +23,49 @@ require('telescope').setup {
         git_files = fixfolds,
         grep_string = fixfolds,
         live_grep = fixfolds,
-        oldfiles = fixfolds,
+        oldfiles = fixfolds
         -- I probably missed some
     },
     defaults = {
+        mappings = {
+            i = {
+                ["<CR>"] = actions.select_default + actions.center,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-t>"] = actions.select_tab,
+                ["<C-c>"] = actions.close,
+                -- ['<Esc>'] = actions.close,
+
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
+                -- Replace current quickfix with selected Telescope entries(or all entries)
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                -- Add entries to current quickfix (selected or all entries)
+                ["<C-a>"] = actions.smart_add_to_qflist,
+                ["<Tab>"] = actions.toggle_selection
+                -- ["<C-w>l"] = actions.preview_switch_window_right,
+            },
+            n = {
+                ["<CR>"] = actions.select_default + actions.center,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-t>"] = actions.select_tab,
+                ["<C-c>"] = actions.close,
+                ["<Esc>"] = actions.close,
+
+                ["j"] = actions.move_selection_next,
+                ["k"] = actions.move_selection_previous,
+
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
+                -- Replace current quickfix with selected Telescope entries(or all entries)
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                -- Add entries to current quickfix (selected or all entries)
+                ["<C-a>"] = actions.smart_add_to_qflist,
+                ["<Tab>"] = actions.toggle_selection
+                -- ["<C-w>l"] = actions.preview_switch_window_right,
+            }
+        },
         vimgrep_arguments = {
             'rg', '--color=never', '--no-heading', '--with-filename',
             '--line-number', '--column', '--smart-case'
@@ -35,7 +74,7 @@ require('telescope').setup {
         selection_caret = "> ",
         entry_prefix = "  ",
         initial_mode = "insert",
-        file_ignore_patterns = { 'node_modules/.*', '%.env' },
+        file_ignore_patterns = {'node_modules/.*', '%.env'},
         selection_strategy = "reset",
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
@@ -45,7 +84,6 @@ require('telescope').setup {
             prompt_position = "bottom"
         },
         file_sorter = require'telescope.sorters'.get_fuzzy_file,
-        file_ignore_patterns = {},
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
         winblend = 0,
         border = {},
@@ -85,25 +123,22 @@ vim.api.nvim_set_keymap("n", "<Leader>f", "[tele]", {})
 
 vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>Telescope git_files<CR>", {})
 
-vim.api.nvim_set_keymap("n", "[tele]f",
-    "<cmd>Telescope find_files <CR>", {})
+vim.api.nvim_set_keymap("n", "[tele]f", "<cmd>Telescope find_files <CR>", {})
 vim.api.nvim_set_keymap("n", "[tele]g",
-    "<cmd>Telescope live_grep theme=get_dropdown<CR>", {})
+                        "<cmd>Telescope live_grep theme=get_dropdown<CR>", {})
 vim.api.nvim_set_keymap("n", "[tele]G",
-    "<cmd>Telescope live_grep theme=get_dropdown vimgrep_arguments=rg,--no-heading,--with-filename,--line-number,--column<CR>", {})
+                        "<cmd>Telescope live_grep theme=get_dropdown vimgrep_arguments=rg,--no-heading,--with-filename,--line-number,--column<CR>",
+                        {})
 vim.api.nvim_set_keymap("n", "[tele]b",
-    "<cmd>Telescope buffers theme=get_dropdown<CR>", {})
+                        "<cmd>Telescope buffers theme=get_dropdown <CR>", {})
 vim.api.nvim_set_keymap("n", "[tele]r",
-    "<cmd>Telescope lsp_references theme=get_dropdown<CR>",
-    {})
+                        "<cmd>Telescope lsp_references theme=get_dropdown<CR>",
+                        {})
 vim.api.nvim_set_keymap("n", "[tele]q",
-    "<cmd>Telescope quickfix theme=get_dropdown<CR>", {})
+                        "<cmd>Telescope quickfix theme=get_dropdown<CR>", {})
 vim.api.nvim_set_keymap("n", "[tele]d",
-    "<cmd>Telescope lsp_definitions theme=get_dropdown<CR>",
-    {})
+                        "<cmd>Telescope lsp_definitions theme=get_dropdown<CR>",
+                        {})
 vim.api.nvim_set_keymap("n", "[tele]D",
-    "<cmd>Telescope file_browser theme=get_dropdown cwd=~/Documents<CR>",
-    {})
-vim.api.nvim_set_keymap("n", "[tele]b",
-    "<cmd>Telescope file_browser theme=get_dropdown",
-    {})
+                        "<cmd>Telescope file_browser theme=get_dropdown cwd=~/Documents<CR>",
+                        {})
