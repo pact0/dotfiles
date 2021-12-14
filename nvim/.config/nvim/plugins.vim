@@ -101,7 +101,7 @@ Plug 'glepnir/lspsaga.nvim'
 
 " lsp helpers
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'jose-elias-alvarez/null-ls.nvim'
 " better quickfix
 Plug 'romainl/vim-qf'
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
@@ -167,6 +167,7 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'Pocco81/DAPInstall.nvim'
 
 " tests
 Plug 'vim-test/vim-test'

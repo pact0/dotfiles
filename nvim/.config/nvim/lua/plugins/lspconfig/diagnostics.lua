@@ -11,8 +11,7 @@ local function source_string(source) return string.format("  [%s]", source) end
 M.line_diagnostics = function()
     local width = 70
     local bufnr, lnum = unpack(vim.fn.getcurpos())
-    local diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, lnum - 1,
-                                                                {})
+    local diagnostics = vim.lsp.diagnostic.get(bufnr, lnum - 1, {})
     if vim.tbl_isempty(diagnostics) then return end
 
     local lines = {}

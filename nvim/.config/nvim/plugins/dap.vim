@@ -7,7 +7,7 @@ local dap = require('dap')
 dap.adapters.node2 = {
   type = 'executable',
   command = 'node',
-  args = {os.getenv('HOME') .. '/apps/node/out/src/nodeDebug.js'},
+  args = {os.getenv('HOME') .. '/vscode-node-debug2/out/src/nodeDebug.js'},
 }
 -- require('dap').set_log_level('INFO')
 dap.defaults.fallback.terminal_win_cmd = '80vsplit new'

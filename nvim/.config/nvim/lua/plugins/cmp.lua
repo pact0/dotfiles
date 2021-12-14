@@ -9,10 +9,7 @@ npairs.setup({
     map_c_w = true -- map <c-w> to delete a pair if possible
 })
 
-require("luasnip").config.set_config({
-    history = true,
-    updateevents = "TextChanged,TextChangedI"
-})
+local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").load()
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')

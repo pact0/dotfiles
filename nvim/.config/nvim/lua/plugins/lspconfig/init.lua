@@ -117,10 +117,6 @@ local on_attach = function(client, bufnr)
     --     utils.map("n", "<Space>rn", "<cmd>lua require'plugins.lspconfig.rename'.rename()<CR>",
     --               {silent = true, buffer = true})
     -- end
-    if client.resolved_capabilities.signature_help then
-        utils.map("n", "<Space>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>",
-                  {silent = true, buffer = true})
-    end
     utils.map("n", "<Space><CR>",
               "<cmd>lua require'plugins.lspconfig.diagnostics'.line_diagnostics()<CR>",
               {buffer = true})
@@ -150,18 +146,6 @@ local on_attach = function(client, bufnr)
     --                opts)
     buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
                    opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
-                   opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
-                   opts)
-
-    -- Set some keybinds conditional on server capabilities
-    buf_set_keymap("n", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>",
-                   opts)
-    if client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("v", "<space>=", "<cmd>lua vim.lsp.buf.formatting()<CR>",
-                       opts)
-    end
 
 end
 local languages = {
@@ -292,7 +276,11 @@ lsp_installer.on_server_ready(function(server)
                 yaml = {
                     schemas = {
                         ["https://raw.githubusercontent.com/quantumblacklabs/kedro/develop/static/jsonschema/kedro-catalog-0.17.json"] = "conf/**/*catalog*",
-                        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+                        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                        ['https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json'] = '.gitlab-ci.yml',
+                        ['http://json.schemastore.org/composer'] = 'composer.yaml',
+                        ['https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json'] = 'docker-compose*.yml',
+                        ['https://raw.githubusercontent.com/kamilkisiela/graphql-config/v3.0.3/config-schema.json'] = '.graphqlrc*'
                     }
                 }
             }

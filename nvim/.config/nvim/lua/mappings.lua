@@ -14,6 +14,16 @@ map("n", "x", '"_x')
 map("n", leader .. "oo", "o<esc>k")
 map("n", leader .. "O", "O<esc>j")
 
+-- Ex-mode is weird and not useful so it seems better to repeat the last macro
+map('n', 'Q', '@@')
+-- Split line with X
+map('n', 'X',
+    ':keeppatterns substitute/\\s*\\%#\\s*/\\r/e <bar> normal! ==^<cr>',
+    {silent = true})
+-- Open the current file's directory
+map('n', '-', [[expand('%') == '' ? ':e ' . getcwd() . '<cr>' : ':e %:h<cr>']],
+    {expr = true})
+
 -- #region Navigator
 map("n", "<A-h>", "<CMD>lua require('Navigator').left()<CR>")
 map("n", "<A-j>", "<CMD>lua require('Navigator').down()<CR>")
@@ -28,8 +38,8 @@ vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'",
                         {noremap = true, expr = true, silent = true})
 map({"n", "o", "v"}, "H", "^")
 map({"n", "o", "v"}, "L", "$")
-map({ "n", "v" }, "J", "5j")
-map({ "n", "v" }, "K", "5k")
+map({"n", "v"}, "J", "5j")
+map({"n", "v"}, "K", "5k")
 
 map("n", leader .. "gd",
     ":set nosplitright<CR>:execute 'Gvdiffsplit ' .. g:git_base<CR>:set splitright<CR>")
@@ -55,7 +65,7 @@ map("n", "<UP>", ":lua require('lists').move('up')<CR>", {silent = true})
 map("n", "<DOWN>", ":lua require('lists').move('down')<CR>", {silent = true})
 map("n", "<LEFT>", ":lua require('lists').move('left')<CR>", {silent = true})
 map("n", "<RIGHT>", ":lua require('lists').move('right')<CR>", {silent = true})
-map("n", leader .. "c",
+map("n", leader .. "cf",
     "<Plug>(qf_qf_toggle_stay):lua require('lists').change_active('Quickfix')<CR>",
     {noremap = false, silent = true})
 map("n", leader .. "v",
@@ -103,3 +113,37 @@ map("n", leader .. "q", ":lua require 'buffers'.close()<CR>")
 map("n", leader .. "w", ":update<CR>")
 map("n", "]b", "<Cmd>bnext<CR>")
 map("n", "[b", "<Cmd>bprev<CR>")
+
+-- Around line: with leading and trailing whitespace
+map('v', 'al', ':<c-u>silent! normal! 0v$<cr>', {silent = true})
+map('o', 'al', ':normal val<cr>', {noremap = false, silent = true})
+
+-- Inner line: without leading or trailing whitespace
+
+map('v', 'il', ':<c-u>silent! normal! ^vg_<cr>', {silent = true})
+map('o', 'il', ':normal vil<cr>', {noremap = false, silent = true})
+
+-- Whole file, jump back with <c-o>
+
+map('v', 'ae', [[:<c-u>silent! normal! m'gg0VG$<cr>]], {silent = true})
+map('o', 'ae', ':normal Vae<cr>', {noremap = false, silent = true})
+
+----------------------------------------------------------------
+------------------------------DAP-------------------------------
+-- vim.api.nvim_set_keymap("n", "[DAP]r", "<cmd>lua require'dap'.repl.open()<CR>",
+--                         {})
+--
+
+map('n', leader .. "dda", ':lua require"debugHelper".attach()<CR>')
+map('n', leader .. "ddb", ':lua require"dap".toggle_breakpoint()<CR>')
+map('n', leader .. "ddB",
+    ':lua require"dap".toggle_breakpoint(vim.fn.input(\'Breakpoint condition: \'))<CR>')
+map('n', leader .. "ddc", ':lua require"dap".continue()<CR>')
+map('n', leader .. "ddi", ':lua require"dap".step_into()<CR>')
+map('n', leader .. "ddo", ':lua require"dap".step_over()<CR>')
+map('n', leader .. "ddR", ':lua require"dap".restart()<CR>')
+map('n', leader .. "dde", ':lua require"dap".disconnect()<CR>')
+map('n', leader .. "dde", ':lua require"dap".disconnect()<CR>')
+map('n', leader .. "ddU", ':lua require"dapui".toggle()<CR>')
+map('n', leader .. "ddh", ':lua require"dap.ui.widgets".hover()<CR>')
+

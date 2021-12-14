@@ -1,6 +1,3 @@
-" needs to be first before plugins
-"lua require('impatient')
-
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -8,6 +5,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 source $HOME/.config/nvim/plugins.vim
+
+" needs to be first before plugins init
+lua require('impatient')
 
 source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/autocmd.vim
@@ -22,6 +22,7 @@ lua require'mappings'
 lua require'snippets'
 lua require("lists").setup()
 lua require("git").setup()
+lua require'debugHelper'
 let g:Hexokinase_highlighters = ['foregroundfull']
 let g:Hexokinase_optInPatterns = "full_hex,rgb,rgba,hsl,hsla"
 
