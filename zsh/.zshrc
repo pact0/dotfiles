@@ -7,7 +7,11 @@ export TERM=xterm-256color
 
 
 alias tat="~/.local/bin/tat"
+#~/.local/share/Trash/
+alias trashdir='cd ~/.local/bin/tat'
 
+alias rm='echo "This is not the command you are looking for. user trash instead"; false'
+# \rm file-without-hope -- to overcome ^
 # set history
 HISTFILESIZE=1000000000
 HISTSIZE=1000000000

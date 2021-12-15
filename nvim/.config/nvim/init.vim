@@ -7,46 +7,19 @@ endif
 source $HOME/.config/nvim/plugins.vim
 
 " needs to be first before plugins init
+
 lua require('impatient')
 
-source $HOME/.config/nvim/functions.vim
-source $HOME/.config/nvim/autocmd.vim
+lua require('plugins')
 
-source $HOME/.config/nvim/remaps.vim
+
 source $HOME/.config/nvim/plugins/dashboard.vim
 source $HOME/.config/nvim/setters.vim
 
-lua require'setters'
-lua require'autocmd'
-lua require'mappings'
-lua require'snippets'
-lua require("lists").setup()
-lua require("git").setup()
-lua require'debugHelper'
 let g:Hexokinase_highlighters = ['foregroundfull']
 let g:Hexokinase_optInPatterns = "full_hex,rgb,rgba,hsl,hsla"
 
-let mapleader = " "
-set completeopt=menuone,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-
-lua require'plugins.cmp'
-lua require'plugins.gitsigns'
-lua require'plugins.lspconfig'
-lua require'plugins.lspkind'
-lua require'plugins.lualine'
-lua require'plugins.bqf'
-lua require'plugins.treesitter'
-lua require'plugins.harpoon'
-lua require'plugins.telescope'
-lua require'plugins.dap'
-lua require'plugins.navigator'
-lua require'plugins.comment'
-lua require'plugins.lightspeed'
-lua require'plugins.luasnip'
-lua require'plugins.indent-blankline'
-lua require'plugins.todo-comments'
-lua require'plugins.defx'
 
 nnoremap <leader>b :ls<cr>:b<space>
 nnoremap <leader>u :MundoToggle<CR>
@@ -58,3 +31,4 @@ let g:mundo_right = 1
 let g:webdevicons_enable_startify = 1
 
 colorscheme gruvbox
+

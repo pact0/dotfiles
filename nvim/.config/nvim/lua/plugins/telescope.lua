@@ -66,15 +66,16 @@ require('telescope').setup {
                 -- ["<C-w>l"] = actions.preview_switch_window_right,
             }
         },
+        file_ignore_patterns = {"node_modules/.*", ".git", "dist", "%.env"},
         vimgrep_arguments = {
-            'rg', '--color=never', '--no-heading', '--with-filename',
-            '--line-number', '--column', '--smart-case'
+            "rg", "--color=never", "--no-heading", "--with-filename",
+            "--line-number", "--column", "--hidden", "--iglob", "!yarn.lock",
+            "--smart-case", "-u"
         },
         prompt_prefix = "> ",
         selection_caret = "> ",
         entry_prefix = "  ",
         initial_mode = "insert",
-        file_ignore_patterns = {'node_modules/.*', '%.env'},
         selection_strategy = "reset",
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
@@ -142,3 +143,10 @@ vim.api.nvim_set_keymap("n", "[tele]d",
 vim.api.nvim_set_keymap("n", "[tele]D",
                         "<cmd>Telescope file_browser theme=get_dropdown cwd=~/Documents<CR>",
                         {})
+map("n", leader .. "f?", "<cmd>Telescope keymaps<CR>")
+map("n", leader .. "fe", "<cmd>Telescope file_browser<CR>")
+map("n", leader .. "fc",
+    "<cmd>lua require('telescope.builtin').file_browser({cwd = vim.fn.expand('%:p:h')<CR>")
+map("n", leader .. "fs", "<cmd>Telescope treesitter<CR>")
+map('n', leader .. 'FF', ':Telescope grep_string<CR>')
+

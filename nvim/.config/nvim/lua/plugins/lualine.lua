@@ -53,11 +53,12 @@ lualine.setup {
         },
         lualine_c = {
 
-            {'filename', file_status = false}, {get_readonly}, {get_modified},
-            {get_spell}, {get_session},
+            {'filename', file_status = false},
+            -- {get_readonly}, {get_modified},
+            -- {get_spell}, {get_session},
             {gps.get_location, cond = gps.is_available}
         },
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_x = {{require('auto-session-library').current_session_name}, 'fileformat', 'filetype'},
         lualine_y = {'progress'},
         lualine_z = {'location'}
     },
@@ -72,3 +73,4 @@ lualine.setup {
     tabline = {},
     extensions = {'fugitive', minimal_extension, 'symbols-outline'}
 }
+

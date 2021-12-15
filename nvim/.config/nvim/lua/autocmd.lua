@@ -18,5 +18,16 @@ vim.cmd [[autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") &
 -- " Enable yank highlighting
 vim.cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup='WildMenu', timeout=4444}]]
 
+-- remove whitespace on save
+vim.cmd [[au BufWritePre * :%s/\s\+$//e]]
+
+-- don't auto commenting new lines
+vim.cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
+
+vim.cmd [[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]]
+
+-- automatically rebalance windows on vim resize
+vim.cmd [[autocmd VimResized * :wincmd =]]
+
 vim.cmd [[augroup END]]
 

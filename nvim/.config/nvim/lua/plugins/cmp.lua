@@ -1,6 +1,12 @@
 -- Setup nvim-cmp.
 local cmp = require 'cmp'
 local npairs = require("nvim-autopairs")
+require('nvim-autopairs').setup({
+    enable_check_bracket_line = true, -- Don't add pairs if it already have a close pairs in same line
+    disable_filetype = {"TelescopePrompt", "vim"}, --
+    enable_afterquote = false, -- add bracket pairs after quote
+    enable_moveright = true
+})
 
 vim.opt.spell = true
 vim.opt.spelllang = {'en_us'}
@@ -94,7 +100,12 @@ cmp.setup({
         }, {
             name = "tmux",
             max_item_count = 5,
-            options = {all_panes = false},
+            option = {
+                all_panes = false,
+                label = "[tmux]",
+                trigger_characters = {'.'},
+                trigger_characters_ft = {}
+            },
             priority_weight = 50
         }, {
             name = "look",
@@ -139,3 +150,28 @@ cmp.setup({
 })
 
 cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
+
+local Rule = require('nvim-autopairs.rule')
+
+npairs.add_rules {
+    -- before   insert  after
+    --  (|)     ( |)	( | )
+    Rule(' ', ' '):with_pair(function(opts)
+        local pair = opts.line:sub(opts.col - 1, opts.col)
+        return vim.tbl_contains({'()', '[]', '{}'}, pair)
+    end), Rule('( ', ' )'):with_pair(function() return false end):with_move(
+        function(opts) return opts.prev_char:match('.%)') ~= nil end):use_key(
+        ')'),
+    Rule('{ ', ' }'):with_pair(function() return false end):with_move(
+        function(opts) return opts.prev_char:match('.%}') ~= nil end):use_key(
+        '}'),
+    Rule('[ ', ' ]'):with_pair(function() return false end):with_move(
+        function(opts) return opts.prev_char:match('.%]') ~= nil end):use_key(
+        ']'), --[===[
+  arrow key on javascript
+      Before 	Insert    After
+      (item)= 	> 	    (item)=> { }
+  --]===] Rule('%(.*%)%s*%=>$', ' {  }',
+               {'typescript', 'typescriptreact', 'javascript'}):use_regex(true)
+        :set_end_pair_length(2)
+}

@@ -6,12 +6,20 @@ call plug#begin('~/.vim/plugged')
 " faster startup
 Plug 'nathom/filetype.nvim'
 Plug 'lewis6991/impatient.nvim'
+Plug 'tweekmonster/startuptime.vim'
+Plug 'folke/which-key.nvim'
 
 Plug 'numToStr/Navigator.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'folke/todo-comments.nvim'
 
-Plug 'mattn/efm-langserver'
+" Plug 'mattn/efm-langserver'
+Plug 'monaqa/dial.nvim'
+Plug 'sQVe/sort.nvim'
+Plug 'folke/zen-mode.nvim'
+Plug 'rmagatti/auto-session'
+Plug 'rmagatti/session-lens'
+Plug 'rafamadriz/friendly-snippets'
 
 
 "theme
@@ -22,7 +30,7 @@ Plug 'ellisonleao/gruvbox.nvim'
 "Switch true to false etc
 Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-surround'
-
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'vim-scripts/UnconditionalPaste'
@@ -44,7 +52,7 @@ Plug 'rhysd/git-messenger.vim'
 
 
 
-Plug 'numToStr/FTerm.nvim'
+" Plug 'numToStr/FTerm.nvim'
 Plug 'akinsho/nvim-toggleterm.lua'
 
 " undo tree
@@ -61,11 +69,12 @@ Plug 'David-Kunz/treesitter-unit'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'spywhere/detect-language.nvim'
+Plug 'MDeiml/tree-sitter-markdown'
 "auto close html tags
 " <div></div>    ciwspan<esc>   <span></span>
 Plug 'windwp/nvim-autopairs'
 Plug 'MunifTanjim/nui.nvim'
-" more text object 
+" more text object
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'andymass/vim-matchup'
@@ -80,9 +89,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-telescope/telescope-fzf-writer.nvim' 
-Plug 'nvim-telescope/telescope-media-files.nvim' 
-Plug 'nvim-telescope/telescope-project.nvim' 
+Plug 'nvim-telescope/telescope-fzf-writer.nvim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
 
 Plug 'ThePrimeagen/harpoon'
 
@@ -105,8 +114,8 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 " better quickfix
 Plug 'romainl/vim-qf'
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
-Plug 'kevinhwang91/nvim-bqf' 
-Plug 'mileszs/ack.vim'
+Plug 'kevinhwang91/nvim-bqf'
+" Plug 'mileszs/ack.vim'
 
 " gS gJ
 Plug 'AndrewRadev/splitjoin.vim'
@@ -114,7 +123,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 " completion
 " snippets
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'andersevenrud/compe-tmux'
+Plug 'andersevenrud/cmp-tmux'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-buffer'
@@ -126,7 +135,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
-Plug 'vim-scripts/CmdlineComplete'
+" Plug 'vim-scripts/CmdlineComplete'
 
 
 
@@ -137,16 +146,17 @@ Plug 'styled-components/vim-styled-components'
 Plug 'nvim-lua/diagnostic-nvim'
 
 
-" file tree 
-Plug 'kyazdani42/nvim-tree.lua'
+" file tree
+" Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'francoiscabrol/ranger.vim'
-Plug 'Shougo/defx.nvim'
-Plug 'kristijanhusak/defx-git'
-Plug 'kristijanhusak/defx-icons'
-Plug 'rbgrouleff/bclose.vim'
+" Plug 'Shougo/defx.nvim'
+" Plug 'kristijanhusak/defx-git'
+" Plug 'kristijanhusak/defx-icons'
+" Plug 'rbgrouleff/bclose.vim'
+Plug 'ms-jpq/chadtree'
 
 " debugging leader p
-Plug 'meain/vim-printer'
+" Plug 'meain/vim-printer'
 
 " pretty start menu
 Plug 'glepnir/dashboard-nvim'
@@ -181,4 +191,3 @@ Plug 'szw/vim-maximizer'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
-

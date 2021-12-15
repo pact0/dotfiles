@@ -3,12 +3,12 @@ local leader = "<space>"
 
 map("n", "/", "<Plug>(incsearch-forward)", {noremap = false})
 map("n", "?", "<Plug>(incsearch-backward)", {noremap = false})
-map("n", "n", "<Plug>(incsearch-nohl-n)", {noremap = false})
-map("n", "N", "<Plug>(incsearch-nohl-N)", {noremap = false})
-map("n", "*", "<Plug>(incsearch-nohl-*)", {noremap = false})
-map("n", "#", "<Plug>(incsearch-nohl-#)", {noremap = false})
-map("n", "g*", "<Plug>(incsearch-nohl-g*)", {noremap = false})
-map("n", "g#", "<Plug>(incsearch-nohl-g#)", {noremap = false})
+map("n", "n", "<Plug>(incsearch-nohl-n)zz", {noremap = false})
+map("n", "N", "<Plug>(incsearch-nohl-N)zz", {noremap = false})
+map("n", "*", "<Plug>(incsearch-nohl-*)zz", {noremap = false})
+map("n", "#", "<Plug>(incsearch-nohl-#)zz", {noremap = false})
+map("n", "g*", "<Plug>(incsearch-nohl-g*)zz", {noremap = false})
+map("n", "g#", "<Plug>(incsearch-nohl-g#)zz", {noremap = false})
 
 map("n", "x", '"_x')
 map("n", leader .. "oo", "o<esc>k")
@@ -61,8 +61,8 @@ map("v", "#", '"vygv:<C-U>?\\<<C-R>v\\><CR>')
 -- #end visual mode
 
 -- # quickfix
-map("n", "<UP>", ":lua require('lists').move('up')<CR>", {silent = true})
-map("n", "<DOWN>", ":lua require('lists').move('down')<CR>", {silent = true})
+map("n", "<UP>", ":lua require('lists').move('up')<CR>zz", {silent = true})
+map("n", "<DOWN>", ":lua require('lists').move('down')<CR>zz", {silent = true})
 map("n", "<LEFT>", ":lua require('lists').move('left')<CR>", {silent = true})
 map("n", "<RIGHT>", ":lua require('lists').move('right')<CR>", {silent = true})
 map("n", leader .. "cf",
@@ -147,3 +147,26 @@ map('n', leader .. "dde", ':lua require"dap".disconnect()<CR>')
 map('n', leader .. "ddU", ':lua require"dapui".toggle()<CR>')
 map('n', leader .. "ddh", ':lua require"dap.ui.widgets".hover()<CR>')
 
+--					Resize splits more quickly
+-- ────────────────────────────────────────────────────
+-- resize up and down
+map('n', ';k', ':resize +3 <CR>', {noremap = true, silent = true})
+map('n', ';j', ':resize -3 <CR>', {noremap = true, silent = true})
+-- resize right and left
+map('n', ';l', ':vertical resize +3 <CR>', {noremap = true, silent = true})
+map('n', ';h', ':vertical resize -3 <CR>', {noremap = true, silent = true})
+
+-- move selected line(s) up or down
+-- map('v', 'J', ":m '>+1<CR>gv=gv", {noremap=true, silent=true})
+-- map('v', 'K', ":m '<-2<CR>gv=gv", {noremap=true, silent=true})
+
+-- Yank, delete and paste will use the x register
+-- k.nnoremap {'y', '"xy'}
+-- k.xnoremap {'y', '"xy'}
+-- k.nnoremap {'Y', '"xy$'}
+-- k.nnoremap {'d', '"xd'}
+-- k.xnoremap {'d', '"xd'}
+-- k.nnoremap {'D', '"xD'}
+-- k.nnoremap {'p', '"xp'}
+-- k.xnoremap {'p', '"xp'}
+-- k.nnoremap {'P', '"xP'}

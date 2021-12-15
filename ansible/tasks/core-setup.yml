@@ -26,6 +26,7 @@
       - stow
       - unzip
       - ranger
+      - trash-cli
   tags:
     - install
     - terminal
@@ -65,9 +66,8 @@
     - terminal
     - core
     - go
-
 # - name: Insert a line at the end of a file.
-#   blockinfile: 
+#   blockinfile:
 #     dest: "{{ lookup('env', 'HOME') }}/.zprofile"
 #     block: |
 #         export PATH=$PATH:/usr/local/go/bin
@@ -78,9 +78,6 @@
 #     - terminal
 #     - core
 #     - go
-
-
-
 
 # - name: install lazygit
 #   environment:
@@ -105,7 +102,4 @@
 #     - dotfiles
 #     - core
 #     - efm
-
-
-
 
