@@ -100,12 +100,11 @@ cmp.setup({
         }, {
             name = "tmux",
             max_item_count = 5,
-            option = {
-                all_panes = false,
-                label = "[tmux]",
-                trigger_characters = {'.'},
-                trigger_characters_ft = {}
-            },
+            -- option = {
+            --     all_panes = false,
+            --     trigger_characters = {'.'},
+            --     trigger_characters_ft = {}
+            -- },
             priority_weight = 50
         }, {
             name = "look",
