@@ -29,5 +29,26 @@ vim.cmd [[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]]
 -- automatically rebalance windows on vim resize
 vim.cmd [[autocmd VimResized * :wincmd =]]
 
+-- styled-components better highlight in long files
+vim.cmd [[autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart]]
+vim.cmd [[autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear]]
+
 vim.cmd [[augroup END]]
 
+-- " ++once supported in Nvim 0.4+ and Vim 8.1+
+-- autocmd CmdlineEnter * ++once call s:wilder_init() | call s:wilder#main#start()
+--
+-- function! s:wilder_init() abort
+--   call wilder#setup(...)
+--   call wilder#set_option(..., ...)
+--
+--   call wilder#set_option('pipeline', ...)
+--   call wilder#set_option('renderer', ...)
+-- endfunction
+
+-- vim.cmd([[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+--   augroup end
+-- ]])

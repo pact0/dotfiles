@@ -17,14 +17,21 @@ Plug 'folke/todo-comments.nvim'
 Plug 'monaqa/dial.nvim'
 Plug 'sQVe/sort.nvim'
 Plug 'folke/zen-mode.nvim'
-Plug 'rmagatti/auto-session'
-Plug 'rmagatti/session-lens'
 Plug 'rafamadriz/friendly-snippets'
 
 
 "theme
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'lambdalisue/suda.vim'
+Plug 'romgrk/barbar.nvim'
+
+" Project management
+Plug 'airblade/vim-rooter'
+''
+Plug 'rmagatti/auto-session'
+Plug 'ahmedkhalf/project.nvim'
+Plug 'rmagatti/session-lens'
 
 
 "Switch true to false etc
@@ -36,7 +43,14 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'vim-scripts/UnconditionalPaste'
 Plug 'bkad/CamelCaseMotion'
 
-Plug 'gelguy/wilder.nvim'
+" Plug 'gelguy/wilder.nvim'
+" Plug 'tami5/telescope-frecency.nvim'
+" Plug 'nvim-telescope/telescope-cheat.nvim'
+" Plug 'tami5/sqlite.lua'
+Plug 'sindrets/diffview.nvim'
+" Plug 'pwntester/octo.nvim#-features' -- gh gui
+Plug 'tami5/neorg'
+
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'romgrk/fzy-lua-native'
@@ -50,6 +64,8 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'rhysd/git-messenger.vim'
 
+Plug 'Shatur/neovim-cmake'
+Plug 'creativenull/efmls-configs-nvim'
 
 
 " Plug 'numToStr/FTerm.nvim'
@@ -65,6 +81,7 @@ Plug 'tree-sitter/tree-sitter-cpp'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'nvim-neorg/tree-sitter-norg'
 Plug 'David-Kunz/treesitter-unit'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'p00f/nvim-ts-rainbow'
@@ -116,7 +133,7 @@ Plug 'romainl/vim-qf'
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
 Plug 'kevinhwang91/nvim-bqf'
 " Plug 'mileszs/ack.vim'
-
+" (a(b)((c)))
 " gS gJ
 Plug 'AndrewRadev/splitjoin.vim'
 

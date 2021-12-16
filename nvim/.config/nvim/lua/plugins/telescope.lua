@@ -2,7 +2,13 @@
 local telescope_actions = require("telescope.actions.set")
 local map = require("utils").map
 local leader = "<space>"
-
+require("git-worktree").setup({
+    -- change_directory_command = <str> -- default: "cd",
+    -- update_on_change = <boolean> -- default: true,
+    -- update_on_change_command = <str> -- default: "e .",
+    -- clearjumps_on_change = <boolean> -- default: true,
+    -- autopush = <boolean> -- default: false,
+})
 local fixfolds = {
     hidden = true,
     attach_mappings = function(_)
@@ -116,37 +122,43 @@ require('telescope').setup {
 
 require("telescope").load_extension("media_files")
 require("telescope").load_extension("git_worktree")
+
+-- Example:
+-- :lua require("git-worktree").create_worktree("feat-69", "master", "origin")
+
 require('telescope').load_extension('dap')
 require('telescope').load_extension('project')
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('cmake')
 
-vim.api.nvim_set_keymap("n", "<Leader>f", "[tele]", {})
+map("n", "<C-p>", "<cmd>Telescope git_files<CR>", {})
 
-vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>Telescope git_files<CR>", {})
-
-vim.api.nvim_set_keymap("n", "[tele]f", "<cmd>Telescope find_files <CR>", {})
-vim.api.nvim_set_keymap("n", "[tele]g",
-                        "<cmd>Telescope live_grep theme=get_dropdown<CR>", {})
-vim.api.nvim_set_keymap("n", "[tele]G",
-                        "<cmd>Telescope live_grep theme=get_dropdown vimgrep_arguments=rg,--no-heading,--with-filename,--line-number,--column<CR>",
-                        {})
-vim.api.nvim_set_keymap("n", "[tele]b",
-                        "<cmd>Telescope buffers theme=get_dropdown <CR>", {})
-vim.api.nvim_set_keymap("n", "[tele]r",
-                        "<cmd>Telescope lsp_references theme=get_dropdown<CR>",
-                        {})
-vim.api.nvim_set_keymap("n", "[tele]q",
-                        "<cmd>Telescope quickfix theme=get_dropdown<CR>", {})
-vim.api.nvim_set_keymap("n", "[tele]d",
-                        "<cmd>Telescope lsp_definitions theme=get_dropdown<CR>",
-                        {})
-vim.api.nvim_set_keymap("n", "[tele]D",
-                        "<cmd>Telescope file_browser theme=get_dropdown cwd=~/Documents<CR>",
-                        {})
+map("n", leader .. "ff", "<cmd>Telescope find_files <CR>", {})
+map("n", leader .. "fg", "<cmd>Telescope live_grep theme=get_dropdown<CR>", {})
+map("n", leader .. "fG",
+    "<cmd>Telescope live_grep theme=get_dropdown vimgrep_arguments=rg,--no-heading,--with-filename,--line-number,--column<CR>",
+    {})
+map("n", leader .. "fb", "<cmd>Telescope buffers theme=get_dropdown <CR>", {})
+map("n", leader .. "fr", "<cmd>Telescope lsp_references theme=get_dropdown<CR>",
+    {})
+map("n", leader .. "fq", "<cmd>Telescope quickfix theme=get_dropdown<CR>", {})
+map("n", leader .. "fd",
+    "<cmd>Telescope lsp_definitions theme=get_dropdown<CR>", {})
+map("n", leader .. "fD",
+    "<cmd>Telescope file_browser theme=get_dropdown cwd=~/Documents<CR>", {})
 map("n", leader .. "f?", "<cmd>Telescope keymaps<CR>")
 map("n", leader .. "fe", "<cmd>Telescope file_browser<CR>")
 map("n", leader .. "fc",
-    "<cmd>lua require('telescope.builtin').file_browser({cwd = vim.fn.expand('%:p:h')<CR>")
+    "<cmd>lua require('telescope.builtin').file_browser({cwd = vim.fn.expand('%:p:h')})<CR>")
 map("n", leader .. "fs", "<cmd>Telescope treesitter<CR>")
 map('n', leader .. 'FF', ':Telescope grep_string<CR>')
+map("n", leader .. "FS",
+    "<cmd>lua require('session-lens').search_session({path_display = {'shorten'},theme_conf = {border = true},previewer = true,prompt_title = 'SESSIONS'})<CR>)")
+map('n', leader .. "FP", "<cmd>Telescope project theme=get_dropdown <CR>")
+
+-- worktree
+map("n", leader .. "gwt",
+    "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
+map("n", leader .. "gcwt",
+    "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>")
 

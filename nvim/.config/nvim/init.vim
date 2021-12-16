@@ -13,9 +13,12 @@ lua require('impatient')
 lua require('plugins')
 
 
-source $HOME/.config/nvim/plugins/dashboard.vim
 source $HOME/.config/nvim/setters.vim
 
+let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt"]
+
+
+let g:suda_smart_edit = 1
 let g:Hexokinase_highlighters = ['foregroundfull']
 let g:Hexokinase_optInPatterns = "full_hex,rgb,rgba,hsl,hsla"
 

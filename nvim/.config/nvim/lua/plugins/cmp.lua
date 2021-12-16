@@ -84,6 +84,7 @@ cmp.setup({
     },
 
     sources = {
+        {name = "neorg"},
         {name = "path", priority_weight = 110},
         {name = "nvim_lsp", max_item_count = 20, priority_weight = 100},
         {name = "nvim_lua", priority_weight = 90},

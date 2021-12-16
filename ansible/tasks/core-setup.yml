@@ -27,6 +27,8 @@
       - unzip
       - ranger
       - trash-cli
+      - sqlite3
+      - libsqlite3-dev
   tags:
     - install
     - terminal

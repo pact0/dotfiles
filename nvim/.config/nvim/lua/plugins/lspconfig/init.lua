@@ -87,12 +87,13 @@ end
 local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
 local luafmt = require "efm/luafmt"
+local clang_format = require 'efm/clang_format'
 
 local lsp_installer = require "nvim-lsp-installer"
 
 -- Setup everything on lsp attach
 local on_attach = function(client, bufnr)
-    print("LSP started.");
+    -- print("LSP started.");
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -160,7 +161,15 @@ local languages = {
     scss = {prettier},
     css = {prettier},
     markdown = {prettier}
+    -- clangd = {clang_format}
+    -- cpp = {clang_format}
     -- python = {autopep}
+}
+local file_types = {
+    "lua", "typescript", "javascript", "typescriptreact", "javascriptreact",
+    "yaml", "json", "html", "scss", "css", "markdown", "cpp", "objcpp", "c",
+    "objc", "clangd"
+
 }
 local ts_utils_attach = require 'plugins.lsp-ts-utils'
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -221,7 +230,7 @@ lsp_installer.on_server_ready(function(server)
         end,
         ['phpactor'] = function()
             default_opts.on_attach = function(client, bufnr)
-                client.resolved_capabilities.document_formatting = true
+                client.resolved_capabilities.document_formatting = false
                 on_attach(client, bufnr)
             end
         end,
@@ -283,6 +292,25 @@ lsp_installer.on_server_ready(function(server)
                         ['https://raw.githubusercontent.com/kamilkisiela/graphql-config/v3.0.3/config-schema.json'] = '.graphqlrc*'
                     }
                 }
+            }
+        end,
+        ['clangd'] = function()
+            default_opts = {
+                root_dir = lspconfig.util.root_pattern("compile_commands.json",
+                                                       "compile_flags.txt",
+                                                       ".git") or
+                    lspconfig.util.dirname,
+                on_attach = function(client, bufnr)
+                    client.resolved_capabilities.document_formatting = true
+                    on_attach(client, bufnr)
+                end,
+                filetypes = {"c", "cpp", "objc", "objcpp"},
+                cmd = {
+                    "clangd", "--background-index", "--pch-storage=memory",
+                    "--clang-tidy", "--suggest-missing-includes"
+                },
+                capabilities = capabilities,
+                single_file_support = true
             }
         end
 

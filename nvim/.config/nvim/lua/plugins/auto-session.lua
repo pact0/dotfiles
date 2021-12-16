@@ -15,7 +15,5 @@ require('auto-session').setup(opts)
 vim.o.sessionoptions =
     "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
-map("n", leader .. "ffs",
-    "<cmd>lua require('session-lens').search_session({path_display = {'shorten'},theme_conf = {border = true},previewer = true,prompt_title = 'SESSIONS'})<CR>)")
 
 
