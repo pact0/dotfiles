@@ -52,7 +52,7 @@ Plug 'sindrets/diffview.nvim'
 Plug 'tami5/neorg'
 
 Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+" Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'romgrk/fzy-lua-native'
 Plug 'junegunn/fzf'
 
@@ -65,7 +65,7 @@ Plug 'ThePrimeagen/git-worktree.nvim'
 Plug 'rhysd/git-messenger.vim'
 
 Plug 'Shatur/neovim-cmake'
-Plug 'creativenull/efmls-configs-nvim'
+" Plug 'creativenull/efmls-configs-nvim'
 
 
 " Plug 'numToStr/FTerm.nvim'
@@ -85,7 +85,7 @@ Plug 'nvim-neorg/tree-sitter-norg'
 Plug 'David-Kunz/treesitter-unit'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'p00f/nvim-ts-rainbow'
-Plug 'spywhere/detect-language.nvim'
+" Plug 'spywhere/detect-language.nvim'
 Plug 'MDeiml/tree-sitter-markdown'
 "auto close html tags
 " <div></div>    ciwspan<esc>   <span></span>
@@ -160,7 +160,7 @@ Plug 'rafamadriz/friendly-snippets'
 " Plug 'simrat39/symbols-outline.nvim'
 
 Plug 'styled-components/vim-styled-components'
-Plug 'nvim-lua/diagnostic-nvim'
+" Plug 'nvim-lua/diagnostic-nvim'
 
 
 " file tree

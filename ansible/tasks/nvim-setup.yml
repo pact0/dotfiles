@@ -92,8 +92,18 @@
     - nvim
     - python-lsp
 
+
+- name: Setup pynvim
+  shell: pip3 install --upgrade pynvim
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - neovim
+    - nvim
+    - pynvim
 - name: Setup yaml language server
-  npm: 
+  npm:
     name: yaml-language-server@latest
     global: yes
   tags:
@@ -105,7 +115,7 @@
     - yaml-lsp
 
 - name: Setup eslint language server
-  npm: 
+  npm:
     name: eslint-language-server@latest
     global: yes
   tags:
@@ -117,7 +127,7 @@
     - yaml-lsp
 
 - name: Setup typescript language server
-  npm: 
+  npm:
     name: typescript-language-server@latest
     global: yes
   tags:
@@ -129,7 +139,7 @@
     - yaml-lsp
 
 - name: Setup html language server
-  npm: 
+  npm:
     name: vscode-langservers-extracted
     global: yes
   tags:
@@ -141,7 +151,7 @@
     - html-lsp
 
 - name: Install yarn
-  npm: 
+  npm:
     name: yarn
     global: yes
   tags:
@@ -153,7 +163,7 @@
     - yarn
 
 - name: Setup html language server
-  npm: 
+  npm:
     name: vscode-json-languageserver
     global: yes
   tags:

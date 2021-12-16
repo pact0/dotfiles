@@ -5,7 +5,8 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 source $HOME/.config/nvim/plugins.vim
-
+source $HOME/.config/nvim/setters.vim
+"lua require('pack')
 " needs to be first before plugins init
 
 lua require('impatient')
@@ -13,7 +14,6 @@ lua require('impatient')
 lua require('plugins')
 
 
-source $HOME/.config/nvim/setters.vim
 
 let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt"]
 
@@ -25,8 +25,6 @@ let g:Hexokinase_optInPatterns = "full_hex,rgb,rgba,hsl,hsla"
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 nnoremap <leader>b :ls<cr>:b<space>
-nnoremap <leader>u :MundoToggle<CR>
-nnoremap <silent><leader>m :MaximizerToggle<CR>
 let g:mundo_width = 60
 let g:mundo_preview_height = 20
 let g:mundo_right = 1

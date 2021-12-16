@@ -35,9 +35,30 @@ require'nvim-treesitter.configs'.setup {
         }
     },
     indent = {enable = true},
-    refactor = {highlight_definitions = {enable = true}},
+    refactor = {
+        highlight_definitions = {enable = true}
+        -- highlight_current_scope = {enable = true}
+    },
     autotag = {enable = true},
-    context_commentstring = {enable = true},
+    context_commentstring = {
+        enable = true,
+        config = {
+            javascript = {
+                __default = '// %s',
+                jsx_element = '{/* %s */}',
+                jsx_fragment = '{/* %s */}',
+                jsx_attribute = '// %s',
+                comment = '// %s'
+            },
+            typescript = {
+                __default = '// %s',
+                __multiline = '/* %s */',
+                tsx_element = '{/* %s */}',
+                tsx_fragment = '{/* %s */}',
+                tsx_attribute = '// %s'
+            }
+        }
+    },
     textobjects = {
         select = {
             enable = true,
@@ -65,7 +86,8 @@ require'nvim-treesitter.configs'.setup {
         }
     },
     swap = {
-        enable = true,swap_next = {['[S'] = '@parameter.inner'},
+        enable = true,
+        swap_next = {['[S'] = '@parameter.inner'},
         swap_previous = {[']S'] = '@parameter.inner'}
     }
 }

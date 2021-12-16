@@ -170,3 +170,6 @@ map('n', ';h', ':vertical resize -3 <CR>', {noremap = true, silent = true})
 -- k.nnoremap {'p', '"xp'}
 -- k.xnoremap {'p', '"xp'}
 -- k.nnoremap {'P', '"xP'}
+
+map("n", leader .. "u", "<cmd>MundoToggle<CR>")
+map("n", leader .. "m", "<cmd>MaximizerToggle<CR>")
