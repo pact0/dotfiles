@@ -88,6 +88,7 @@ local prettier = require "efm/prettier"
 local eslint = require "efm/eslint"
 local luafmt = require "efm/luafmt"
 local clang_format = require 'efm/clang_format'
+local phpcbf = require 'efm/php_cs_fixer'
 
 local lsp_installer = require "nvim-lsp-installer"
 
@@ -134,7 +135,7 @@ local on_attach = function(client, bufnr)
     local opts = {noremap = true, silent = true}
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    -- buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                    opts)
     buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
@@ -160,26 +161,34 @@ local languages = {
     html = {prettier},
     scss = {prettier},
     css = {prettier},
-    markdown = {prettier}
-    -- clangd = {clang_format}
-    -- cpp = {clang_format}
+    markdown = {prettier},
+    clangd = {clang_format},
+    cpp = {clang_format},
+    phpactor = {phpcbf},
+    php = {phpcbf}
     -- python = {autopep}
 }
-local file_types = {
-    "lua", "typescript", "javascript", "typescriptreact", "javascriptreact",
-    "yaml", "json", "html", "scss", "css", "markdown", "cpp", "objcpp", "c",
-    "objc", "clangd"
 
-}
 local ts_utils_attach = require 'plugins.lsp-ts-utils'
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
                                                                      .protocol
                                                                      .make_client_capabilities())
+
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
+
+local clangd_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
+                                                                            .protocol
+                                                                            .make_client_capabilities())
+
+clangd_capabilities.textDocument.completion.completionItem.snippetSupport = true
+clangd_capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {"documentation", "detail", "additionalTextEdits"}
+}
+clangd_capabilities.offsetEncoding = {"utf-16"}
 
 lsp_installer.on_server_ready(function(server)
     local default_opts = {
@@ -301,7 +310,7 @@ lsp_installer.on_server_ready(function(server)
                                                        ".git") or
                     lspconfig.util.dirname,
                 on_attach = function(client, bufnr)
-                    client.resolved_capabilities.document_formatting = true
+                    client.resolved_capabilities.document_formatting = false
                     on_attach(client, bufnr)
                 end,
                 filetypes = {"c", "cpp", "objc", "objcpp"},
@@ -309,7 +318,7 @@ lsp_installer.on_server_ready(function(server)
                     "clangd", "--background-index", "--pch-storage=memory",
                     "--clang-tidy", "--suggest-missing-includes"
                 },
-                capabilities = capabilities,
+                capabilities = clangd_capabilities,
                 single_file_support = true
             }
         end

@@ -84,11 +84,11 @@ cmp.setup({
     },
 
     sources = {
-        {name = "neorg"},
-        {name = "path", priority_weight = 110},
+        {name = "neorg"}, {name = "path", priority_weight = 110},
         {name = "nvim_lsp", max_item_count = 20, priority_weight = 100},
         {name = "nvim_lua", priority_weight = 90},
-        {name = "luasnip", priority_weight = 80}, {name = 'spell'},
+        {name = "luasnip", priority_weight = 80},
+        {name = 'spell', priority_weight = 50, max_item_count = 3},
         {name = 'treesitter'}, {
             name = "buffer",
             max_item_count = 5,
@@ -135,7 +135,8 @@ cmp.setup({
                 tmux = "[Tmux]",
                 look = "[Look]",
                 rg = "[RG]",
-                treesitter = '[TS]'
+                treesitter = '[TS]',
+                spell = '[Spell]'
             }
             vim_item.menu = menu_map[entry.source.name] or
                                 string.format("[%s]", entry.source.name)

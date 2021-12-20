@@ -130,6 +130,7 @@ require('telescope').load_extension('dap')
 require('telescope').load_extension('project')
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('cmake')
+require'telescope'.load_extension("cheat")
 
 map("n", "<C-p>", "<cmd>Telescope git_files<CR>", {})
 

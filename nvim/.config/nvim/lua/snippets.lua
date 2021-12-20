@@ -42,7 +42,7 @@ ls.snippets = {
             }, {func(bash, {}, "pwd")}),
         snip(
             {trig = "signature", namr = "Signature", dscr = "Name and Surname"},
-            {text "Sergei Bulavintsev", insert(0)})
+            {text "Jakub Kowalski", insert(0)})
     },
     sh = {snip("shebang", {text {"#!/bin/sh", ""}, insert(0)})},
     python = {snip("shebang", {text {"#!/usr/bin/env python", ""}, insert(0)})},

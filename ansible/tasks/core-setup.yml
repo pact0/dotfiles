@@ -29,6 +29,7 @@
       - trash-cli
       - sqlite3
       - libsqlite3-dev
+      - taskwarrior
   tags:
     - install
     - terminal
@@ -37,7 +38,7 @@
     - core
 
 - name: pipx
-  shell: pip3 install pipx ueberzug
+  shell: pip3 install pipx ueberzug tasklib
   tags:
     - install
     - terminal

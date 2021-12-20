@@ -3,7 +3,12 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'vimwiki/vimwiki'
+Plug 'tools-life/taskwiki'
 " faster startup
+
+Plug 'ldelossa/calltree.nvim'
+Plug 'voldikss/vim-floaterm'
 Plug 'nathom/filetype.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'tweekmonster/startuptime.vim'
@@ -21,10 +26,18 @@ Plug 'rafamadriz/friendly-snippets'
 
 
 "theme
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'rigellute/shades-of-purple.vim'
+Plug 'cocopon/iceberg.vim'
 Plug 'rktjmp/lush.nvim'
+Plug 'ray-x/aurora'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'mcchrish/zenbones.nvim'
+Plug 'CantoroMC/nvim-nightmare'
 Plug 'lambdalisue/suda.vim'
 Plug 'romgrk/barbar.nvim'
+
+Plug 'stephpy/vim-php-cs-fixer'
 
 " Project management
 Plug 'airblade/vim-rooter'
@@ -42,6 +55,9 @@ Plug 'tpope/vim-repeat'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'vim-scripts/UnconditionalPaste'
 Plug 'bkad/CamelCaseMotion'
+
+Plug 'tami5/sqlite.lua'
+Plug 'nvim-telescope/telescope-cheat.nvim'
 
 " Plug 'gelguy/wilder.nvim'
 " Plug 'tami5/telescope-frecency.nvim'
@@ -170,7 +186,7 @@ Plug 'styled-components/vim-styled-components'
 " Plug 'kristijanhusak/defx-git'
 " Plug 'kristijanhusak/defx-icons'
 " Plug 'rbgrouleff/bclose.vim'
-Plug 'ms-jpq/chadtree'
+" Plug 'ms-jpq/chadtree'
 
 " debugging leader p
 " Plug 'meain/vim-printer'

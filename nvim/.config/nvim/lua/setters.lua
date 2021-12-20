@@ -1,25 +1,27 @@
 -- fold settings
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+vim.o.foldtext =
+    [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 vim.opt.fillchars = "fold: "
 vim.wo.foldnestmax = 3
 vim.wo.foldminlines = 1
 
+-- vim.cmd [[colorscheme gruvbox]]
 -- In init.lua or filetype.nvim's config file
 require("filetype").setup({
     overrides = {
         extensions = {
             -- Set the filetype of *.pn files to potion
-            pn = "potion",
+            pn = "potion"
         },
         literal = {
             -- Set the filetype of files named "MyBackupFile" to lua
-            MyBackupFile = "lua",
+            MyBackupFile = "lua"
         },
         complex = {
             -- Set the filetype of any full filename matching the regex to gitconfig
-            [".*git/config"] = "gitconfig", -- Included in the plugin
+            [".*git/config"] = "gitconfig" -- Included in the plugin
         },
 
         -- The same as the ones above except the keys map to functions
@@ -32,27 +34,20 @@ require("filetype").setup({
             ["pdf"] = function()
                 vim.bo.filetype = "pdf"
                 -- Open in PDF viewer (Skim.app) automatically
-                vim.fn.jobstart(
-                    "open -a skim " .. '"' .. vim.fn.expand("%") .. '"'
-                )
-            end,
+                vim.fn.jobstart("open -a skim " .. '"' .. vim.fn.expand("%") ..
+                                    '"')
+            end
         },
-        function_literal = {
-            Brewfile = function()
-                vim.cmd("syntax off")
-            end,
-        },
+        function_literal = {Brewfile = function() vim.cmd("syntax off") end},
         function_complex = {
-            ["*.math_notes/%w+"] = function()
-                vim.cmd("iabbrev $ $$")
-            end,
+            ["*.math_notes/%w+"] = function() vim.cmd("iabbrev $ $$") end
         },
 
         shebang = {
             -- Set the filetype of files with a dash shebang to sh
-            dash = "sh",
-        },
-    },
+            dash = "sh"
+        }
+    }
 })
 -- vim.cmd [[syntax enable]]
 -- vim.cmd [[filetype plugin indent on]]

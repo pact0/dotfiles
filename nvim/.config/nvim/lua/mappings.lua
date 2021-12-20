@@ -173,3 +173,11 @@ map('n', ';h', ':vertical resize -3 <CR>', {noremap = true, silent = true})
 
 map("n", leader .. "u", "<cmd>MundoToggle<CR>")
 map("n", leader .. "m", "<cmd>MaximizerToggle<CR>")
+
+-- terminal
+-- map("n", "<C-t>", "<cmd>FloatermToggle<CR>")
+map("n", "<A-g>", "<cmd>FloatermNew! --disposable lazygit<CR>")
+
+-- map("n", "]t", "<cmd>FloatermNext <CR>")
+-- map("n", "[t", "<cmd>FloatermPrev<CR>")
+
