@@ -64,7 +64,17 @@ let g:webdevicons_enable_startify = 1
 " set background=light " or dark
 
 " colorscheme neobones
-colorscheme iceberg
+colorscheme kanagawa
+" colorscheme iceberg
 " colorscheme tokyobones
 " colorscheme duckbones
 
+
+" vimwiki and Obsidian better compatibility
+function! VimwikiLinkHandler(link)
+    if a:link =~ '\.\(pdf\|jpg\|jpeg\|png\|gif\)$'
+        call vimwiki#base#open_link(':e ', 'file:'.a:link)
+        return 1
+    endif
+    return 0
+endfunction

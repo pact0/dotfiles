@@ -17,6 +17,7 @@ Plug 'folke/which-key.nvim'
 Plug 'numToStr/Navigator.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'folke/todo-comments.nvim'
+Plug 'rebelot/kanagawa.nvim'
 
 " Plug 'mattn/efm-langserver'
 Plug 'monaqa/dial.nvim'
