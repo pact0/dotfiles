@@ -1,0 +1,108 @@
+- name: Install System Packages 1 (terminal)
+  become_user: root
+  apt:
+    name:
+      - build-essential
+      - ccache
+      - clang-tidy
+      - clang
+      - cmake
+      - curl
+      - dconf-editor
+      - direnv
+      - gettext
+      - htop
+      - libevent-dev
+      - libpthread-stubs0-dev
+      - libtool
+      - libtool-bin
+      - lsof
+      - lua5.1
+      - ninja-build
+      - pkg-config
+      - python3
+      - python3-pip
+      - python-pip
+      - stow
+      - unzip
+      - ranger
+      - trash-cli
+      - sqlite3
+      - libsqlite3-dev
+      - taskwarrior
+  tags:
+    - install
+    - terminal
+    - neovim
+    - nvim
+    - core
+
+- name: pipx
+  shell: pip3 install pipx ueberzug tasklib
+  tags:
+    - install
+    - terminal
+    - core
+    - pipx
+
+- name: Add another bin dir to system-wide $PATH.
+  become_user: root
+  copy:
+    dest: /etc/profile.d/custom-path.sh
+    content: 'export "PATH=$PATH:~/.local/bin"'
+  tags:
+    - install
+    - terminal
+    - core
+    - custom-path
+
+- name: Install go
+  shell: |
+    wget -c https://go.dev/dl/go1.17.5.linux-amd64.tar.gz -O - | sudo tar -xz -C /usr/local
+    echo 'export PATH=$PATH:/usr/local/go/bin' >> {{ lookup('env', 'HOME') }}/.zprofile
+    echo 'export GOPATH={{ lookup('env', 'HOME') }}/go' >> {{ lookup('env', 'HOME') }}/.zprofile
+    echo 'export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin' >> {{ lookup('env', 'HOME') }}/.zprofile
+    . {{ lookup('env', 'HOME') }}/.zprofile && go install github.com/jesseduffield/lazygit@latest
+    . {{ lookup('env', 'HOME') }}/.zprofile && go install github.com/mattn/efm-langserver@latest
+  tags:
+    - install
+    - terminal
+    - core
+    - go
+# - name: Insert a line at the end of a file.
+#   blockinfile:
+#     dest: "{{ lookup('env', 'HOME') }}/.zprofile"
+#     block: |
+#         export PATH=$PATH:/usr/local/go/bin
+#         export GOPATH={{ lookup('env', 'HOME') }}/go
+#         export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin
+#   tags:
+#     - install
+#     - terminal
+#     - core
+#     - go
+
+# - name: install lazygit
+#   environment:
+#     GOPATH: "{{ lookup('env', 'HOME') }}/.go"
+#   shell: "source {{ lookup('env', 'HOME') }}/.profile && go install github.com/jesseduffield/lazygit@latest"
+#   tags:
+#     - install
+#     - terminal
+#     - dotfiles
+#     - core
+#     - lazygit
+
+# - name: install efm
+#   shell: |
+#     export PATH=$PATH:/usr/local/go/bin
+#     export GOPATH={{ lookup('env', 'HOME') }}/.go
+#     export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin
+#     go install github.com/mattn/efm-langserver@latest
+#   tags:
+#     - install
+#     - terminal
+#     - dotfiles
+#     - core
+#     - efm
+
