@@ -41,11 +41,16 @@ Plug 'romgrk/barbar.nvim'
 Plug 'stephpy/vim-php-cs-fixer'
 
 " Project management
-Plug 'airblade/vim-rooter'
-''
+" Plug 'airblade/vim-rooter'
+
+Plug 'windwp/nvim-projectconfig'
+Plug 'klen/nvim-config-local'
 Plug 'rmagatti/auto-session'
-Plug 'ahmedkhalf/project.nvim'
+" Plug 'ahmedkhalf/project.nvim'
 Plug 'rmagatti/session-lens'
+
+Plug 'andweeb/presence.nvim'
+Plug 'Pocco81/AutoSave.nvim'
 
 
 "Switch true to false etc
@@ -138,6 +143,7 @@ Plug 'RishabhRD/nvim-lsputils'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'folke/lsp-colors.nvim'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'glepnir/lspsaga.nvim'
@@ -169,6 +175,9 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
+Plug 'lukas-reineke/cmp-under-comparator'
+Plug 'lukas-reineke/cmp-rg'
+
 " Plug 'vim-scripts/CmdlineComplete'
 
 
@@ -177,6 +186,7 @@ Plug 'rafamadriz/friendly-snippets'
 " Plug 'simrat39/symbols-outline.nvim'
 
 Plug 'styled-components/vim-styled-components'
+Plug 'junegunn/vim-easy-align'
 " Plug 'nvim-lua/diagnostic-nvim'
 
 
@@ -187,7 +197,7 @@ Plug 'styled-components/vim-styled-components'
 " Plug 'kristijanhusak/defx-git'
 " Plug 'kristijanhusak/defx-icons'
 " Plug 'rbgrouleff/bclose.vim'
-" Plug 'ms-jpq/chadtree'
+Plug 'ms-jpq/chadtree'
 
 " debugging leader p
 " Plug 'meain/vim-printer'

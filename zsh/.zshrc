@@ -19,6 +19,7 @@ HISTFILE=~/.zsh_history
 SAVEHIST=1000000000
 setopt appendhistory
 setopt share_history
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -144,6 +145,12 @@ bindkey -M vicmd 'j' history-substring-search-down
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
-source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export XAUTHORITY=/home/pacto/.Xauthority
+
+export XAUTHORITY=/home/pacto/.Xauthority

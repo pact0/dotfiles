@@ -84,6 +84,7 @@ cmp.setup({
     },
 
     sources = {
+        { name = 'rg' },
         {name = "neorg"}, {name = "path", priority_weight = 110},
         {name = "nvim_lsp", max_item_count = 20, priority_weight = 100},
         {name = "nvim_lua", priority_weight = 90},
@@ -117,10 +118,14 @@ cmp.setup({
     },
     sorting = {
         comparators = {
-            cmp.config.compare.offset, cmp.config.compare.exact,
-            cmp.config.compare.score, cmp_compare.kind,
-            cmp.config.compare.sort_text, cmp.config.compare.sort_text,
-            cmp.config.compare.order
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            require "cmp-under-comparator".under,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
         }
     },
     formatting = {
@@ -136,7 +141,8 @@ cmp.setup({
                 look = "[Look]",
                 rg = "[RG]",
                 treesitter = '[TS]',
-                spell = '[Spell]'
+                spell = '[Spell]',
+                rg = '[RG]'
             }
             vim_item.menu = menu_map[entry.source.name] or
                                 string.format("[%s]", entry.source.name)

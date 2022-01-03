@@ -26,11 +26,18 @@ require 'plugins.todo-comments'
 require 'plugins.zen-mode'
 require 'plugins.sort'
 require 'plugins.chad-tree'
-require 'plugins.auto-session'
 require 'plugins.dial'
 require 'plugins.dashboard'
 require 'plugins.barbar'
 require 'plugins.diffview'
 require 'plugins.neovim-cmake'
+require 'plugins.presence'
+require 'plugins.project'
 
+require("lsp-colors").setup({
+    Error = "#db4b4b",
+    Warning = "#e0af68",
+    Information = "#0db9d7",
+    Hint = "#10B981",
+})
 require 'setters'

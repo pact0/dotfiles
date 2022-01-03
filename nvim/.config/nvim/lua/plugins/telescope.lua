@@ -127,10 +127,12 @@ require("telescope").load_extension("git_worktree")
 -- :lua require("git-worktree").create_worktree("feat-69", "master", "origin")
 
 require('telescope').load_extension('dap')
-require('telescope').load_extension('project')
-require('telescope').load_extension('fzf')
+-- require('telescope').load_extension('project')
+require('telescope').load_extension('projects')
+--require('telescope').load_extension('fzf')
 require('telescope').load_extension('cmake')
 require'telescope'.load_extension("cheat")
+require("telescope").load_extension("session-lens")
 
 map("n", "<C-p>", "<cmd>Telescope git_files<CR>", {})
 
@@ -154,8 +156,8 @@ map("n", leader .. "fc",
 map("n", leader .. "fs", "<cmd>Telescope treesitter<CR>")
 map('n', leader .. 'FF', ':Telescope grep_string<CR>')
 map("n", leader .. "FS",
-    "<cmd>lua require('session-lens').search_session({path_display = {'shorten'},theme_conf = {border = true},previewer = true,prompt_title = 'SESSIONS'})<CR>)")
-map('n', leader .. "FP", "<cmd>Telescope project theme=get_dropdown <CR>")
+    "<cmd>lua require('session-lens').search_session({theme_conf = {border = true},previewer = false,prompt_title = 'SESSIONS'})<CR>)")
+map('n', leader .. "FP", "<cmd>Telescope projects theme=get_dropdown <CR>")
 
 -- worktree
 map("n", leader .. "gwt",

@@ -62,6 +62,9 @@
     echo 'export PATH=$PATH:/usr/local/go/bin' >> {{ lookup('env', 'HOME') }}/.zprofile
     echo 'export GOPATH={{ lookup('env', 'HOME') }}/go' >> {{ lookup('env', 'HOME') }}/.zprofile
     echo 'export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin' >> {{ lookup('env', 'HOME') }}/.zprofile
+    echo 'export PATH=$PATH:/usr/local/go/bin' >> {{ lookup('env', 'HOME') }}/.zshenv
+    echo 'export GOPATH={{ lookup('env', 'HOME') }}/go' >> {{ lookup('env', 'HOME') }}/.zshenv
+    echo 'export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin' >> {{ lookup('env', 'HOME') }}/.zshenv
     . {{ lookup('env', 'HOME') }}/.zprofile && go install github.com/jesseduffield/lazygit@latest
     . {{ lookup('env', 'HOME') }}/.zprofile && go install github.com/mattn/efm-langserver@latest
   tags:
@@ -69,40 +72,12 @@
     - terminal
     - core
     - go
-# - name: Insert a line at the end of a file.
-#   blockinfile:
-#     dest: "{{ lookup('env', 'HOME') }}/.zprofile"
-#     block: |
-#         export PATH=$PATH:/usr/local/go/bin
-#         export GOPATH={{ lookup('env', 'HOME') }}/go
-#         export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin
-#   tags:
-#     - install
-#     - terminal
-#     - core
-#     - go
 
-# - name: install lazygit
-#   environment:
-#     GOPATH: "{{ lookup('env', 'HOME') }}/.go"
-#   shell: "source {{ lookup('env', 'HOME') }}/.profile && go install github.com/jesseduffield/lazygit@latest"
-#   tags:
-#     - install
-#     - terminal
-#     - dotfiles
-#     - core
-#     - lazygit
-
-# - name: install efm
-#   shell: |
-#     export PATH=$PATH:/usr/local/go/bin
-#     export GOPATH={{ lookup('env', 'HOME') }}/.go
-#     export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin
-#     go install github.com/mattn/efm-langserver@latest
-#   tags:
-#     - install
-#     - terminal
-#     - dotfiles
-#     - core
-#     - efm
-
+- name: Install tmux plugin manager
+  git: repo=https://github.com/tmux-plugins/tpm dest="{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm" update=yes
+  tags:
+    - install
+    - terminal
+    - core
+    - tmux
+    - tmux-tmp

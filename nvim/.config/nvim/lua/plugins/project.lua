@@ -1,3 +1,6 @@
+local map = require("utils").map
+local leader = "<space>"
+
   require("project_nvim").setup {
   -- Manual mode doesn't automatically change your root directory, so you have
   -- the option to manually do so using `:ProjectRoot` command.
@@ -11,11 +14,11 @@
 
   -- All the patterns used to detect root dir, when **"pattern"** is in
   -- detection_methods
-  patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+  patterns = { '.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt",'composer.json', 'package.json' ,"_darcs", ".hg", ".bzr", ".svn"},
 
   -- Table of lsp clients to ignore by name
   -- eg: { "efm", ... }
-  ignore_lsp = {},
+  ignore_lsp = {"efm"},
 
   -- Don't calculate root dir on specific directories
   -- Ex: { "~/.cargo/*", ... }
@@ -31,4 +34,27 @@
   -- Path where project.nvim will store the project history for use in
   -- telescope
   datapath = vim.fn.stdpath("data"),
-  }
+}
+
+require('config-local').setup {
+      -- Default configuration (optional)
+      config_files = { ".vimrc.lua", ".vimrc" },  -- Config file patterns to load (lua supported)
+      hashfile = vim.fn.stdpath("data") .. "/config-local", -- Where the plugin keeps files data
+      autocommands_create = true,                 -- Create autocommands (VimEnter, DirectoryChanged)
+      commands_create = true,                     -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
+      silent = false,                             -- Disable plugin messages (Config loaded/ignored)
+    }
+
+require('auto-session').setup({
+    log_level = 'info',
+    auto_session_enable_last_session = false,
+    auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
+    auto_session_enabled = true,
+    auto_save_enabled = nil,
+    auto_restore_enabled = nil,
+    auto_session_suppress_dirs = nil
+})
+
+vim.o.sessionoptions =
+    "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+

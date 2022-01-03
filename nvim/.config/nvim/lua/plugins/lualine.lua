@@ -1,4 +1,5 @@
 local lualine = require('lualine')
+require 'plugins.gps'
 local gps = require("nvim-gps")
 local get_modified = function() return '%m' or '' end
 local get_readonly = function()
@@ -56,7 +57,7 @@ lualine.setup {
             {'filename', file_status = false},
             -- {get_readonly}, {get_modified},
             -- {get_spell}, {get_session},
-            {gps.get_location, cond = gps.is_available}
+            { gps.get_location, cond = gps.is_available },
         },
         lualine_x = {{require('auto-session-library').current_session_name}, 'fileformat', 'filetype'},
         lualine_y = {'progress'},

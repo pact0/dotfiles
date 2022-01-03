@@ -35,10 +35,23 @@
 - name: Install correct version of Node
   shell: |
     export N_PREFIX={{ lookup('env', 'HOME') }}/.local/.n
-    sudo {{ lookup('env', 'HOME') }}/.local/.npm-global/bin/n 14 
+    sudo {{ lookup('env', 'HOME') }}/.local/.npm-global/bin/n 14
   tags:
     - install
     - terminal
     - node
     - nvim
     - neovim
+
+- name: Install yarn
+  shell: |
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    sudo apt install yarn
+  tags:
+    - install
+    - terminal
+    - node
+    - nvim
+    - neovim
+

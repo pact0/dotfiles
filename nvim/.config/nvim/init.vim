@@ -24,7 +24,15 @@ let g:wimwiki_ext2syntax = {'.md' : 'markdown', '.markdown' : 'markdown', '.mdow
 let g:vimwiki_markdown_link_ext = 1
 let g:taskwiki_markup_syntax = 'markdown'
 let g:markdown_folding = 1
-let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt",'compose.json', 'package.json' ]
+" let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt",'compose.json', 'package.json' ]
+" let g:rooter_manual_only = 1
+
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 let g:suda_smart_edit = 1
 let g:Hexokinase_highlighters = ['foregroundfull']
@@ -34,7 +42,7 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " If php-cs-fixer is in $PATH, you don't need to define line below
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
-let g:php_cs_fixer_path = "/home/pacto/.composer/vendor/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_path = "/home/pacto/.config/composer/vendor/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
 
 " If you use php-cs-fixer version 1.x
 let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
@@ -68,13 +76,3 @@ colorscheme kanagawa
 " colorscheme iceberg
 " colorscheme tokyobones
 " colorscheme duckbones
-
-
-" vimwiki and Obsidian better compatibility
-function! VimwikiLinkHandler(link)
-    if a:link =~ '\.\(pdf\|jpg\|jpeg\|png\|gif\)$'
-        call vimwiki#base#open_link(':e ', 'file:'.a:link)
-        return 1
-    endif
-    return 0
-endfunction

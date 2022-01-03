@@ -332,7 +332,7 @@ end)
 local servers = {
     "bashls", "jsonls", "pyright", "vuels", "yamlls", "tsserver", "eslint",
     "html", "dockerls", "cssls", "prismals", "clangd", "c", "c++", "cmake",
-    "lua", "vimls"
+    "lua", "vimls", "efm"
 }
 
 for _, name in pairs(servers) do

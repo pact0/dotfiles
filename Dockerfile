@@ -1,16 +1,19 @@
 FROM python:3.8-buster
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG USER_ID
+ARG GROUP_ID
 
 RUN apt-get update && apt-get upgrade && apt-get install sudo
-RUN adduser --disabled-password --gecos '' dockeruser
+RUN addgroup --gid $GROUP_ID dockeruser
+RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID dockeruser
 RUN adduser dockeruser sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER dockeruser
 COPY . /devtainer
-COPY . /home/dockeruser/dotfiles
-workdir /devtainer
+# COPY . /home/dockeruser/dotfiles
+ WORKDIR /devtainer
 
 # make it as the dockeruser otherwise it becomes owned by root
 RUN mkdir ~/.local/share/nvim/site/autoload/ -p
@@ -32,8 +35,12 @@ RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t zsh
 
 RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t nvim
 
-RUN nvim -u ~/.config/nvim/plugins.vim +PlugInstall +UpdateRemotePlugins +RnvimrSync +qall
+RUN nvim -u ~/.config/nvim/plugins.vim +PlugInstall +UpdateRemotePlugins +qall
+RUN nvim +CHADdeps +qall
+
+RUN . ~/.zprofile && cd ~/.vim/plugged/vim-hexokinase && make
 
 WORKDIR /home/dockeruser
+
 
 CMD ["zsh"]
