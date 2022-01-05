@@ -20,6 +20,7 @@ SAVEHIST=1000000000
 setopt appendhistory
 setopt share_history
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -95,12 +96,14 @@ bindkey '^e' edit-command-line
 
 
 
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
-alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
-alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
+# alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
+# alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
+# alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
+alias la='exa --all --colour always --icons -F'
 alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
-#alias ls='exa --icons --colour always -F '
-#alias ll='exa --icons --colour always -F --long --git -b '
+alias ls='exa --icons --colour always -F '
+alias ll='exa --icons --colour always -F --long --git -b '
+alias tree='exa -T --all --colour always --icons'
 #alias ltag='ls -t | ag'
 alias dev="cd ~/Documents/dev"
 alias ra='ranger'
@@ -136,6 +139,7 @@ plugins=(... sudo autojump )
 #plugin+=(zsh-vi-mode)
 # starship
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 
 # bind k j in vim mode to fuzzy search and arrows in normal mode
@@ -154,3 +158,6 @@ source ~/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export XAUTHORITY=/home/pacto/.Xauthority
 
 export XAUTHORITY=/home/pacto/.Xauthority
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
