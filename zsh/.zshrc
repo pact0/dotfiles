@@ -7,6 +7,7 @@ export TERM=xterm-256color
 
 
 alias tat="~/.local/bin/tat"
+alias emoji="~/scripts/emoji_select.zsh"
 #~/.local/share/Trash/
 alias trashdir='cd ~/.local/bin/tat'
 
@@ -56,6 +57,16 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 # +---------+
 # | ALIASES |
 # +---------+
+AUDIO="mpv --input-ipc-server=/tmp/mpvsocket"
+alias radio2="$AUDIO http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_med/llnw/bbc_radio_two.m3u8"
+alias radio4="$AUDIO http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/uk/sbr_med/llnw/bbc_radio_fourfm.m3u8"
+alias classic="$AUDIO http://icy-e-bab-04-cr.sharp-stream.com/absoluteradio.mp3"
+alias absolute="$AUDIO 'http://network.absoluteradio.co.uk/core/audio/mp3/live.pls?service=vrbb'"
+alias magic="$AUDIO 'http://www.radiofeeds.co.uk/bauer.pls?station=magicnational.mp3.m3u'"
+
+alias ytaudio='mpv --ytdl-format="bestaudio"'
+#Always make all directories necesary
+alias mkdir='mkdir -p'
 
 alias cat="bat"
 # fuzzy select file to edit
@@ -99,18 +110,23 @@ bindkey '^e' edit-command-line
 # alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -h'
 # alias ll='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hl'
 # alias la='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlA'
-alias la='exa --all --colour always --icons -F'
-alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
-alias ls='exa --icons --colour always -F '
-alias ll='exa --icons --colour always -F --long --git -b '
-alias tree='exa -T --all --colour always --icons'
+type -p exa > /dev/null && alias la='exa --all --colour always --icons -F'
+type -p exa > /dev/null && alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F -hlt'
+type -p exa > /dev/null && alias ls='exa --icons --colour always -F '
+type -p exa > /dev/null && alias ll='exa --icons --colour always -F --long --git -b '
+type -p exa > /dev/null && alias tree='exa -T --all --colour always --icons'
 #alias ltag='ls -t | ag'
 alias dev="cd ~/Documents/dev"
 alias ra='ranger'
 alias h='history'
 alias grep='grep --color=tty -d skip'
-alias v="nvim"
+
+type -p nvim > /dev/null && alias vim="nvim"
+type -p nvim > /dev/null && alias v="nvim"
+type -p nvim > /dev/null && alias vimdiff="nvim -d"
+
 alias se="sudoedit"
+alias home="cd ~"
 
 
 # Add this to your zshrc or bzshrc file
@@ -134,6 +150,50 @@ man() {
 		LESS_TERMCAP_us=$'\e[1;32m' \
 			man "$@"
 }
+# Man without options will use fzf to select a page
+#
+function man(){
+	export	LESS_TERMCAP_md=$'\e[1;36m'
+	export	LESS_TERMCAP_me=$'\e[0m'
+	export	LESS_TERMCAP_se=$'\e[0m'
+	export	LESS_TERMCAP_so=$'\e[1;40;92m'
+	export	LESS_TERMCAP_ue=$'\e[0m'
+	export	LESS_TERMCAP_us=$'\e[1;32m'
+	MAN="/usr/bin/man"
+	if [ -n "$1" ]; then
+		$MAN "$@"
+		return $?
+	else
+		$MAN -k . | fzf --reverse --preview="echo {1,2} | sed 's/ (/./' | sed -E 's/\)\s*$//' | xargs $MAN" | awk '{print $1 "." $2}' | tr -d '()' | xargs -r $MAN
+		return $?
+	fi
+}
+
+function cd() {
+	# Try a normal cd
+	builtin cd "$@" 2> /dev/null
+	if [ $? = 0 ]; then
+		# If we get here cd was successful so do a ls
+		ls
+	else
+		# If we get here, cd was not successful
+		if [ -f "$1" ]; then
+			# If there is a file there, try and open it in vim
+			# ToDo: smarter open so it will open in zathura if it's a pdf for
+			# example
+			$EDITOR "$1"
+		else
+			# Otherwise fail clearly
+			echo "Can't cd"
+		fi
+	fi
+	#updatePath
+}
+
+function mkcd() {
+	mkdir -p "$1"
+	cd "$1"
+}
 
 plugins=(... sudo autojump )
 #plugin+=(zsh-vi-mode)
@@ -152,6 +212,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 source ~/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/plugins/fzf-tab/fzf-tab.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

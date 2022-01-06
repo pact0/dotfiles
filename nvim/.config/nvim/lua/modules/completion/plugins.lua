@@ -15,7 +15,7 @@ completion["hrsh7th/nvim-cmp"] = {
   -- opt = true,
   -- event = "InsertEnter", -- InsertCharPre
   -- ft = {'lua', 'markdown',  'yaml', 'json', 'sql', 'vim', 'sh', 'sql', 'vim', 'sh'},
-  after = { "LuaSnip" }, -- "nvim-snippy",
+  after = { "LuaSnip"}, -- "nvim-snippy",
   requires = {
     { "hrsh7th/cmp-buffer", after = "nvim-cmp", opt = true },
     { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp", opt = true },
@@ -28,7 +28,6 @@ completion["hrsh7th/nvim-cmp"] = {
     { "octaltree/cmp-look", after = "nvim-cmp", opt = true },
     { "andersevenrud/cmp-tmux", after = "nvim-cmp", opt = true },
     { "lukas-reineke/cmp-rg", after = "nvim-cmp", opt = true },
-    { "lukas-reineke/cmp-under-comparator", opt = true },
     -- {"quangnguyen30192/cmp-nvim-ultisnips", event = "InsertCharPre", after = "nvim-cmp", opt=true },
     { "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp", "LuaSnip" } },
     -- {"tzachar/cmp-tabnine", opt = true}

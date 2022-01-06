@@ -55,15 +55,15 @@ editor["rrethy/vim-hexokinase"] = {
 }
 
 -- booperlv/nvim-gomove
--- <A-k>   Move current line/selection up
--- <A-j>   Move current line/selection down
--- <A-h>   Move current character/selection left
--- <A-l>   Move current character/selection right
-editor["matze/vim-move"] = {
-  opt = true,
-  event = { "CursorMoved", "CursorMovedI" },
-  -- fn = {'<Plug>MoveBlockDown', '<Plug>MoveBlockUp', '<Plug>MoveLineDown', '<Plug>MoveLineUp'}
-}
+
+-- editor["matze/vim-move"] = {
+--   opt = true,
+--   event = { "CursorMoved", "CursorMovedI" },
+--   config = function()
+--
+--     end
+--   -- fn = {'<Plug>MoveBlockDown', '<Plug>MoveBlockUp', '<Plug>MoveLineDown', '<Plug>MoveLineUp'}
+-- }
 
 -- editor["kevinhwang91/nvim-hlslens"] = {
 --   -- keys = {"/", "?", '*', '#'}, --'n', 'N', '*', '#', 'g'

@@ -115,4 +115,7 @@ ui[plugin_folder() .. "starry.nvim"] = {
 ui["wiliamks/mechanical.nvim"] = {
   opt = true,
 }
+ui["glepnir/oceanic-material"] = {
+  opt = true,
+}
 return ui

@@ -117,32 +117,6 @@ end
 --   vim.g["far#cmdparse_mode"] = "shell"
 -- end
 
-function config.clap()
-  vim.g.clap_preview_size = 10
-  vim.g.airline_powerline_fonts = 1
-  vim.g.clap_layout = {width = "80%", row = "8%", col = "10%", height = "34%"} -- height = "40%", row = "17%", relative = "editor",
-  -- vim.g.clap_popup_border = "rounded"
-  vim.g.clap_selected_sign = {text = "", texthl = "ClapSelectedSign", linehl = "ClapSelected"}
-  vim.g.clap_current_selection_sign = {
-    text = "",
-    texthl = "ClapCurrentSelectionSign",
-    linehl = "ClapCurrentSelection"
-  }
-  -- vim.g.clap_always_open_preview = true
-  vim.g.clap_preview_direction = "UD"
-  -- if vim.g.colors_name == 'zephyr' then
-  vim.g.clap_theme = 'material_design_dark'
-  vim.api.nvim_command(
-      "autocmd FileType clap_input lua require'cmp'.setup.buffer { completion = {autocomplete = false} }")
-  -- end
-  -- vim.api.nvim_command("autocmd FileType clap_input call compe#setup({ 'enabled': v:false }, 0)")
-end
-
-function config.clap_after()
-  if not packer_plugins["nvim-cmp"].loaded then
-    require"packer".loader("nvim-cmp")
-  end
-end
 
 function config.project()
     require("project_nvim").setup {
@@ -421,55 +395,6 @@ function config.mkdp()
   vim.g.mkdp_command_for_global = 1
   vim.cmd(
       [[let g:mkdp_preview_options = { 'mkit': {}, 'katex': {}, 'uml': {}, 'maid': {}, 'disable_sync_scroll': 0, 'sync_scroll_type': 'middle', 'hide_yaml_meta': 1, 'sequence_diagrams': {}, 'flowchart_diagrams': {}, 'content_editable': v:true, 'disable_filename': 0 }]])
-end
-
-function config.snap()
-  local snap = require 'snap'
-  local limit = snap.get "consumer.limit"
-  local select_vimgrep = snap.get "select.vimgrep"
-  local preview_file = snap.get "preview.file"
-  local preview_vimgrep = snap.get "preview.vimgrep"
-  local producer_vimgrep = snap.get "producer.ripgrep.vimgrep"
-  function _G.snap_grep()
-    snap.run({
-      prompt = "  Grep  ",
-      producer = limit(10000, producer_vimgrep),
-      select = select_vimgrep.select,
-      steps = {{consumer = snap.get "consumer.fzf", config = {prompt = "FZF>"}}},
-      multiselect = select_vimgrep.multiselect,
-      views = {preview_vimgrep}
-    })
-  end
-
-  function _G.snap_grep_selected_word()
-    snap.run({
-      prompt = "  Grep  ",
-      producer = limit(10000, producer_vimgrep),
-      select = select_vimgrep.select,
-      multiselect = select_vimgrep.multiselect,
-      views = {preview_vimgrep},
-      initial_filter = vim.fn.expand("<cword>")
-    })
-  end
-
-  snap.maps {
-    {"<Leader>rg", snap.config.file {producer = "ripgrep.file"}},
-    -- {"<Leader>fb", snap.config.file {producer = "vim.buffer"}},
-    {"<Leader>fo", snap.config.file {producer = "vim.oldfile"}},
-    -- {"<Leader>ff", snap.config.vimgrep {}},
-    {
-      "<Leader>fz", function()
-        snap.run {
-          prompt = "  Grep  ",
-          producer = limit(1000, snap.get'producer.ripgrep.vimgrep'.args({'--ignore-case'})),
-          steps = {{consumer = snap.get 'consumer.fzf', config = {prompt = " Fzf  "}}},
-          select = snap.get'select.file'.select,
-          multiselect = snap.get'select.file'.multiselect,
-          views = {snap.get 'preview.vimgrep'}
-        }
-      end
-    }
-  }
 end
 
 return config
