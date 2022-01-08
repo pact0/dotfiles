@@ -1,0 +1,692 @@
+diff --git a/Dockerfile b/Dockerfile
+index 0014364..d19bfac 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -1,16 +1,19 @@
+ FROM python:3.8-buster
+ 
+ ARG DEBIAN_FRONTEND=noninteractive
++ARG USER_ID
++ARG GROUP_ID
+ 
+ RUN apt-get update && apt-get upgrade && apt-get install sudo
+-RUN adduser --disabled-password --gecos '' dockeruser
++RUN addgroup --gid $GROUP_ID dockeruser
++RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID dockeruser
+ RUN adduser dockeruser sudo
+ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+ 
+ USER dockeruser
+ COPY . /devtainer
+-COPY . /home/dockeruser/dotfiles
+-workdir /devtainer
++# COPY . /home/dockeruser/dotfiles
++ WORKDIR /devtainer
+ 
+ # make it as the dockeruser otherwise it becomes owned by root
+ RUN mkdir ~/.local/share/nvim/site/autoload/ -p
+@@ -32,8 +35,12 @@ RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t zsh
+ 
+ RUN pipx run --spec ansible ansible-playbook /devtainer/ansible/local.yml -t nvim
+ 
+-RUN nvim -u ~/.config/nvim/plugins.vim +PlugInstall +UpdateRemotePlugins +RnvimrSync +qall
++RUN nvim -u ~/.config/nvim/plugins.vim +PlugInstall +UpdateRemotePlugins +qall
++RUN nvim +CHADdeps +qall
++
++RUN . ~/.zprofile && cd ~/.vim/plugged/vim-hexokinase && make
+ 
+ WORKDIR /home/dockeruser
+ 
++
+ CMD ["zsh"]
+diff --git a/ansible/tasks/core-setup.yml b/ansible/tasks/core-setup.yml
+index c8c07e7..2b5931d 100644
+--- a/ansible/tasks/core-setup.yml
++++ b/ansible/tasks/core-setup.yml
+@@ -62,6 +62,9 @@
+     echo 'export PATH=$PATH:/usr/local/go/bin' >> {{ lookup('env', 'HOME') }}/.zprofile
+     echo 'export GOPATH={{ lookup('env', 'HOME') }}/go' >> {{ lookup('env', 'HOME') }}/.zprofile
+     echo 'export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin' >> {{ lookup('env', 'HOME') }}/.zprofile
++    echo 'export PATH=$PATH:/usr/local/go/bin' >> {{ lookup('env', 'HOME') }}/.zshenv
++    echo 'export GOPATH={{ lookup('env', 'HOME') }}/go' >> {{ lookup('env', 'HOME') }}/.zshenv
++    echo 'export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin' >> {{ lookup('env', 'HOME') }}/.zshenv
+     . {{ lookup('env', 'HOME') }}/.zprofile && go install github.com/jesseduffield/lazygit@latest
+     . {{ lookup('env', 'HOME') }}/.zprofile && go install github.com/mattn/efm-langserver@latest
+   tags:
+@@ -69,40 +72,12 @@
+     - terminal
+     - core
+     - go
+-# - name: Insert a line at the end of a file.
+-#   blockinfile:
+-#     dest: "{{ lookup('env', 'HOME') }}/.zprofile"
+-#     block: |
+-#         export PATH=$PATH:/usr/local/go/bin
+-#         export GOPATH={{ lookup('env', 'HOME') }}/go
+-#         export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin
+-#   tags:
+-#     - install
+-#     - terminal
+-#     - core
+-#     - go
+-
+-# - name: install lazygit
+-#   environment:
+-#     GOPATH: "{{ lookup('env', 'HOME') }}/.go"
+-#   shell: "source {{ lookup('env', 'HOME') }}/.profile && go install github.com/jesseduffield/lazygit@latest"
+-#   tags:
+-#     - install
+-#     - terminal
+-#     - dotfiles
+-#     - core
+-#     - lazygit
+-
+-# - name: install efm
+-#   shell: |
+-#     export PATH=$PATH:/usr/local/go/bin
+-#     export GOPATH={{ lookup('env', 'HOME') }}/.go
+-#     export PATH=$PATH:{{ lookup('env', 'HOME') }}/go/bin
+-#     go install github.com/mattn/efm-langserver@latest
+-#   tags:
+-#     - install
+-#     - terminal
+-#     - dotfiles
+-#     - core
+-#     - efm
+ 
++- name: Install tmux plugin manager
++  git: repo=https://github.com/tmux-plugins/tpm dest="{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm" update=yes
++  tags:
++    - install
++    - terminal
++    - core
++    - tmux
++    - tmux-tmp
+diff --git a/ansible/tasks/node-setup.yml b/ansible/tasks/node-setup.yml
+index 10e17c4..dfdbb99 100644
+--- a/ansible/tasks/node-setup.yml
++++ b/ansible/tasks/node-setup.yml
+@@ -35,10 +35,23 @@
+ - name: Install correct version of Node
+   shell: |
+     export N_PREFIX={{ lookup('env', 'HOME') }}/.local/.n
+-    sudo {{ lookup('env', 'HOME') }}/.local/.npm-global/bin/n 14 
++    sudo {{ lookup('env', 'HOME') }}/.local/.npm-global/bin/n 14
+   tags:
+     - install
+     - terminal
+     - node
+     - nvim
+     - neovim
++
++- name: Install yarn
++  shell: |
++    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
++    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
++    sudo apt install yarn
++  tags:
++    - install
++    - terminal
++    - node
++    - nvim
++    - neovim
++
+diff --git a/config/.config/htop/htoprc b/config/.config/htop/htoprc
+index b02d57d..e0c6db2 100644
+--- a/config/.config/htop/htoprc
++++ b/config/.config/htop/htoprc
+@@ -1,26 +1,44 @@
+ # Beware! This file is rewritten by htop when settings are changed in the interface.
+ # The parser is also very primitive, and not human-friendly.
++htop_version=3.1.2
++config_reader_min_version=2
+ fields=0 48 17 18 38 39 40 2 46 47 49 1
+-sort_key=46
+-sort_direction=1
+-hide_threads=0
++sort_key=38
++sort_direction=-1
++tree_sort_key=0
++tree_sort_direction=1
+ hide_kernel_threads=1
+ hide_userland_threads=0
+ shadow_other_users=0
+ show_thread_names=0
+ show_program_path=1
+ highlight_base_name=0
++highlight_deleted_exe=1
+ highlight_megabytes=1
+ highlight_threads=1
++highlight_changes=0
++highlight_changes_delay_secs=5
++find_comm_in_cmdline=1
++strip_exe_from_cmdline=1
++show_merged_command=0
+ tree_view=0
++tree_view_always_by_pid=0
++all_branches_collapsed=0
+ header_margin=1
+ detailed_cpu_time=0
+-cpu_count_from_zero=0
++cpu_count_from_one=1
++show_cpu_usage=1
++show_cpu_frequency=0
++show_cpu_temperature=0
++degree_fahrenheit=0
+ update_process_names=0
+ account_guest_in_cpu_meter=0
+ color_scheme=0
++enable_mouse=1
+ delay=15
+-left_meters=LeftCPUs2 Memory Swap
+-left_meter_modes=1 1 1
+-right_meters=RightCPUs2 Tasks LoadAverage Uptime
+-right_meter_modes=1 2 2 2
++hide_function_bar=0
++header_layout=two_50_50
++column_meters_0=LeftCPUs2 Memory Swap
++column_meter_modes_0=1 1 1
++column_meters_1=RightCPUs2 Tasks LoadAverage Uptime
++column_meter_modes_1=1 2 2 2
+diff --git a/config/.config/ranger/plugins/__pycache__/__init__.cpython-39.opt-1.pyc b/config/.config/ranger/plugins/__pycache__/__init__.cpython-39.opt-1.pyc
+index 22b8ceb..70dd640 100644
+Binary files a/config/.config/ranger/plugins/__pycache__/__init__.cpython-39.opt-1.pyc and b/config/.config/ranger/plugins/__pycache__/__init__.cpython-39.opt-1.pyc differ
+diff --git a/nvim/.config/nvim/init.vim b/nvim/.config/nvim/init.vim
+index a94dceb..c646aac 100644
+--- a/nvim/.config/nvim/init.vim
++++ b/nvim/.config/nvim/init.vim
+@@ -24,7 +24,15 @@ let g:wimwiki_ext2syntax = {'.md' : 'markdown', '.markdown' : 'markdown', '.mdow
+ let g:vimwiki_markdown_link_ext = 1
+ let g:taskwiki_markup_syntax = 'markdown'
+ let g:markdown_folding = 1
+-let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt",'compose.json', 'package.json' ]
++" let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt",'compose.json', 'package.json' ]
++" let g:rooter_manual_only = 1
++
++
++" Start interactive EasyAlign in visual mode (e.g. vipga)
++xmap ga <Plug>(EasyAlign)
++
++" Start interactive EasyAlign for a motion/text object (e.g. gaip)
++nmap ga <Plug>(EasyAlign)
+ 
+ let g:suda_smart_edit = 1
+ let g:Hexokinase_highlighters = ['foregroundfull']
+@@ -34,7 +42,7 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+ 
+ " If php-cs-fixer is in $PATH, you don't need to define line below
+ autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+-let g:php_cs_fixer_path = "/home/pacto/.composer/vendor/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
++let g:php_cs_fixer_path = "/home/pacto/.config/composer/vendor/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+ 
+ " If you use php-cs-fixer version 1.x
+ let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
+@@ -68,13 +76,3 @@ colorscheme kanagawa
+ " colorscheme iceberg
+ " colorscheme tokyobones
+ " colorscheme duckbones
+-
+-
+-" vimwiki and Obsidian better compatibility
+-function! VimwikiLinkHandler(link)
+-    if a:link =~ '\.\(pdf\|jpg\|jpeg\|png\|gif\)$'
+-        call vimwiki#base#open_link(':e ', 'file:'.a:link)
+-        return 1
+-    endif
+-    return 0
+-endfunction
+diff --git a/nvim/.config/nvim/lua/plugins/auto-session.lua b/nvim/.config/nvim/lua/plugins/auto-session.lua
+index eac53d3..e69de29 100644
+--- a/nvim/.config/nvim/lua/plugins/auto-session.lua
++++ b/nvim/.config/nvim/lua/plugins/auto-session.lua
+@@ -1,19 +0,0 @@
+--- let g:auto_session_root_dir = path/to/my/custom/dir
+-local map = require("utils").map
+-local leader = "<space>"
+-local opts = {
+-    log_level = 'info',
+-    auto_session_enable_last_session = false,
+-    auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
+-    auto_session_enabled = true,
+-    auto_save_enabled = nil,
+-    auto_restore_enabled = nil,
+-    auto_session_suppress_dirs = nil
+-}
+-require('auto-session').setup(opts)
+-
+-vim.o.sessionoptions =
+-    "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+-
+-
+-
+diff --git a/nvim/.config/nvim/lua/plugins/barbar.lua b/nvim/.config/nvim/lua/plugins/barbar.lua
+index 0856134..e2feac9 100644
+--- a/nvim/.config/nvim/lua/plugins/barbar.lua
++++ b/nvim/.config/nvim/lua/plugins/barbar.lua
+@@ -28,7 +28,7 @@ map('n', '<A-e>', ':BufferGoto 3<CR>', opts)
+ --                 :BufferCloseBuffersLeft<CR>
+ --                 :BufferCloseBuffersRight<CR>
+ -- Magic buffer-picking mode
+-map('n', leader .. 'bp', ':BufferPick<CR>', opts)
++map('n', '<A-b>', ':BufferPick<CR>', opts)
+ -- Sort automatically by...
+ map('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', opts)
+ map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
+diff --git a/nvim/.config/nvim/lua/plugins/cmp.lua b/nvim/.config/nvim/lua/plugins/cmp.lua
+index b6cac48..5428b00 100644
+--- a/nvim/.config/nvim/lua/plugins/cmp.lua
++++ b/nvim/.config/nvim/lua/plugins/cmp.lua
+@@ -84,6 +84,7 @@ cmp.setup({
+     },
+ 
+     sources = {
++        { name = 'rg' },
+         {name = "neorg"}, {name = "path", priority_weight = 110},
+         {name = "nvim_lsp", max_item_count = 20, priority_weight = 100},
+         {name = "nvim_lua", priority_weight = 90},
+@@ -117,10 +118,14 @@ cmp.setup({
+     },
+     sorting = {
+         comparators = {
+-            cmp.config.compare.offset, cmp.config.compare.exact,
+-            cmp.config.compare.score, cmp_compare.kind,
+-            cmp.config.compare.sort_text, cmp.config.compare.sort_text,
+-            cmp.config.compare.order
++            cmp.config.compare.offset,
++            cmp.config.compare.exact,
++            cmp.config.compare.score,
++            require "cmp-under-comparator".under,
++            cmp.config.compare.kind,
++            cmp.config.compare.sort_text,
++            cmp.config.compare.length,
++            cmp.config.compare.order,
+         }
+     },
+     formatting = {
+@@ -136,7 +141,8 @@ cmp.setup({
+                 look = "[Look]",
+                 rg = "[RG]",
+                 treesitter = '[TS]',
+-                spell = '[Spell]'
++                spell = '[Spell]',
++                rg = '[RG]'
+             }
+             vim_item.menu = menu_map[entry.source.name] or
+                                 string.format("[%s]", entry.source.name)
+diff --git a/nvim/.config/nvim/lua/plugins/init.lua b/nvim/.config/nvim/lua/plugins/init.lua
+index d19781a..c862fe2 100644
+--- a/nvim/.config/nvim/lua/plugins/init.lua
++++ b/nvim/.config/nvim/lua/plugins/init.lua
+@@ -26,11 +26,18 @@ require 'plugins.todo-comments'
+ require 'plugins.zen-mode'
+ require 'plugins.sort'
+ require 'plugins.chad-tree'
+-require 'plugins.auto-session'
+ require 'plugins.dial'
+ require 'plugins.dashboard'
+ require 'plugins.barbar'
+ require 'plugins.diffview'
+ require 'plugins.neovim-cmake'
++require 'plugins.presence'
++require 'plugins.project'
+ 
++require("lsp-colors").setup({
++    Error = "#db4b4b",
++    Warning = "#e0af68",
++    Information = "#0db9d7",
++    Hint = "#10B981",
++})
+ require 'setters'
+diff --git a/nvim/.config/nvim/lua/plugins/lspconfig/init.lua b/nvim/.config/nvim/lua/plugins/lspconfig/init.lua
+index 93f0d59..e69eca4 100644
+--- a/nvim/.config/nvim/lua/plugins/lspconfig/init.lua
++++ b/nvim/.config/nvim/lua/plugins/lspconfig/init.lua
+@@ -332,7 +332,7 @@ end)
+ local servers = {
+     "bashls", "jsonls", "pyright", "vuels", "yamlls", "tsserver", "eslint",
+     "html", "dockerls", "cssls", "prismals", "clangd", "c", "c++", "cmake",
+-    "lua", "vimls"
++    "lua", "vimls", "efm"
+ }
+ 
+ for _, name in pairs(servers) do
+diff --git a/nvim/.config/nvim/lua/plugins/lualine.lua b/nvim/.config/nvim/lua/plugins/lualine.lua
+index 7d8c7d5..86bcf8a 100644
+--- a/nvim/.config/nvim/lua/plugins/lualine.lua
++++ b/nvim/.config/nvim/lua/plugins/lualine.lua
+@@ -1,4 +1,5 @@
+ local lualine = require('lualine')
++require 'plugins.gps'
+ local gps = require("nvim-gps")
+ local get_modified = function() return '%m' or '' end
+ local get_readonly = function()
+@@ -56,7 +57,7 @@ lualine.setup {
+             {'filename', file_status = false},
+             -- {get_readonly}, {get_modified},
+             -- {get_spell}, {get_session},
+-            {gps.get_location, cond = gps.is_available}
++            { gps.get_location, cond = gps.is_available },
+         },
+         lualine_x = {{require('auto-session-library').current_session_name}, 'fileformat', 'filetype'},
+         lualine_y = {'progress'},
+diff --git a/nvim/.config/nvim/lua/plugins/neovim-cmake.lua b/nvim/.config/nvim/lua/plugins/neovim-cmake.lua
+index e621fbe..6a16689 100644
+--- a/nvim/.config/nvim/lua/plugins/neovim-cmake.lua
++++ b/nvim/.config/nvim/lua/plugins/neovim-cmake.lua
+@@ -1,7 +1,7 @@
+ local Path = require('plenary.path')
+ require('cmake').setup({
+     parameters_file = 'neovim.json', -- JSON file to store information about selected target, run arguments and build type.
+-    build_dir = tostring(Path:new('{cwd}', 'build', '{os}-{build_type}')), -- Build directory. The expressions `{cwd}`, `{os}` and `{build_type}` will be expanded with the corresponding text values.
++    build_dir = tostring(Path:new('{cwd}', 'build', '{build_type}')), -- Build directory. The expressions `{cwd}`, `{os}` and `{build_type}` will be expanded with the corresponding text values.
+     -- samples_path = tostring(script_path:parent():parent():parent() / 'samples'), -- Folder with samples. `samples` folder from the plugin directory is used by default.
+     default_projects_path = tostring(Path:new(vim.loop.os_homedir(), 'Projects')), -- Default folder for creating project.
+     configure_args = {'-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1'}, -- Default arguments that will be always passed at cmake configure step. By default tells cmake to generate `compile_commands.json`.
+diff --git a/nvim/.config/nvim/lua/plugins/presence.lua b/nvim/.config/nvim/lua/plugins/presence.lua
+new file mode 100644
+index 0000000..fc1d0a1
+--- /dev/null
++++ b/nvim/.config/nvim/lua/plugins/presence.lua
+@@ -0,0 +1,22 @@
++-- The setup config table shows all available config options with their default values:
++require("presence"):setup({
++    -- General options
++    -- auto_update         = true,                       -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
++    -- neovim_image_text   = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
++    -- main_image          = "neovim",                   -- Main image display (either "neovim" or "file")
++    -- client_id           = "793271441293967371",       -- Use your own Discord application client id (not recommended)
++    -- log_level           = nil,                        -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
++    -- debounce_timeout    = 10,                         -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
++    enable_line_number  = false,                      -- Displays the current line number instead of the current project
++    -- blacklist           = {},                         -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
++    buttons             = false,                       -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
++    --
++    -- -- Rich Presence text options
++    editing_text        = "Editing %s",               -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
++    -- file_explorer_text  = "Browsing %s",              -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
++    -- git_commit_text     = "Committing changes",       -- Format string rendered when committing changes in git (either string or function(filename: string): string)
++    -- plugin_manager_text = "Managing plugins",         -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
++    -- reading_text        = "Reading %s",               -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
++    -- workspace_text      = "Working on %s",            -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
++    -- line_number_text    = "Line %s out of %s",        -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
++})
+diff --git a/nvim/.config/nvim/lua/plugins/project.lua b/nvim/.config/nvim/lua/plugins/project.lua
+index f156556..695b29d 100644
+--- a/nvim/.config/nvim/lua/plugins/project.lua
++++ b/nvim/.config/nvim/lua/plugins/project.lua
+@@ -1,3 +1,6 @@
++local map = require("utils").map
++local leader = "<space>"
++
+   require("project_nvim").setup {
+   -- Manual mode doesn't automatically change your root directory, so you have
+   -- the option to manually do so using `:ProjectRoot` command.
+@@ -11,11 +14,11 @@
+ 
+   -- All the patterns used to detect root dir, when **"pattern"** is in
+   -- detection_methods
+-  patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
++  patterns = { '.git', 'Makefile', '*.sln', 'build/env.sh', "CMakeLists.txt",'composer.json', 'package.json' ,"_darcs", ".hg", ".bzr", ".svn"},
+ 
+   -- Table of lsp clients to ignore by name
+   -- eg: { "efm", ... }
+-  ignore_lsp = {},
++  ignore_lsp = {"efm"},
+ 
+   -- Don't calculate root dir on specific directories
+   -- Ex: { "~/.cargo/*", ... }
+@@ -31,4 +34,27 @@
+   -- Path where project.nvim will store the project history for use in
+   -- telescope
+   datapath = vim.fn.stdpath("data"),
+-  }
++}
++
++require('config-local').setup {
++      -- Default configuration (optional)
++      config_files = { ".vimrc.lua", ".vimrc" },  -- Config file patterns to load (lua supported)
++      hashfile = vim.fn.stdpath("data") .. "/config-local", -- Where the plugin keeps files data
++      autocommands_create = true,                 -- Create autocommands (VimEnter, DirectoryChanged)
++      commands_create = true,                     -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
++      silent = false,                             -- Disable plugin messages (Config loaded/ignored)
++    }
++
++require('auto-session').setup({
++    log_level = 'info',
++    auto_session_enable_last_session = false,
++    auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
++    auto_session_enabled = true,
++    auto_save_enabled = nil,
++    auto_restore_enabled = nil,
++    auto_session_suppress_dirs = nil
++})
++
++vim.o.sessionoptions =
++    "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
++
+diff --git a/nvim/.config/nvim/lua/plugins/telescope.lua b/nvim/.config/nvim/lua/plugins/telescope.lua
+index a10fd5b..c111227 100644
+--- a/nvim/.config/nvim/lua/plugins/telescope.lua
++++ b/nvim/.config/nvim/lua/plugins/telescope.lua
+@@ -127,10 +127,12 @@ require("telescope").load_extension("git_worktree")
+ -- :lua require("git-worktree").create_worktree("feat-69", "master", "origin")
+ 
+ require('telescope').load_extension('dap')
+-require('telescope').load_extension('project')
+-require('telescope').load_extension('fzf')
++-- require('telescope').load_extension('project')
++require('telescope').load_extension('projects')
++--require('telescope').load_extension('fzf')
+ require('telescope').load_extension('cmake')
+ require'telescope'.load_extension("cheat")
++require("telescope").load_extension("session-lens")
+ 
+ map("n", "<C-p>", "<cmd>Telescope git_files<CR>", {})
+ 
+@@ -154,8 +156,8 @@ map("n", leader .. "fc",
+ map("n", leader .. "fs", "<cmd>Telescope treesitter<CR>")
+ map('n', leader .. 'FF', ':Telescope grep_string<CR>')
+ map("n", leader .. "FS",
+-    "<cmd>lua require('session-lens').search_session({path_display = {'shorten'},theme_conf = {border = true},previewer = true,prompt_title = 'SESSIONS'})<CR>)")
+-map('n', leader .. "FP", "<cmd>Telescope project theme=get_dropdown <CR>")
++    "<cmd>lua require('session-lens').search_session({theme_conf = {border = true},previewer = false,prompt_title = 'SESSIONS'})<CR>)")
++map('n', leader .. "FP", "<cmd>Telescope projects theme=get_dropdown <CR>")
+ 
+ -- worktree
+ map("n", leader .. "gwt",
+diff --git a/nvim/.config/nvim/plugins.vim b/nvim/.config/nvim/plugins.vim
+index f3f66d1..f5be88b 100644
+--- a/nvim/.config/nvim/plugins.vim
++++ b/nvim/.config/nvim/plugins.vim
+@@ -41,12 +41,17 @@ Plug 'romgrk/barbar.nvim'
+ Plug 'stephpy/vim-php-cs-fixer'
+ 
+ " Project management
+-Plug 'airblade/vim-rooter'
+-''
++" Plug 'airblade/vim-rooter'
++
++Plug 'windwp/nvim-projectconfig'
++Plug 'klen/nvim-config-local'
+ Plug 'rmagatti/auto-session'
+-Plug 'ahmedkhalf/project.nvim'
++" Plug 'ahmedkhalf/project.nvim'
+ Plug 'rmagatti/session-lens'
+ 
++Plug 'andweeb/presence.nvim'
++Plug 'Pocco81/AutoSave.nvim'
++
+ 
+ "Switch true to false etc
+ Plug 'machakann/vim-sandwich'
+@@ -138,6 +143,7 @@ Plug 'RishabhRD/nvim-lsputils'
+ Plug 'nvim-lua/lsp_extensions.nvim'
+ Plug 'onsails/lspkind-nvim'
+ Plug 'neovim/nvim-lspconfig'
++Plug 'folke/lsp-colors.nvim'
+ Plug 'williamboman/nvim-lsp-installer'
+ Plug 'ray-x/lsp_signature.nvim'
+ Plug 'glepnir/lspsaga.nvim'
+@@ -169,6 +175,9 @@ Plug 'hrsh7th/nvim-cmp'
+ Plug 'L3MON4D3/LuaSnip'
+ Plug 'saadparwaiz1/cmp_luasnip'
+ Plug 'rafamadriz/friendly-snippets'
++Plug 'lukas-reineke/cmp-under-comparator'
++Plug 'lukas-reineke/cmp-rg'
++
+ " Plug 'vim-scripts/CmdlineComplete'
+ 
+ 
+@@ -177,6 +186,7 @@ Plug 'rafamadriz/friendly-snippets'
+ " Plug 'simrat39/symbols-outline.nvim'
+ 
+ Plug 'styled-components/vim-styled-components'
++Plug 'junegunn/vim-easy-align'
+ " Plug 'nvim-lua/diagnostic-nvim'
+ 
+ 
+@@ -187,7 +197,7 @@ Plug 'styled-components/vim-styled-components'
+ " Plug 'kristijanhusak/defx-git'
+ " Plug 'kristijanhusak/defx-icons'
+ " Plug 'rbgrouleff/bclose.vim'
+-" Plug 'ms-jpq/chadtree'
++Plug 'ms-jpq/chadtree'
+ 
+ " debugging leader p
+ " Plug 'meain/vim-printer'
+diff --git a/tat b/tat
+new file mode 100644
+index 0000000..6ec1f46
+--- /dev/null
++++ b/tat
+@@ -0,0 +1,74 @@
++#!/bin/bash
++
++ not_in_tmux() {
++   [ -z "$TMUX" ]
++ }
++
++DIR=$1
++
++# If no arguments are passed in try to immediately attach or start without further input
++echo $DIR
++if [ -z "$DIR" ]; then
++   if not_in_tmux; then
++     tmux attach && exit 1 || DIR="--start"
++   else
++       exit 1
++   fi
++fi
++
++# If --start was passed in immediately start a new session based on the current directory
++if [ "$DIR" == "--start" ]; then
++    echo "starting"
++    path_name="$(basename "$PWD" | tr . -)"
++    session_name=${path_name//./_}
++else
++    # ask the user which directory to start in
++    _session_name=$(cd $DIR && ls -d */ | sed  "s|/||g" | fzf --reverse --header="Select project from $(basename $DIR) >")
++    session_name=${_session_name//./_}
++    path_name=$DIR/$session_name
++fi
++
++echo session name is \"$session_name\"
++echo path name is $path_name
++
++if [ -z "$session_name" ]; then
++    # operation cancelled by user
++    exit 1
++fi
++
++session_exists() {
++    # checks if the $session_name exists
++    tmux has-session -t "=$session_name"
++}
++
++create_detached_session() {
++if [ "$DIR" == "--start" ]; then
++    (TMUX=''
++    tmux new-session -Ad -s "$session_name" -c $path_name
++    )
++else
++    (TMUX=''
++    tmux new-session -Ad -s"$session_name" -c $path_name;
++    tmux split-window -vb -t "$session_name" -c $path_name -p 70;
++    tmux send-keys -t "$session_name" "nvim '+Telescope find_files'" Enter;
++    )
++fi
++ }
++
++create_if_needed_and_attach() {
++    if not_in_tmux; then
++        tmux new-session -As "$session_name" -c $path_name
++    else
++        if ! session_exists; then
++        create_detached_session
++        fi
++        tmux switch-client -t "$session_name"
++    fi
++}
++
++ attatch_to_first_session() {
++     tmux attach -t $(tmux list-sessions -F "${session_name}" | head -n 1)
++     tmux choose-tree -Za
++}
++
++create_if_needed_and_attach || attatch_to_first_session
+diff --git a/zsh/.zsh/zsh-autosuggestions b/zsh/.zsh/zsh-autosuggestions
+deleted file mode 160000
+index a411ef3..0000000
+--- a/zsh/.zsh/zsh-autosuggestions
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit a411ef3e0992d4839f0732ebeb9823024afaaaa8
+diff --git a/zsh/.zsh/zsh-history-substring-search b/zsh/.zsh/zsh-history-substring-search
+deleted file mode 160000
+index 4abed97..0000000
+--- a/zsh/.zsh/zsh-history-substring-search
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit 4abed97b6e67eb5590b39bcd59080aa23192f25d
+diff --git a/zsh/.zsh/zsh-syntax-highlighting b/zsh/.zsh/zsh-syntax-highlighting
+deleted file mode 160000
+index 1a9264b..0000000
+--- a/zsh/.zsh/zsh-syntax-highlighting
++++ /dev/null
+@@ -1 +0,0 @@
+-Subproject commit 1a9264bc661b3d52756916bf9ec3f41687d64db2
+diff --git a/zsh/.zshrc b/zsh/.zshrc
+index 05be622..9e7f52a 100644
+--- a/zsh/.zshrc
++++ b/zsh/.zshrc
+@@ -19,6 +19,7 @@ HISTFILE=~/.zsh_history
+ SAVEHIST=1000000000
+ setopt appendhistory
+ setopt share_history
++export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+ 
+ # Basic auto/tab complete:
+ autoload -U compinit
+@@ -144,6 +145,12 @@ bindkey -M vicmd 'j' history-substring-search-down
+ bindkey "$terminfo[kcuu1]" history-substring-search-up
+ bindkey "$terminfo[kcud1]" history-substring-search-down
+ 
+-source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+-source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
++source ~/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
++source ~/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
++source ~/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
++
++[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
++
++export XAUTHORITY=/home/pacto/.Xauthority
++
++export XAUTHORITY=/home/pacto/.Xauthority
+diff --git a/zsh/plugins/zsh-syntax-highlighting b/zsh/plugins/zsh-syntax-highlighting
+index 1a9264b..c7caf57 160000
+--- a/zsh/plugins/zsh-syntax-highlighting
++++ b/zsh/plugins/zsh-syntax-highlighting
+@@ -1 +1 @@
+-Subproject commit 1a9264bc661b3d52756916bf9ec3f41687d64db2
++Subproject commit c7caf57ca805abd54f11f756fda6395dd4187f8a

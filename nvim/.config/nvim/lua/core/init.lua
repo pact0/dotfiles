@@ -1,11 +1,14 @@
-local global = require 'core.global'
+local global = require("core.global")
 local vim = vim
 
 -- Create cache dir and subs dir
 local createdir = function()
   local data_dir = {
-    global.cache_dir .. 'backup', global.cache_dir .. 'session', global.cache_dir .. 'swap',
-    global.cache_dir .. 'tags', global.cache_dir .. 'undo'
+    global.cache_dir .. "backup",
+    global.cache_dir .. "session",
+    global.cache_dir .. "swap",
+    global.cache_dir .. "tags",
+    global.cache_dir .. "undo",
   }
   -- There only check once that If cache_dir exists
   -- Then I don't want to check subs dir exists
@@ -41,15 +44,15 @@ local disable_distribution_plugins = function()
 end
 
 local leader_map = function()
-  vim.g.mapleader = "\\"
-  vim.api.nvim_set_keymap('n', ' ', '', {noremap = true})
-  vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
+  vim.g.mapleader = " "
+  -- vim.api.nvim_set_keymap("n", " ", "", { noremap = true })
+  -- vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
 end
 
 local load_core = function()
-  require('core.helper').init()
+  require("core.helper").init()
 
-  local pack = require('core.pack')
+  local pack = require("core.pack")
 
   -- print(vim.inspect(debug.traceback()))
 
@@ -57,19 +60,18 @@ local load_core = function()
   disable_distribution_plugins()
   leader_map()
 
-  if pcall(require, 'impatient') then
-    require 'impatient'
+  if pcall(require, "impatient") then
+    require("impatient")
   end
 
-  if pack.ensure_plugins() == 'installed' then
-    require('core.options')
-    require('core.mapping')
-    require('keymap')
-    require('core.event')
+  if pack.ensure_plugins() == "installed" then
+    require("core.options")
+    require("keymap")
+    require("core.event")
     pack.load_compile()
-    require('core.lazy')
+    require("core.lazy")
   else
-    print('install all plugins, please wait')
+    print("install all plugins, please wait")
   end
 end
 

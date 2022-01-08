@@ -23,6 +23,7 @@ function options:load_options()
     }
   else
     self.global_local = {
+      wrap = false,
       ttyfast = true, -- Indicate fast terminal conn for faster redraw
       errorbells = false, -- No beeps
       hidden = true, -- Buffer should still exist if window is closed
@@ -68,7 +69,6 @@ function options:load_options()
     synmaxcol = 500,
     textwidth = 120,
     colorcolumn = "110", -- will reformat lines more than 120, but show ruler at 110
-    wrap = false
   }
   bind_option(bw_local)
   for name, value in pairs(self.global_local) do

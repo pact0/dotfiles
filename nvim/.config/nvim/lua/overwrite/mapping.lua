@@ -41,21 +41,7 @@ local keys = {
   --
   -- Lsp mapp work when insertenter and lsp start
   --
-  -- ["n|<Leader>tc"] = map_cu("Clap colors"):with_noremap():with_silent(),
-  -- ["n|<Leader>bb"] = map_cu("Clap buffers"):with_noremap():with_silent(),
-  -- ["n|<Leader>ff"] = map_cu("Clap grep"):with_noremap():with_silent(),
-  -- ["n|<Leader>fb"] = map_cu("Clap marks"):with_noremap():with_silent(),
-  -- ["n|<C-x><C-f>"] = map_cu("Clap filer"):with_noremap():with_silent(),
-  -- ["n|<Leader>ff"] = map_cu("Clap files ++finder=rg --ignore --hidden --files"):with_noremap():with_silent(),
-  -- ["n|<M-g>"] = map_cu("Clap gfiles"):with_noremap():with_silent(),
-  -- ["n|<Leader>fw"] = map_cu("Clap grep ++query=<Cword>"):with_noremap():with_silent(),
-  -- ["n|<M-h>"] = map_cu("Clap history"):with_noremap():with_silent(),
 
-  -- ["n|<Leader>fW"] = map_cu("Clap windows"):with_noremap():with_silent(),
-  -- ["n|<Leader>fl"] = map_cu("Clap loclist"):with_noremap():with_silent(),
-  -- ["n|<Leader>fu"] = map_cu("Clap git_diff_files"):with_noremap():with_silent(),
-  -- ["n|<Leader>fv"] = map_cu("Clap grep ++query=@visual"):with_noremap():with_silent(),
-  -- ["n|<Leader>fh"] = map_cu("Clap command_history"):with_noremap():with_silent(),
   ["n|<Leader><Leader>r"] = map_cmd("v:lua.run_or_test()"):with_expr(),
   ["v|<Leader><Leader>r"] = map_cmd("v:lua.run_or_test()"):with_expr(),
 
@@ -129,10 +115,10 @@ local keys = {
 
   ["v|<Leader>gs"] = map_cmd("<cmd>lua require('utils.git').qf_add()<cr>"),
 
-  ["n|<A-h>"] = map_cmd("<CMD>lua require('Navigator').left()<CR>"),
-  ["n|<A-j>"] = map_cmd("<CMD>lua require('Navigator').down()<CR>"),
-  ["n|<A-k>"] = map_cmd("<CMD>lua require('Navigator').up()<CR>"),
-  ["n|<A-l>"] = map_cmd("<CMD>lua require('Navigator').right()<CR>"),
+["n|<A-h>"] = map_cmd("<CMD>lua require('Navigator').left()<CR>"),
+["n|<A-j>"] = map_cmd("<CMD>lua require('Navigator').down()<CR>"),
+["n|<A-k>"] = map_cmd("<CMD>lua require('Navigator').up()<CR>"),
+["n|<A-l>"] = map_cmd("<CMD>lua require('Navigator').right()<CR>"),
 }
 
 --

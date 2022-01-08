@@ -13,15 +13,15 @@ function Lazyload()
   --
   math.randomseed(os.time())
   local themes = {
-    "starry.nvim",
-    "aurora",
-    "aurora",
+    -- "starry.nvim",
+    -- "aurora",
+    -- "aurora",
     "tokyonight.nvim",
-    "starry.nvim",
-    "aurora",
+    -- "starry.nvim",
+    -- "aurora",
     "gruvbox-material",
-    "sonokai",
-    "github-nvim-theme",
+    -- "sonokai",
+    -- "github-nvim-theme",
   }
 
   if plugin_folder() == [[~/github/]] then
@@ -34,6 +34,8 @@ function Lazyload()
     -- themes = { "starry.nvim" }
     -- themes = { "aurora" }
   end
+
+  -- themes = { "aurora", "gruvbox-material" }
   local v = math.random(1, #themes)
   local loading_theme = themes[v]
 
@@ -61,6 +63,7 @@ function Lazyload()
     "txt",
     "defx",
     "sidekick",
+    "win-key",
   }
 
   local syn_on = not vim.tbl_contains(disable_ft, vim.bo.filetype)

@@ -10,8 +10,11 @@ local function bind_option(options)
   end
 end
 
+
+
 local function load_options()
   local global_local = {
+    wrap = false;
     termguicolors  = true;
     mouse          = "nv";
     errorbells     = true;
@@ -52,14 +55,14 @@ local function load_options()
     smartcase      = true;
     infercase      = true;
     incsearch      = true;
-    wrapscan       = true;
+    -- wrapscan       = true;
     complete       = ".,w,b,k";
     inccommand     = "nosplit";  --split
     grepformat     = "%f:%l:%c:%m";
     grepprg        = 'rg --hidden --vimgrep --smart-case --glob "!{.git,node_modules,*~}/*" --';
     breakat        = [[\ \	;:,!?]];
     startofline    = false;
-    whichwrap      = "h,l,<,>,[,],~";
+    -- whichwrap      = "h,l,<,>,[,],~";
     splitbelow     = true;
     splitright     = true;
     switchbuf      = "useopen";
@@ -90,7 +93,7 @@ local function load_options()
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
     pumblend       = 10;
     winblend       = 10;
-    wrap           = false;
+    -- wrap           = false;
     syntax         = "off";
     background     = "dark";
   }
@@ -105,7 +108,7 @@ local function load_options()
     shiftwidth     = 2;
     softtabstop    = -1;
     breakindentopt = "shift:2,min:20";
-    wrap           = false;
+    -- wrap           = false;
     linebreak      = true;
     number         = true;
     colorcolumn    = "80";
@@ -137,5 +140,6 @@ local function load_options()
 end
 
 vim.cmd([[syntax off]])
+vim.cmd([[set nowrap]])
 
 load_options()

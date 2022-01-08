@@ -34,14 +34,6 @@ ui["akinsho/bufferline.nvim"] = {
 --   config = conf.barbar,
 --   requires = {'kyazdani42/nvim-web-devicons'}
 -- }
---
--- not so useful...
--- ui["wfxr/minimap.vim"] = {
---   run = ":!cargo install --locked code-minimap",
---   keys = {"<F14>"},
---   cmd = {"Minimap", "MinimapToggle"},
---   setup = conf.minimap
--- }
 
 ui["kyazdani42/nvim-tree.lua"] = {
   cmd = { "NvimTreeToggle", "NvimTreeOpen" },
@@ -66,7 +58,7 @@ ui["lukas-reineke/virt-column.nvim"] = {
 
 ui["dstein64/nvim-scrollview"] = { event = { "CursorMoved", "CursorMovedI" }, config = conf.scrollview }
 
-ui[plugin_folder() .. "aurora"] = { opt = true, config = conf.aurora }
+ui["x-ray/aurora"] = { opt = true, config = conf.aurora }
 ui["folke/tokyonight.nvim"] = {
   opt = true,
   setup = conf.tokyonight,
@@ -104,7 +96,7 @@ ui["sainnhe/gruvbox-material"] = { opt = true, config = conf.gruvbox }
 -- cant config cursor line
 -- ui["rafamadriz/neon"] = {opt = true, config = conf.neon}
 
-ui[plugin_folder() .. "starry.nvim"] = {
+ui["x-ray/starry.nvim"] = {
   opt = true,
   setup = conf.starry,
   config = function()

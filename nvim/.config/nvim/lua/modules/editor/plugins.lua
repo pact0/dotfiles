@@ -18,19 +18,19 @@ editor["windwp/nvim-autopairs"] = {
 
 -- I like this plugin, but 1) offscreen context is slow
 -- 2) it not friendly to lazyload and treesitter startup
--- editor["andymass/vim-matchup"] = {
---   opt = true,
---   event = {"CursorMoved", "CursorMovedI"},
---   cmd = {'MatchupWhereAmI?'},
---   config = function()
---     vim.g.matchup_enabled = 1
---     vim.g.matchup_surround_enabled = 1
---     -- vim.g.matchup_transmute_enabled = 1
---     vim.g.matchup_matchparen_deferred = 1
---     vim.g.matchup_matchparen_offscreen = {method = 'popup'}
---     vim.cmd([[nnoremap <c-s-k> :<c-u>MatchupWhereAmI?<cr>]])
---   end
--- }
+editor["andymass/vim-matchup"] = {
+  opt = true,
+  event = {"CursorMoved", "CursorMovedI"},
+  cmd = {'MatchupWhereAmI?'},
+  config = function()
+    vim.g.matchup_enabled = 1
+    vim.g.matchup_surround_enabled = 1
+    -- vim.g.matchup_transmute_enabled = 1
+    vim.g.matchup_matchparen_deferred = 1
+    vim.g.matchup_matchparen_offscreen = {method = 'popup'}
+    vim.cmd([[nnoremap <c-s-k> :<c-u>MatchupWhereAmI?<cr>]])
+  end
+}
 
 -- editor["ggandor/lightspeed.nvim"] = {
 --   as = "lightspeed",
@@ -133,14 +133,6 @@ editor["numToStr/Comment.nvim"] = {
   config = conf.comment,
 }
 
--- editor["preservim/nerdcommenter"] = {
---   -- keys = {"<Leader>c<space>", "\\c ", "<D-/>", "<C-<Space>>", "<Leader>cc", "//", "<M-/>"},
---   keys = {'<Leader>c<space>', '\\c ', '<Leader>cc', '//', '<M-/>'},
---   setup = conf.nerdcommenter,
---   fn = {"NERDComment", "nerdcommenter#Comment"}
---   -- cmd = {'NERDCommenterToggle', 'NERDCommenterComment'}
---   -- opt = true,
--- }
 
 -- copy paste failed in block mode when clipboard = unnameplus"
 editor["bfredl/nvim-miniyank"] = {

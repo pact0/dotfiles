@@ -277,6 +277,8 @@ function config.default()
   )
   vim.cmd("augroup END")
   vim.cmd("hi def link MyTodo Todo")
+
+  vim.cmd([[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]])
   -- theme()
 end
 
@@ -285,6 +287,8 @@ function config.aurora()
   vim.cmd("colorscheme aurora")
   vim.cmd("hi Normal guibg=NONE ctermbg=NONE") -- remove background
   vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE") -- remove background
+
+  vim.cmd([[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]])
 end
 
 function config.starry()
@@ -303,6 +307,11 @@ function config.starry()
   -- vim.g.starry_style = "earlysummer" -- 'moonlight' emerald middlenight_blue earlysummer
   -- vim.g.starry_style_fix = true
   -- config.default()
+
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE") -- remove background
+  vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE") -- remove background
+
+  vim.cmd([[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]])
 end
 
 function config.tokyonight()
@@ -314,6 +323,11 @@ function config.tokyonight()
 
   -- Change the "hint" color to the "orange" color, and make the "error" color bright red
   vim.g.tokyonight_colors = { hint = "orange", error = "#ae1960" }
+
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE") -- remove background
+  vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE") -- remove background
+
+  vim.cmd([[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]])
 end
 
 function config.nightfly()
@@ -325,6 +339,11 @@ function config.nightfly()
   vim.g.nightflyTransparent = 1
 
   -- body
+
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE") -- remove background
+  vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE") -- remove background
+
+  vim.cmd([[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]])
 end
 
 function config.nvcode()
@@ -333,6 +352,9 @@ function config.nvcode()
   local v = "colorscheme " .. opt[math.random(1, #opt)]
   vim.cmd(v)
   -- body
+
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE") -- remove background
+  vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE") -- remove background
 end
 
 function config.sonokai()
@@ -346,6 +368,11 @@ function config.sonokai()
   vim.cmd([[colorscheme sonokai]])
   vim.cmd([[hi CurrentWord guifg=#E3F467 guibg=#332248 gui=Bold,undercurl]])
   vim.cmd([[hi TSKeyword gui=Bold]])
+
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE") -- remove background
+  vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE") -- remove background
+
+  vim.cmd([[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]])
 end
 
 function config.blankline()
@@ -424,6 +451,11 @@ function config.gruvbox()
   vim.g.gruvbox_material_palette = palette
   vim.cmd("colorscheme gruvbox-material")
   vim.cmd("doautocmd ColorScheme")
+
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE") -- remove background
+  vim.cmd("hi EndOfBuffer guibg=NONE ctermbg=NONE") -- remove background
+
+  vim.cmd([[autocmd ColorScheme * hi! Normal ctermbg=NONE guibg=NONE]])
 end
 
 function config.minimap()

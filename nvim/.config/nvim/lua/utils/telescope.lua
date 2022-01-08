@@ -307,10 +307,10 @@ M.setup = function()
   telescope.setup({
     defaults = {
       shorten_path = true,
-      prompt_prefix = "🙊",
+      prompt_prefix = "💫 ",
       layout_strategy = "flex",
       layout_config = {
-        prompt_position = "top",
+        prompt_position = "bottom",
         width = 0.9,
         horizontal = {
           -- width_padding = 0.1,
@@ -332,6 +332,22 @@ M.setup = function()
           flip_columns = 120,
         },
       },
+
+      file_ignore_patterns = { "node_modules/.*", ".git", "dist", "%.env" },
+      vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--hidden",
+        "--iglob",
+        "!yarn.lock",
+        "--smart-case",
+        "-u",
+      },
+      color_devicons = true,
       sorting_strategy = "ascending",
       selection_strategy = "closest",
       scroll_strategy = "cycle",
@@ -394,7 +410,6 @@ M.setup = function()
   })
 
   telescope.load_extension("dotfiles")
-  telescope.load_extension("gosource")
   -- telescope.load_extension("notify")
 
   loader("telescope-fzy-native.nvim telescope-fzf-native.nvim telescope-live-grep-raw.nvim")
