@@ -7,6 +7,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'tools-life/taskwiki'
 " faster startup
 
+Plug 'ahmedkhalf/project.nvim'
 Plug 'ldelossa/calltree.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'nathom/filetype.nvim'
@@ -17,7 +18,7 @@ Plug 'folke/which-key.nvim'
 Plug 'numToStr/Navigator.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'folke/todo-comments.nvim'
-Plug 'rebelot/kanagawa.nvim'
+" Plug 'rebelot/kanagawa.nvim'
 
 " Plug 'mattn/efm-langserver'
 Plug 'monaqa/dial.nvim'
@@ -45,9 +46,9 @@ Plug 'stephpy/vim-php-cs-fixer'
 
 Plug 'windwp/nvim-projectconfig'
 Plug 'klen/nvim-config-local'
-Plug 'rmagatti/auto-session'
+" Plug 'rmagatti/auto-session'
 " Plug 'ahmedkhalf/project.nvim'
-Plug 'rmagatti/session-lens'
+" Plug 'rmagatti/session-lens'
 
 Plug 'andweeb/presence.nvim'
 Plug 'Pocco81/AutoSave.nvim'
@@ -78,7 +79,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'romgrk/fzy-lua-native'
 Plug 'junegunn/fzf'
 
-Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'lukas-reineke/indent-blankline.nvim'
 
 " git in vim
 Plug 'tpope/vim-fugitive'
@@ -132,7 +133,7 @@ Plug 'nvim-telescope/telescope-fzf-writer.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-telescope/telescope-project.nvim'
 
-Plug 'ThePrimeagen/harpoon'
+" Plug 'ThePrimeagen/harpoon'
 
 " adds colors #fff
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -154,7 +155,7 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 " better quickfix
 Plug 'romainl/vim-qf'
 Plug 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
-Plug 'kevinhwang91/nvim-bqf'
+" Plug 'kevinhwang91/nvim-bqf'
 " Plug 'mileszs/ack.vim'
 " (a(b)((c)))
 " gS gJ

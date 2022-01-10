@@ -40,7 +40,7 @@
 - name: Install zsh-autosuggestions
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "{{ lookup('env', 'HOME') }}/.zsh/plugins/zsh-autosuggestions"
+    dest: "{{ lookup('env', 'HOME') }}/plugins/zsh-autosuggestions"
   tags:
     - install
     - terminal
@@ -62,7 +62,7 @@
 - name: Install zsh-syntax-highlighting
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "{{ lookup('env', 'HOME') }}/.zsh/plugins/zsh-syntax-highlighting"
+    dest: "{{ lookup('env', 'HOME') }}/plugins/zsh-syntax-highlighting"
   tags:
     - install
     - terminal
@@ -75,6 +75,16 @@
     curl -fsSL https://starship.rs/install.sh | bash -s -- -y
     cat ~/.bashrc | grep -q 'eval "$(starship init bash)"' || echo 'eval "$(starship init bash)"' >> ~/.bashrc
     cat ~/.zshrc | grep -q 'eval "$(starship init zsh)"' || echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+  tags:
+    - install
+    - terminal
+    - dotfiles
+    - zsh
+
+- name: Install zoxide
+  shell: |
+    cat ~/.bashrc | grep -q 'eval "$(zoxide init zsh)"' || echo 'eval "$(zoxide init zsh)"' >> ~/.bashrc
+    cat ~/.zshrc | grep -q 'eval "$(zoxide init zsh)"' || echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
   tags:
     - install
     - terminal
@@ -105,7 +115,7 @@
 #   shell: |
 #     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 #     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-#     brew install jesseduffield/lazygit/lazygit 
+#     brew install jesseduffield/lazygit/lazygit
 #     brew install efm-langserver
 #   tags:
 #     - install

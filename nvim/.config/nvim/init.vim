@@ -10,6 +10,7 @@ source $HOME/.config/nvim/setters.vim
 " needs to be first before plugins init
 
 lua require('impatient')
+lua require('core')
 lua require('plugins')
 let g:floaterm_keymap_new    = '<C-T>'
 let g:floaterm_keymap_prev   = '[t'
@@ -72,7 +73,7 @@ let g:webdevicons_enable_startify = 1
 " set background=light " or dark
 
 " colorscheme neobones
-colorscheme kanagawa
+" colorscheme kanagawa
 " colorscheme iceberg
 " colorscheme tokyobones
 " colorscheme duckbones

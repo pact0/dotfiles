@@ -30,6 +30,7 @@
       - sqlite3
       - libsqlite3-dev
       - taskwarrior
+      - exa
   tags:
     - install
     - terminal

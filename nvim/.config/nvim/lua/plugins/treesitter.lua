@@ -91,4 +91,3 @@ require'nvim-treesitter.configs'.setup {
         swap_previous = {[']S'] = '@parameter.inner'}
     }
 }
-

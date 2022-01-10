@@ -180,4 +180,3 @@ map("n", "<A-g>", "<cmd>FloatermNew! --disposable lazygit<CR>")
 
 -- map("n", "]t", "<cmd>FloatermNext <CR>")
 -- map("n", "[t", "<cmd>FloatermPrev<CR>")
-

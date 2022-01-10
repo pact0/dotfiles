@@ -57,8 +57,5 @@ set foldlevelstart=99
 set encoding=UTF-8
 
 " transparent background
-hi! Normal ctermbg=NONE
-hi! Normal guibg=NONE
-
 set clipboard=unnamedplus
 set termguicolors " this variable must be enabled for colors to be applied properly
