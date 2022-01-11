@@ -1,7 +1,11 @@
 local tools = {}
 local conf = require('modules.tools.config')
 
-tools["folke/which-key.nvim"] = {opt = true}
+tools["numToStr/Navigator.nvim"] = { config = function()
+        require('Navigator').setup()
+    end}
+
+tools["zeertzjq/which-key.nvim"] = {branch = "patch-1"}
 
 tools["kristijanhusak/vim-dadbod-ui"] = {
     cmd = {

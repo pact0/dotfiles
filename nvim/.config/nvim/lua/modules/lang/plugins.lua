@@ -23,12 +23,12 @@ lang["nvim-treesitter/nvim-treesitter-textobjects"] = {
 
 lang["RRethy/nvim-treesitter-textsubjects"] = { opt = true, config = conf.tsubject }
 
-lang["danymat/neogen"] = {
-  opt = true,
-  config = function()
-    require("neogen").setup({ enabled = true })
-  end,
-}
+-- lang["danymat/neogen"] = {
+--   opt = true,
+--   config = function()
+--     require("neogen").setup()
+--   end,
+-- }
 
 lang["ThePrimeagen/refactoring.nvim"] = {
   opt = true,

@@ -178,7 +178,8 @@ vim.defer_fn(function()
   --  defer in time
   local loader = require("packer").loader
   loader("telescope.nvim telescope-zoxide project.nvim nvim-neoclip.lua")
-  loader("neogen harpoon")
+  -- loader("neogen")
+  loader("harpoon")
   -- loader("windline.nvim")
   -- require("modules.ui.eviline")
   -- require("wlfloatline").setup()

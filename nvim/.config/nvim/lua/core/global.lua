@@ -20,6 +20,7 @@ function global:load_variables()
   self.path_sep = path_sep
   self.home = home
   self.data_dir = string.format('%s%ssite%s', vim.fn.stdpath('data'), path_sep, path_sep)
+  print(self.data_dir)
 end
 
 global:load_variables()

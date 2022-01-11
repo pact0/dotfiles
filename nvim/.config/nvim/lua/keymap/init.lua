@@ -1,9 +1,4 @@
--- convenient helper to declare maps
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then options = vim.tbl_extend("force", options, opts) end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local map = require("keymap.bind").map
 
 -- avoid clashing with leader as space
 map("n", "<Space>", "<NOP>", { noremap = true, silent = true })
@@ -75,6 +70,9 @@ map_normal_leader = {
       z = { "<cmd>:Git stash<CR>", "run git stash" },
     },
   },
+  Z = {
+    M = "<cmd>ZenMode<CR>", "Toggle ZenMode"
+  }
 }
 wk.register(map_normal_leader, { prefix = "<leader>" })
 

@@ -13,29 +13,28 @@ Plug 'voldikss/vim-floaterm'
 Plug 'nathom/filetype.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'tweekmonster/startuptime.vim'
-Plug 'folke/which-key.nvim'
 
-Plug 'numToStr/Navigator.nvim'
-Plug 'numToStr/Comment.nvim'
+" Plug 'numToStr/Navigator.nvim'
+" Plug 'numToStr/Comment.nvim'
 Plug 'folke/todo-comments.nvim'
 " Plug 'rebelot/kanagawa.nvim'
 
 " Plug 'mattn/efm-langserver'
 Plug 'monaqa/dial.nvim'
 Plug 'sQVe/sort.nvim'
-Plug 'folke/zen-mode.nvim'
+" Plug 'folke/zen-mode.nvim'
 Plug 'rafamadriz/friendly-snippets'
 
 
 "theme
-Plug 'ghifarit53/tokyonight-vim'
-Plug 'rigellute/shades-of-purple.vim'
-Plug 'cocopon/iceberg.vim'
-Plug 'rktjmp/lush.nvim'
-Plug 'ray-x/aurora'
-Plug 'ellisonleao/gruvbox.nvim'
-Plug 'mcchrish/zenbones.nvim'
-Plug 'CantoroMC/nvim-nightmare'
+" Plug 'ghifarit53/tokyonight-vim'
+" Plug 'rigellute/shades-of-purple.vim'
+" Plug 'cocopon/iceberg.vim'
+" Plug 'rktjmp/lush.nvim'
+" Plug 'ray-x/aurora'
+" Plug 'ellisonleao/gruvbox.nvim'
+" Plug 'mcchrish/zenbones.nvim'
+" Plug 'CantoroMC/nvim-nightmare'
 Plug 'lambdalisue/suda.vim'
 Plug 'romgrk/barbar.nvim'
 
@@ -136,7 +135,6 @@ Plug 'nvim-telescope/telescope-project.nvim'
 " Plug 'ThePrimeagen/harpoon'
 
 " adds colors #fff
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " lsp Plugins
 Plug 'RishabhRD/popfix'
@@ -198,7 +196,6 @@ Plug 'junegunn/vim-easy-align'
 " Plug 'kristijanhusak/defx-git'
 " Plug 'kristijanhusak/defx-icons'
 " Plug 'rbgrouleff/bclose.vim'
-Plug 'ms-jpq/chadtree'
 
 " debugging leader p
 " Plug 'meain/vim-printer'
@@ -225,8 +222,6 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'Pocco81/DAPInstall.nvim'
 
 " tests
-Plug 'vim-test/vim-test'
-Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'tpope/vim-dispatch'
 Plug 'szw/vim-maximizer'

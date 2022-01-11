@@ -83,6 +83,7 @@
 
 - name: Install zoxide
   shell: |
+    curl -sS https://webinstall.dev/zoxide | bash
     cat ~/.bashrc | grep -q 'eval "$(zoxide init zsh)"' || echo 'eval "$(zoxide init zsh)"' >> ~/.bashrc
     cat ~/.zshrc | grep -q 'eval "$(zoxide init zsh)"' || echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
   tags:

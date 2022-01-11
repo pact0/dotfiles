@@ -123,9 +123,6 @@ local on_attach = function(client, bufnr)
               "<cmd>lua require'plugins.lspconfig.diagnostics'.line_diagnostics()<CR>",
               {buffer = true})
 
-    local function buf_set_keymap(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
-    end
     require("lsp_signature").on_attach {
         hint_enable = false,
         hi_parameter = "QuickFixLine",
@@ -133,20 +130,20 @@ local on_attach = function(client, bufnr)
     }
     -- Mappings.
     local opts = {noremap = true, silent = true}
-    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
+    utils.map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    utils.map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    utils.map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    utils.map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                    opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
+    utils.map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                    opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    -- buf_set_keymap('n', '<space>rr', '<cmd>lua vim.lsp.buf.references()<CR>',
+    utils.map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    -- utils.map('n', '<space>rr', '<cmd>lua vim.lsp.buf.references()<CR>',
     --                opts)
-    -- buf_set_keymap('n', '<space>d',
+    -- utils.map('n', '<space>d',
     --                '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
     --                opts)
-    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
+    utils.map('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
                    opts)
 
 end
