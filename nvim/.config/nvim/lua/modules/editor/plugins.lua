@@ -29,11 +29,11 @@ local conf = require("modules.editor.config")
 --   config = conf.lightspeed
 -- }
 
--- editor["tpope/vim-surround"] = {
---   opt = true,
---   event = "InsertEnter",
---   -- keys={'c', 'd'}
--- }
+editor["tpope/vim-surround"] = {
+  opt = true,
+  event = "InsertEnter",
+  -- keys={'c', 'd'}
+}
 
 -- nvim-colorizer replacement
 editor["rrethy/vim-hexokinase"] = {
@@ -141,7 +141,6 @@ editor["bfredl/nvim-miniyank"] = {
     vim.api.nvim_command("map P <Plug>(miniyank-autoPut)")
   end,
 }
-
 editor["dhruvasagar/vim-table-mode"] = { cmd = { "TableModeToggle" } }
 
 -- fix terminal color

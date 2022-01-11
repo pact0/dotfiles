@@ -2,7 +2,6 @@ local map = require("keymap.bind").map
 
 -- avoid clashing with leader as space
 map("n", "<Space>", "<NOP>", { noremap = true, silent = true })
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
 
 
 local t = function(str) return vim.api.nvim_replace_termcodes(str, true, true, true) end
@@ -32,6 +31,9 @@ vim.api.nvim_set_keymap('o', '<Space>', ':<c-u>lua require"treesitter-unit".sele
 local map_normal_leader
 local map_normal_g
 map_normal_leader = {
+  N = {"<cmd>NvimTreeToggle<CR>", "Toggle NvimTree"},
+  Z = {
+    },
   f = {
     name = "Telescope",
     f = {"<cmd>Telescope git_files<CR>", "Search project files"},
