@@ -24,8 +24,12 @@ require 'plugins.luasnip'
 -- require 'plugins.indent-blankline'
 require 'plugins.todo-comments'
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 -- require 'plugins.zen-mode'
 =======
+>>>>>>> Stashed changes
+=======
+-- require 'plugins.zen-mode'
 >>>>>>> Stashed changes
 require 'plugins.sort'
 -- require 'plugins.chad-tree'
