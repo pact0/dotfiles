@@ -70,6 +70,7 @@ tools['ThePrimeagen/harpoon'] = {
 -- end
 -- }
 tools["TimUntersberger/neogit"] = {cmd = {"Neogit"}, config = conf.neogit}
+
 tools["liuchengxu/vista.vim"] = {
     cmd = "Vista",
     setup = conf.vim_vista,
@@ -156,13 +157,13 @@ tools["ray-x/viewdoc.nvim"] = {
 }
 
 -- early stage...
-tools['tanvirtin/vgit.nvim'] = { -- gitsign has similar features
-    setup = function() vim.o.updatetime = 2000 end,
-    cmd = {'VGit'},
-    -- after = {"telescope.nvim"},
-    opt = true,
-    config = conf.vgit
-}
+-- tools['tanvirtin/vgit.nvim'] = { -- gitsign has similar features
+--     setup = function() vim.o.updatetime = 2000 end,
+--     cmd = {'VGit'},
+--     -- after = {"telescope.nvim"},
+--     opt = true,
+--     config = conf.vgit
+-- }
 
 -- tools["tpope/vim-fugitive"] = {
 --     cmd = {

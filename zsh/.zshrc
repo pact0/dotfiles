@@ -22,6 +22,7 @@ setopt appendhistory
 setopt share_history
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$(yarn global bin):$PATH"
 
 # Basic auto/tab complete:
 autoload -U compinit

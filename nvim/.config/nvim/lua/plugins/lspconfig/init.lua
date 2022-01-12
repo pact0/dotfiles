@@ -161,6 +161,7 @@ local languages = {
     markdown = {prettier},
     clangd = {clang_format},
     cpp = {clang_format},
+    c = {clang_format},
     phpactor = {phpcbf},
     php = {phpcbf}
     -- python = {autopep}

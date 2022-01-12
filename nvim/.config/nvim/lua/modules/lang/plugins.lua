@@ -2,26 +2,32 @@ local lang = {}
 local conf = require("modules.lang.config")
 
 lang["nathom/filetype.nvim"] = {
-  -- event = {'BufEnter'},
-  setup = function()
-    vim.g.did_load_filetypes = 1
-  end,
+    -- event = {'BufEnter'},
+    setup = function() vim.g.did_load_filetypes = 1 end
 }
 
-lang["nvim-treesitter/nvim-treesitter"] = { opt = true, config = conf.nvim_treesitter,
-require = {'tree-sitter/tree-sitter-cpp', 'JoosepAlviste/nvim-ts-context-commentstring',
-  'nvim-neorg/tree-sitter-norg', 'David-Kunz/treesitter-unit', 'windwp/nvim-ts-autotag',
-  'p00f/nvim-ts-rainbow', 'MDeiml/tree-sitter-markdown'
-  }
+lang["nvim-treesitter/nvim-treesitter"] = {
+    opt = true,
+    config = conf.nvim_treesitter,
+    require = {
+        'tree-sitter/tree-sitter-cpp',
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        'nvim-neorg/tree-sitter-norg', 'David-Kunz/treesitter-unit',
+        'windwp/nvim-ts-autotag', 'p00f/nvim-ts-rainbow',
+        'MDeiml/tree-sitter-markdown'
+    }
 }
 
 lang["nvim-treesitter/nvim-treesitter-textobjects"] = {
-  after = "nvim-treesitter",
-  config = conf.treesitter_obj,
-  opt = true,
+    after = "nvim-treesitter",
+    config = conf.treesitter_obj,
+    opt = true
 }
 
-lang["RRethy/nvim-treesitter-textsubjects"] = { opt = true, config = conf.tsubject }
+lang["RRethy/nvim-treesitter-textsubjects"] = {
+    opt = true,
+    config = conf.tsubject
+}
 
 -- lang["danymat/neogen"] = {
 --   opt = true,
@@ -30,32 +36,31 @@ lang["RRethy/nvim-treesitter-textsubjects"] = { opt = true, config = conf.tsubje
 --   end,
 -- }
 
-lang["ThePrimeagen/refactoring.nvim"] = {
-  opt = true,
-  config = conf.refactor,
-}
+lang["ThePrimeagen/refactoring.nvim"] = {opt = true, config = conf.refactor}
 
 lang["nvim-treesitter/nvim-treesitter-refactor"] = {
-  after = "nvim-treesitter-textobjects", -- manual loading
-  config = conf.treesitter_ref, -- let the last loaded config treesitter
-  opt = true,
+    after = "nvim-treesitter-textobjects", -- manual loading
+    config = conf.treesitter_ref, -- let the last loaded config treesitter
+    opt = true
 }
-
 
 lang["nvim-treesitter/playground"] = {
-  -- after = "nvim-treesitter",
-  opt = true,
-  cmd = "TSPlaygroundToggle",
-  config = conf.playground,
+    -- after = "nvim-treesitter",
+    opt = true,
+    cmd = "TSPlaygroundToggle",
+    config = conf.playground
 }
 
-lang["yardnsm/vim-import-cost"] = { cmd = "ImportCost", opt = true }
+lang["yardnsm/vim-import-cost"] = {cmd = "ImportCost", opt = true}
 
 -- lang['scalameta/nvim-metals'] = {requires = {"nvim-lua/plenary.nvim"}}
 -- lang["lifepillar/pgsql.vim"] = {ft = {"sql", "pgsql"}}
 
-lang["nanotee/sqls.nvim"] = { ft = { "sql", "pgsql" }, setup = conf.sqls, opt = true }
-
+lang["nanotee/sqls.nvim"] = {
+    ft = {"sql", "pgsql"},
+    setup = conf.sqls,
+    opt = true
+}
 
 -- lang["ray-x/navigator.lua"] = {
 --   requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
@@ -64,70 +69,75 @@ lang["nanotee/sqls.nvim"] = { ft = { "sql", "pgsql" }, setup = conf.sqls, opt = 
 -- }
 
 lang["ray-x/web-tools.nvim"] = {
-  ft = { "html", "javascript" },
-  opt = true,
-  config = function ()
-    require('web-tools').setup()
-  end
+    ft = {"html", "javascript"},
+    opt = true,
+    config = function() require('web-tools').setup() end
 }
 
 lang["gcmt/wildfire.vim"] = {
-  setup = function()
-    vim.cmd([[nmap <leader>s <Plug>(wildfire-quick-select)]])
-  end,
-  fn = {'<Plug>(wildfire-fuel)', '<Plug>(wildfire-water)', '<Plug>(wildfire-quick-select)'}
+    setup = function()
+        -- vim.cmd([[nmap <leader>S <Plug>(wildfire-quick-select)]])
+    end,
+    fn = {
+        '<Plug>(wildfire-fuel)', '<Plug>(wildfire-water)',
+        '<Plug>(wildfire-quick-select)'
+    }
 }
-
 
 -- great plugin but not been maintained
 -- lang["ElPiloto/sidekick.nvim"] = {opt = true, fn = {'SideKickNoReload'}, setup = conf.sidekick}
 lang["stevearc/aerial.nvim"] = {
-  opt = true,
-  cmd = { "AerialToggle" },
-  setup = conf.aerial,
-  config = function()
-    local aerial = require("aerial")
-    aerial.register_attach_cb(function(bufnr)
-      -- Toggle the aerial window with <leader>a
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>a", "<cmd>AerialToggle!<CR>", {})
-      -- Jump forwards/backwards with '{' and '}'
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "<cmd>AerialPrev<CR>", {})
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "<cmd>AerialNext<CR>", {})
-      -- Jump up the tree with '[[' or ']]'
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "[[", "<cmd>AerialPrevUp<CR>", {})
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "]]", "<cmd>AerialNextUp<CR>", {})
-    end)
-  end,
+    opt = true,
+    cmd = {"AerialToggle"},
+    setup = conf.aerial,
+    config = function()
+        local aerial = require("aerial")
+        aerial.register_attach_cb(function(bufnr)
+            -- Toggle the aerial window with <leader>a
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>a",
+                                        "<cmd>AerialToggle!<CR>", {})
+            -- Jump forwards/backwards with '{' and '}'
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "<cmd>AerialPrev<CR>",
+                                        {})
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "<cmd>AerialNext<CR>",
+                                        {})
+            -- Jump up the tree with '[[' or ']]'
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "[[",
+                                        "<cmd>AerialPrevUp<CR>", {})
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "]]",
+                                        "<cmd>AerialNextUp<CR>", {})
+        end)
+    end
 }
 
 lang["simrat39/symbols-outline.nvim"] = {
-  opt = true,
-  cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
-  setup = conf.outline,
+    opt = true,
+    cmd = {"SymbolsOutline", "SymbolsOutlineOpen"},
+    setup = conf.outline
 }
 
-lang["mfussenegger/nvim-dap"] = { config = conf.dap, opt = true } -- cmd = "Luadev",
+lang["mfussenegger/nvim-dap"] = {config = conf.dap, opt = true} -- cmd = "Luadev",
 
-lang["JoosepAlviste/nvim-ts-context-commentstring"] = { opt = true }
+lang["JoosepAlviste/nvim-ts-context-commentstring"] = {opt = true}
 
 lang["rcarriga/nvim-dap-ui"] = {
-  -- requires = {"mfussenegger/nvim-dap"},
-  config = conf.dapui,
-  cmd = "Luadev",
-  opt = true,
+    -- requires = {"mfussenegger/nvim-dap"},
+    config = conf.dapui,
+    cmd = "Luadev",
+    opt = true
 }
 
-lang["theHamsta/nvim-dap-virtual-text"] = { opt = true, cmd = "Luadev" }
+lang["theHamsta/nvim-dap-virtual-text"] = {opt = true, cmd = "Luadev"}
 
 lang["nvim-telescope/telescope-dap.nvim"] = {
-  config = conf.dap,
-  -- cmd = "Telescope",
-  opt = true,
+    config = conf.dap,
+    -- cmd = "Telescope",
+    opt = true
 }
 
-lang["mfussenegger/nvim-dap-python"] = { ft = { "python" } }
+lang["mfussenegger/nvim-dap-python"] = {ft = {"python"}}
 
-lang["mtdl9/vim-log-highlighting"] = { ft = { "text", "log" } }
+lang["mtdl9/vim-log-highlighting"] = {ft = {"text", "log"}}
 
 -- lang["michaelb/sniprun"] = {
 --   run = "bash install.sh",
@@ -147,25 +157,25 @@ lang["mtdl9/vim-log-highlighting"] = { ft = { "text", "log" } }
 -- lang["gennaro-tedesco/nvim-jqx"] = {opt = true, cmd = {"JqxList", "JqxQuery"}}
 
 lang["windwp/nvim-ts-autotag"] = {
-  opt = true,
-  -- after = "nvim-treesitter",
-  -- config = function() require"nvim-treesitter.configs".setup {autotag = {enable = true}} end
+    opt = true
+    -- after = "nvim-treesitter",
+    -- config = function() require"nvim-treesitter.configs".setup {autotag = {enable = true}} end
 }
 
 lang["p00f/nvim-ts-rainbow"] = {
-  opt = true,
-  -- after = "nvim-treesitter",
-  -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-  cmd = "Rainbow",
-  config = function()
-    require("nvim-treesitter.configs").setup({ rainbow = { enable = true, extended_mode = true } })
-  end,
+    opt = true,
+    -- after = "nvim-treesitter",
+    -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+    -- cmd = "Rainbow",
+    config = function()
+        require("nvim-treesitter.configs").setup({
+            rainbow = {enable = true, extended_mode = true}
+        })
+    end
 }
 
 lang["folke/trouble.nvim"] = {
-  cmd = { "Trouble", "TroubleToggle" },
-  config = function()
-    require("trouble").setup({})
-  end,
+    cmd = {"Trouble", "TroubleToggle"},
+    config = function() require("trouble").setup({}) end
 }
 return lang
