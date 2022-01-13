@@ -1,9 +1,10 @@
 local tools = {}
 local conf = require('modules.tools.config')
 
-tools["numToStr/Navigator.nvim"] = { config = function()
-        require('Navigator').setup()
-    end}
+tools["numToStr/Navigator.nvim"] = {
+    config = function() require('Navigator').setup() end
+}
+
 
 tools["zeertzjq/which-key.nvim"] = {branch = "patch-1"}
 
@@ -55,7 +56,7 @@ tools['ThePrimeagen/harpoon'] = {
 --   end
 -- }
 
--- tools["wellle/targets.vim"] = {}
+tools["wellle/targets.vim"] = {}
 -- tools["williamboman/nvim-lsp-installer"] = {
 -- cmd = "LspInstall",
 -- config = function()

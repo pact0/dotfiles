@@ -62,11 +62,11 @@ lang["nanotee/sqls.nvim"] = {
     opt = true
 }
 
--- lang["ray-x/navigator.lua"] = {
---   requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
---   config = conf.navigator,
---   opt = true,
--- }
+lang["ray-x/navigator.lua"] = {
+    requires = {"ray-x/guihua.lua", run = "cd lua/fzy && make"},
+    config = conf.navigator,
+    opt = true
+}
 
 lang["ray-x/web-tools.nvim"] = {
     ft = {"html", "javascript"},

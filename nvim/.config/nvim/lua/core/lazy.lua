@@ -99,10 +99,12 @@ function Lazyload()
     loader("gitsigns.nvim") -- neogit vgit.nvim
   end
   --
-  -- if load_lsp then
-  --   loader("nvim-lspconfig") -- null-ls.nvim
-  --   loader("lsp_signature.nvim")
-  -- end
+  if load_lsp then
+    loader("nvim-lspconfig") -- null-ls.nvim
+    loader("lsp_signature.nvim")
+    loader("nvim-lsp-installer")
+    -- require 'plugins.lspconfig'
+  end
 
   require("vscripts.cursorhold")
   require("vscripts.tools")
@@ -111,10 +113,10 @@ function Lazyload()
     loader("nvim-treesitter")
   end
 
-  -- if load_lsp or load_ts_plugins then
-  --   loader("guihua.lua")
-  --   loader("navigator.lua")
-  -- end
+  if load_lsp or load_ts_plugins then
+    loader("guihua.lua")
+    loader("navigator.lua")
+  end
 
   -- local bytes = vim.fn.wordcount()['bytes']
   if load_ts_plugins then

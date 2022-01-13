@@ -133,18 +133,15 @@ local on_attach = function(client, bufnr)
     utils.map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     utils.map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     utils.map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    utils.map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
-                   opts)
-    utils.map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
-                   opts)
+    utils.map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    utils.map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     utils.map('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     -- utils.map('n', '<space>rr', '<cmd>lua vim.lsp.buf.references()<CR>',
     --                opts)
     -- utils.map('n', '<space>d',
     --                '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
     --                opts)
-    utils.map('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>',
-                   opts)
+    utils.map('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
 end
 local languages = {
@@ -324,7 +321,7 @@ lsp_installer.on_server_ready(function(server)
     }
     local server_options = server_opts[server.name] and
                                server_opts[server.name]() or default_opts
-    server:setup(server_options)
+    -- server:setup(server_options)
 end)
 
 local servers = {
