@@ -32,4 +32,6 @@ lsp["ray-x/lsp_signature.nvim"] = {
 
 lsp["neovim/nvim-lspconfig"] = { opt = true }
 
+lsp["onsails/lspkind-nvim"] = {}
+
 return lsp

@@ -250,18 +250,18 @@ function config.navigator()
         -- external = true, -- true: enable for goneovim multigrid otherwise false
         -- lsp_signature_help = true
 
-        lsp = {
-            cpp = {cmd = {install_root_dir .. '/clangd/clangd/bin/clangd'}},
-            c = {cmd = {install_root_dir .. '/clangd/clangd/bin/clangd'}},
-            tsserver = { cmd = {install_root_dir .. '/tsserver/node_modules/typescript/bin/tsserver'} },
-            sumneko_lua = {
-                cmd = {
-                    install_root_dir ..
-                        'sumneko_lua/extension/server/bin/lua-language-server'
-                }
-            }
-        }
-        -- default_mapping = false,
+        -- lsp = {
+        --     cpp = {cmd = {install_root_dir .. '/clangd/clangd/bin/clangd'}},
+        --     c = {cmd = {install_root_dir .. '/clangd/clangd/bin/clangd'}},
+        --     tsserver = { cmd = {install_root_dir .. '/tsserver/node_modules/typescript/bin/tsserver'} },
+        --     sumneko_lua = {
+        --         cmd = {
+        --             install_root_dir ..
+        --                 'sumneko_lua/extension/server/bin/lua-language-server'
+        --         }
+        --     }
+        -- }
+        default_mapping = true,
         -- keymaps = {
         --     {mode = 'i', key = '<M-k>', func = 'signature_help()'},
         --     {key = "<c-i>", func = "signature_help()"}
@@ -274,11 +274,6 @@ function config.navigator()
         --   diagnostic_virtual_text = ""
         -- }
     }
-
-    -- nav_cfg.lsp.efm = require("modules.lang.efm").efm
-    vim.lsp.set_log_level("error") -- error debug info
-    -- require"navigator".setup(nav_cfg)
-    -- PLoader('aerial.nvim')
     require("navigator").setup(nav_cfg)
 end
 

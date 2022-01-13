@@ -1,4 +1,22 @@
-local utils = require "utils"
+local wrap_lines = function(input, width)
+    local output = {}
+    for _, line in ipairs(input) do
+        line = line:gsub("\r", "")
+        while #line > width + 2 do
+            local trimmed_line = string.sub(line, 1, width)
+            local index = trimmed_line:reverse():find " "
+            if index == nil or index > #trimmed_line / 2 then
+                break
+            end
+            table.insert(output, string.sub(line, 1, width - index))
+            line = vim.o.showbreak .. string.sub(line, width - index + 2, #line)
+        end
+        table.insert(output, line)
+    end
+    return output
+end
+
+
 local M = {}
 
 local serverity_map = {
@@ -39,7 +57,7 @@ M.line_diagnostics = function()
     local winnr = vim.api.nvim_open_win(floating_bufnr, false, {
         relative = "cursor",
         width = width,
-        height = #utils.wrap_lines(lines, width - 1),
+        height = #wrap_lines(lines, width - 1),
         row = 1,
         col = 1,
         style = "minimal",
