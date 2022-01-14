@@ -34,4 +34,6 @@ lsp["neovim/nvim-lspconfig"] = { opt = true }
 
 lsp["onsails/lspkind-nvim"] = {}
 
+lsp["RishabhRD/nvim-lsputils"] = {}
+
 return lsp

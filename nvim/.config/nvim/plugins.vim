@@ -138,14 +138,14 @@ Plug 'nvim-telescope/telescope-project.nvim'
 
 " lsp Plugins
 Plug 'RishabhRD/popfix'
-Plug 'RishabhRD/nvim-lsputils'
+" Plug 'RishabhRD/nvim-lsputils'
 Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'onsails/lspkind-nvim'
-Plug 'neovim/nvim-lspconfig'
+" Plug 'onsails/lspkind-nvim'
+" Plug 'neovim/nvim-lspconfig'
 Plug 'folke/lsp-colors.nvim'
-Plug 'williamboman/nvim-lsp-installer'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'glepnir/lspsaga.nvim'
+" Plug 'williamboman/nvim-lsp-installer'
+" Plug 'ray-x/lsp_signature.nvim'
+" Plug 'glepnir/lspsaga.nvim'
 
 " lsp helpers
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'

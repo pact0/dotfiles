@@ -90,12 +90,29 @@ map_normal_leader = {
 wk.register(map_normal_leader, {prefix = "<leader>"})
 
 map_normal_g = {
-    a = {"<cmd>Telescope lsp_code_actions<CR>", "Code actions"},
-    d = {"<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition"},
-    h = {"<cmd>lua vim.lsp.buf.hover()<CR>", "Display hover tooltip"},
-    i = {"<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation "},
-    t = {"<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go to type definition"},
-    r = {"<cmd>Telescope lsp_references<CR>", "References"}
+    d = {"<cmd>lua require('navigator.definition').definition()<CR>", "Go to definition"},
+    D = {"<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to declaration"},
+    i = {"<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation"},
+    r = {"<cmd>lua require('navigator.reference').reference()<CR>", "Browser references"},
+    R = {"<cmd>lua require('navigator.reference').async_ref()<CR>", "Browse reference async"},
+    -- '0' = {"<cmd>lua require('navigator.symbols').document_symbols()<CR>", "Document symbols"},
+    W = {"<cmd>lua require('navigator.workspace').workspace_symbol()<CR>", "Workspace symbol"},
+    p = {"<cmd>lua require('navigator.definition').definition_preview()<CR>", "Definition prev"},
+    T = {"<cmd>lua require('navigator.treesitter').buf_ts()<CR>", "Treesitter "},
+    r = {"<cmd>Telescope lsp_references<CR>", "References"},
 }
 
--- wk.register(map_normal_g, { prefix = "g" })
+wk.register(map_normal_g, { prefix = "g" })
+
+
+local navigator_leader = {
+  c ={
+    a = {"<cmd>lua require('navigator.codeAction').code_action()<CR>", "Code action"},
+  },
+  w = {
+    a = {"<cmd>lua require('navigator.workspace').add_workspace_folder()<CR>" ,"Add Workspace folder"},
+    r = {"<cmd>lua require('navigator.workspace').remove_workspace_folder()<CR>" ,"Remove Workspace folder"},
+  },
+
+  }
+wk.register(navigator_leader, { prefix = "<leader>" })

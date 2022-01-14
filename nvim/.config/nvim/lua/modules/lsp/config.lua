@@ -105,10 +105,10 @@ local on_attach = function(client, bufnr)
             .nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync({},1500)]]
         vim.api.nvim_command [[augroup END]]
     end
-    if client.resolved_capabilities.goto_definition then
-        utils.map("n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<CR>",
-                  {buffer = true})
-    end
+    -- if client.resolved_capabilities.goto_definition then
+    --     utils.map("n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<CR>",
+    --               {buffer = true})
+    -- end
     if client.resolved_capabilities.hover then
         utils.map("n", "<CR>", "<cmd>lua vim.lsp.buf.hover()<CR>",
                   {buffer = true})
@@ -122,19 +122,19 @@ local on_attach = function(client, bufnr)
     --     utils.map("n", "<Space>rn", "<cmd>lua require'plugins.lspconfig.rename'.rename()<CR>",
     --               {silent = true, buffer = true})
     -- end
-    utils.map("n", "<Space><CR>",
-              "<cmd>lua require'plugins.lspconfig.diagnostics'.line_diagnostics()<CR>",
-              {buffer = true})
-
-    require("lsp_signature").on_attach {
-        hint_enable = false,
-        hi_parameter = "QuickFixLine",
-        handler_opts = {border = vim.g.floating_window_border}
-    }
+    -- utils.map("n", "<Space><CR>",
+    --           "<cmd>lua require'plugins.lspconfig.diagnostics'.line_diagnostics()<CR>",
+    --           {buffer = true})
+    --
+    -- require("lsp_signature").on_attach {
+    --     hint_enable = false,
+    --     hi_parameter = "QuickFixLine",
+    --     handler_opts = {border = vim.g.floating_window_border}
+    -- }
     -- Mappings.
     local opts = {noremap = true, silent = true}
     utils.map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    utils.map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    -- utils.map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     utils.map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     utils.map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     utils.map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -144,7 +144,7 @@ local on_attach = function(client, bufnr)
     -- utils.map('n', '<space>d',
     --                '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
     --                opts)
-    utils.map('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    -- utils.map('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
 end
 local languages = {
@@ -324,7 +324,7 @@ lsp_installer.on_server_ready(function(server)
     }
     local server_options = server_opts[server.name] and
                                server_opts[server.name]() or default_opts
-    -- server:setup(server_options)
+    server:setup(server_options)
 end)
 
 local servers = {

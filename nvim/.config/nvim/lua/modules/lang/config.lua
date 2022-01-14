@@ -1,4 +1,44 @@
 local config = {}
+local key_maps = {
+  { key = '<Leader>gi', func = "require('navigator.cclshierarchy').incoming_calls()" },
+  { key = '<Leader>go', func = "require('navigator.cclshierarchy').outgoing_calls()" },
+  { key = 'gr', func = "require('navigator.reference').reference()" },
+  { key = 'Gr', func = "require('navigator.reference').async_ref()" },
+  { mode = 'i', key = '<M-k>', func = 'signature_help()' },
+  { key = '<c-k>', func = 'signature_help()' },
+  { key = 'g0', func = "require('navigator.symbols').document_symbols()" },
+  { key = 'gW', func = "require('navigator.workspace').workspace_symbol()" },
+  { key = '<c-]>', func = "require('navigator.definition').definition()" },
+  { key = 'gD', func = "declaration({ border = 'rounded', max_width = 80 })" },
+  { key = 'gp', func = "require('navigator.definition').definition_preview()" },
+  { key = '<Leader>gt', func = "require('navigator.treesitter').buf_ts()" },
+  { key = '<Leader>gT', func = "require('navigator.treesitter').bufs_ts()" },
+  { key = 'K', func = 'hover({ popup_opts = { border = single, max_width = 80 }})' },
+  { key = '<Space>ca', mode = 'n', func = "require('navigator.codeAction').code_action()" },
+  { key = '<Space>cA', mode = 'v', func = 'range_code_action()' },
+  -- { key = '<Leader>re', func = 'rename()' },
+  { key = '<Space>rn', func = "require('navigator.rename').rename()" },
+  { key = '<Leader>gi', func = 'incoming_calls()' },
+  { key = '<Leader>go', func = 'outgoing_calls()' },
+  { key = 'gi', func = 'implementation()' },
+  { key = '<Space>D', func = 'type_definition()' },
+  { key = 'gL', func = "require('navigator.diagnostics').show_diagnostics()" },
+  { key = 'gG', func = "require('navigator.diagnostics').show_buf_diagnostics()" },
+  { key = '<Leader>dt', func = "require('navigator.diagnostics').toggle_diagnostics()" },
+  { key = ']d', func = "diagnostic.goto_next({ border = 'rounded', max_width = 80})" },
+  { key = '[d', func = "diagnostic.goto_prev({ border = 'rounded', max_width = 80})" },
+  { key = ']r', func = "require('navigator.treesitter').goto_next_usage()" },
+  { key = '[r', func = "require('navigator.treesitter').goto_previous_usage()" },
+  { key = '<C-LeftMouse>', func = 'definition()' },
+  { key = 'g<LeftMouse>', func = 'implementation()' },
+  { key = '<Leader>k', func = "require('navigator.dochighlight').hi_symbol()" },
+  { key = '<Space>wa', func = "require('navigator.workspace').add_workspace_folder()" },
+  { key = '<Space>wr', func = "require('navigator.workspace').remove_workspace_folder()" },
+  { key = '<Space>ff', func = 'formatting()', mode = 'n' },
+  { key = '<Space>ff', func = 'range_formatting()', mode = 'v' },
+  { key = '<Space>wl', func = "require('navigator.workspace').list_workspace_folders()" },
+  { key = '<Space>la', mode = 'n', func = "require('navigator.codelens').run_action()" },
+}
 
 function config.nvim_treesitter() require("modules.lang.treesitter").treesitter() end
 
@@ -248,7 +288,11 @@ function config.navigator()
         border = single, -- "single",
         ts_fold = true,
         -- external = true, -- true: enable for goneovim multigrid otherwise false
-        -- lsp_signature_help = true
+        lsp_signature_help = true,
+
+        default_mapping = false,
+  keymaps = keymaps
+    , -- a list of key maps
 
         -- lsp = {
         --     cpp = {cmd = {install_root_dir .. '/clangd/clangd/bin/clangd'}},
@@ -260,8 +304,7 @@ function config.navigator()
         --                 'sumneko_lua/extension/server/bin/lua-language-server'
         --         }
         --     }
-        -- }
-        default_mapping = true,
+        -- },
         -- keymaps = {
         --     {mode = 'i', key = '<M-k>', func = 'signature_help()'},
         --     {key = "<c-i>", func = "signature_help()"}
