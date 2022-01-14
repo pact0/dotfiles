@@ -7,6 +7,7 @@ end
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 local conf = require("telescope.config").values
+local trouble = require("trouble.providers.telescope")
 
 local layout = require("telescope.pickers.layout_strategies")
 local resolve = require("telescope.config.resolve")
@@ -373,8 +374,10 @@ M.setup = function()
             action_set.shift_selection(prompt_bufnr, -math.floor(height / 2))
           end,
           ["<C-q>"] = custom_actions.smart_send_to_qflist,
+           ["<c-t>"] = trouble.open_with_trouble,
         },
         i = {
+           ["<c-t>"] = trouble.open_with_trouble ,
           ["<S-Down>"] = actions.cycle_history_next,
           ["<S-Up>"] = actions.cycle_history_prev,
           -- ['<Down>'] = actions.move_selection_next,

@@ -290,9 +290,8 @@ function config.navigator()
         -- external = true, -- true: enable for goneovim multigrid otherwise false
         lsp_signature_help = true,
 
-        default_mapping = false,
-  keymaps = keymaps
-    , -- a list of key maps
+        -- default_mapping = false,
+  -- keymaps = key_maps, -- a list of key maps
 
         -- lsp = {
         --     cpp = {cmd = {install_root_dir .. '/clangd/clangd/bin/clangd'}},

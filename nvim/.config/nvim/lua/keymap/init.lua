@@ -85,7 +85,15 @@ map_normal_leader = {
             z = {"<cmd>:Git stash<CR>", "run git stash"}
         }
     },
-    Z = {M = {"<cmd>ZenMode<CR>", "Toggle ZenMode"}}
+    Z = {M = {"<cmd>ZenMode<CR>", "Toggle ZenMode"}},
+    x = {
+      x = {"<cmd>Trouble<CR>", "Trouble"},
+      w = {"<cmd>Trouble workspace_diagnostics<CR>", "Trouble workspace diagnostic"},
+      d = {"<cmd>Trouble document_diagnostics<CR>", "Trouble document diagnostic"},
+      l = {"<cmd>Trouble loclist<CR>", "Trouble loclist"},
+      q = {"<cmd>Trouble quickfix<CR>", "Trouble quickfix"},
+      r = {"<cmd>Trouble lsp_references<CR>", "Trouble lsp reference"},
+  }
 }
 wk.register(map_normal_leader, {prefix = "<leader>"})
 
@@ -113,6 +121,22 @@ local navigator_leader = {
     a = {"<cmd>lua require('navigator.workspace').add_workspace_folder()<CR>" ,"Add Workspace folder"},
     r = {"<cmd>lua require('navigator.workspace').remove_workspace_folder()<CR>" ,"Remove Workspace folder"},
   },
+  g= {
+    i = { "<cmd>lua require('navigator.cclshierarchy').incoming_calls()<CR>", "Incoming calls"   },
+    o = { "<cmd>lua require('navigator.cclshierarchy').outgoing_calls()<CR>", "Outgoing calls"   },
+  },
+  k = {"<cmd>lua require('navigator.dochighlight').hi_symbol()<CR>", "Highlight symbol"}
 
   }
 wk.register(navigator_leader, { prefix = "<leader>" })
+
+
+local open_brac = {
+  t = {"<cmd>lua require('trouble').previous({skip_groups = true, jump = true})<CR>", "Prev trouble"}
+  }
+wk.register(open_brac, {"["})
+
+local close_brac = {
+  t = {"<cmd>lua require('trouble').next({skip_groups = true, jump = true})<CR>", "Next trouble"}
+  }
+wk.register(close_brac, {"]"})

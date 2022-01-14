@@ -103,6 +103,8 @@ function Lazyload()
   if load_lsp then
     loader("nvim-lspconfig") -- null-ls.nvim
     loader("lsp_signature.nvim")
+    loader("lspkind-nvim")
+    loader("nvim-lsputils")
     loader("nvim-lsp-installer")
   print("Loaded lsp")
   end
@@ -180,6 +182,7 @@ vim.cmd([[hi LineNr guifg=#505068]])
 vim.defer_fn(function()
   --  defer in time
   local loader = require("packer").loader
+  loader("trouble.nvim")
   loader("telescope.nvim telescope-zoxide project.nvim nvim-neoclip.lua")
   -- loader("neogen")
   loader("harpoon")
