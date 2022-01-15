@@ -13,6 +13,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'nathom/filetype.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'tweekmonster/startuptime.vim'
+Plug 'folke/which-key.nvim'
 
 " Plug 'numToStr/Navigator.nvim'
 " Plug 'numToStr/Comment.nvim'
@@ -36,7 +37,7 @@ Plug 'rafamadriz/friendly-snippets'
 " Plug 'mcchrish/zenbones.nvim'
 " Plug 'CantoroMC/nvim-nightmare'
 Plug 'lambdalisue/suda.vim'
-Plug 'romgrk/barbar.nvim'
+" Plug 'romgrk/barbar.nvim'
 
 Plug 'stephpy/vim-php-cs-fixer'
 

@@ -67,9 +67,9 @@ function autocmd.load_autocmds()
     yank = {
       { "TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]] },
     },
-    theme = {
-      { "ColorScheme", "* hi! Normal ctermbg=NONE guibg=NONE" },
-    },
+    -- theme = {
+    --   { "ColorScheme", "* hi! Normal ctermbg=NONE guibg=NONE" },
+    -- },
   }
 
   autocmd.nvim_create_augroups(definitions)

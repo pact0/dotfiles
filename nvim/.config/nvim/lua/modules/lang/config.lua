@@ -1,43 +1,68 @@
 local config = {}
 local key_maps = {
-  { key = '<Leader>gi', func = "require('navigator.cclshierarchy').incoming_calls()" },
-  { key = '<Leader>go', func = "require('navigator.cclshierarchy').outgoing_calls()" },
-  { key = 'gr', func = "require('navigator.reference').reference()" },
-  { key = 'Gr', func = "require('navigator.reference').async_ref()" },
-  { mode = 'i', key = '<M-k>', func = 'signature_help()' },
-  { key = '<c-k>', func = 'signature_help()' },
-  { key = 'g0', func = "require('navigator.symbols').document_symbols()" },
-  { key = 'gW', func = "require('navigator.workspace').workspace_symbol()" },
-  { key = '<c-]>', func = "require('navigator.definition').definition()" },
-  { key = 'gD', func = "declaration({ border = 'rounded', max_width = 80 })" },
-  { key = 'gp', func = "require('navigator.definition').definition_preview()" },
-  { key = '<Leader>gt', func = "require('navigator.treesitter').buf_ts()" },
-  { key = '<Leader>gT', func = "require('navigator.treesitter').bufs_ts()" },
-  { key = 'K', func = 'hover({ popup_opts = { border = single, max_width = 80 }})' },
-  { key = '<Space>ca', mode = 'n', func = "require('navigator.codeAction').code_action()" },
-  { key = '<Space>cA', mode = 'v', func = 'range_code_action()' },
-  -- { key = '<Leader>re', func = 'rename()' },
-  { key = '<Space>rn', func = "require('navigator.rename').rename()" },
-  { key = '<Leader>gi', func = 'incoming_calls()' },
-  { key = '<Leader>go', func = 'outgoing_calls()' },
-  { key = 'gi', func = 'implementation()' },
-  { key = '<Space>D', func = 'type_definition()' },
-  { key = 'gL', func = "require('navigator.diagnostics').show_diagnostics()" },
-  { key = 'gG', func = "require('navigator.diagnostics').show_buf_diagnostics()" },
-  { key = '<Leader>dt', func = "require('navigator.diagnostics').toggle_diagnostics()" },
-  { key = ']d', func = "diagnostic.goto_next({ border = 'rounded', max_width = 80})" },
-  { key = '[d', func = "diagnostic.goto_prev({ border = 'rounded', max_width = 80})" },
-  { key = ']r', func = "require('navigator.treesitter').goto_next_usage()" },
-  { key = '[r', func = "require('navigator.treesitter').goto_previous_usage()" },
-  { key = '<C-LeftMouse>', func = 'definition()' },
-  { key = 'g<LeftMouse>', func = 'implementation()' },
-  { key = '<Leader>k', func = "require('navigator.dochighlight').hi_symbol()" },
-  { key = '<Space>wa', func = "require('navigator.workspace').add_workspace_folder()" },
-  { key = '<Space>wr', func = "require('navigator.workspace').remove_workspace_folder()" },
-  { key = '<Space>ff', func = 'formatting()', mode = 'n' },
-  { key = '<Space>ff', func = 'range_formatting()', mode = 'v' },
-  { key = '<Space>wl', func = "require('navigator.workspace').list_workspace_folders()" },
-  { key = '<Space>la', mode = 'n', func = "require('navigator.codelens').run_action()" },
+    {
+        key = '<Leader>gi',
+        func = "require('navigator.cclshierarchy').incoming_calls()"
+    }, {
+        key = '<Leader>go',
+        func = "require('navigator.cclshierarchy').outgoing_calls()"
+    }, {key = 'gr', func = "require('navigator.reference').reference()"},
+    {key = 'Gr', func = "require('navigator.reference').async_ref()"},
+    {mode = 'i', key = '<M-k>', func = 'signature_help()'},
+    {key = '<c-k>', func = 'signature_help()'},
+    {key = 'g0', func = "require('navigator.symbols').document_symbols()"},
+    {key = 'gW', func = "require('navigator.workspace').workspace_symbol()"},
+    {key = '<c-]>', func = "require('navigator.definition').definition()"},
+    {key = 'gD', func = "declaration({ border = 'rounded', max_width = 80 })"},
+    {key = 'gp', func = "require('navigator.definition').definition_preview()"},
+    {key = '<Leader>gt', func = "require('navigator.treesitter').buf_ts()"},
+    {key = '<Leader>gT', func = "require('navigator.treesitter').bufs_ts()"}, {
+        key = 'K',
+        func = 'hover({ popup_opts = { border = single, max_width = 80 }})'
+    }, {
+        key = '<Space>ca',
+        mode = 'n',
+        func = "require('navigator.codeAction').code_action()"
+    }, {key = '<Space>cA', mode = 'v', func = 'range_code_action()'},
+    -- { key = '<Leader>re', func = 'rename()' },
+    {key = '<Space>rn', func = "require('navigator.rename').rename()"},
+    {key = '<Leader>gi', func = 'incoming_calls()'},
+    {key = '<Leader>go', func = 'outgoing_calls()'},
+    {key = 'gi', func = 'implementation()'},
+    {key = '<Space>D', func = 'type_definition()'},
+    {key = 'gL', func = "require('navigator.diagnostics').show_diagnostics()"},
+    {
+        key = 'gG',
+        func = "require('navigator.diagnostics').show_buf_diagnostics()"
+    }, {
+        key = '<Leader>dt',
+        func = "require('navigator.diagnostics').toggle_diagnostics()"
+    }, {
+        key = ']d',
+        func = "diagnostic.goto_next({ border = 'rounded', max_width = 80})"
+    }, {
+        key = '[d',
+        func = "diagnostic.goto_prev({ border = 'rounded', max_width = 80})"
+    }, {key = ']r', func = "require('navigator.treesitter').goto_next_usage()"},
+    {key = '[r', func = "require('navigator.treesitter').goto_previous_usage()"},
+    {key = '<C-LeftMouse>', func = 'definition()'},
+    {key = 'g<LeftMouse>', func = 'implementation()'},
+    {key = '<Leader>k', func = "require('navigator.dochighlight').hi_symbol()"},
+    {
+        key = '<Space>wa',
+        func = "require('navigator.workspace').add_workspace_folder()"
+    }, {
+        key = '<Space>wr',
+        func = "require('navigator.workspace').remove_workspace_folder()"
+    }, {key = '<Space>ff', func = 'formatting()', mode = 'n'},
+    {key = '<Space>ff', func = 'range_formatting()', mode = 'v'}, {
+        key = '<Space>wl',
+        func = "require('navigator.workspace').list_workspace_folders()"
+    }, {
+        key = '<Space>la',
+        mode = 'n',
+        func = "require('navigator.codelens').run_action()"
+    }
 }
 
 function config.nvim_treesitter() require("modules.lang.treesitter").treesitter() end
@@ -149,101 +174,6 @@ end
 function config.sqls() end
 
 function config.aerial()
-    vim.g.aerial = {
-        -- Priority list of preferred backends for aerial
-        backends = {"lsp", "treesitter", "markdown"},
-
-        -- Enum: persist, close, auto, global
-        --   persist - aerial window will stay open until closed
-        --   close   - aerial window will close when original file is no longer visible
-        --   auto    - aerial window will stay open as long as there is a visible
-        --             buffer to attach to
-        --   global  - same as 'persist', and will always show symbols for the current buffer
-        close_behavior = "auto",
-
-        -- Set to false to remove the default keybindings for the aerial buffer
-        default_bindings = true,
-
-        -- Enum: prefer_right, prefer_left, right, left
-        -- Determines the default direction to open the aerial window. The 'prefer'
-        -- options will open the window in the other direction *if* there is a
-        -- different buffer in the way of the preferred direction
-        default_direction = "prefer_right",
-
-        -- A list of all symbols to display. Set to false to display all symbols.
-        filter_kind = {
-            "Class", "Constructor", "Enum", "Function", "Interface", "Method",
-            "Struct"
-        },
-
-        -- Enum: split_width, full_width, last, none
-        -- Determines line highlighting mode when multiple buffers are visible
-        highlight_mode = "split_width",
-
-        -- When jumping to a symbol, highlight the line for this many ms
-        -- Set to 0 or false to disable
-        highlight_on_jump = 300,
-
-        -- Fold code when folding the tree. Only works when manage_folds is enabled
-        link_tree_to_folds = true,
-
-        -- Fold the tree when folding code. Only works when manage_folds is enabled
-        link_folds_to_tree = false,
-
-        -- Use symbol tree for folding. Set to true or false to enable/disable
-        -- 'auto' will manage folds if your previous foldmethod was 'manual'
-        manage_folds = "auto",
-
-        -- The maximum width of the aerial window
-        max_width = 40,
-
-        -- The minimum width of the aerial window.
-        -- To disable dynamic resizing, set this to be equal to max_width
-        min_width = 10,
-
-        -- Set default symbol icons to use Nerd Font icons (see https://www.nerdfonts.com/)
-        nerd_font = "auto",
-
-        -- Whether to open aerial automatically when entering a buffer.
-        -- Can also be specified per-filetype as a map (see below)
-        open_automatic = false,
-
-        -- If open_automatic is true, only open aerial if the source buffer is at
-        -- least this long
-        open_automatic_min_lines = 0,
-
-        -- If open_automatic is true, only open aerial if there are at least this many symbols
-        open_automatic_min_symbols = 0,
-
-        -- Set to true to only open aerial at the far right/left of the editor
-        -- Default behavior opens aerial relative to current window
-        placement_editor_edge = false,
-
-        -- Run this command after jumping to a symbol (false will disable)
-        post_jump_cmd = "normal! zz",
-
-        -- If close_on_select is true, aerial will automatically close after jumping to a symbol
-        close_on_select = false,
-
-        lsp = {
-            -- Fetch document symbols when LSP diagnostics change.
-            -- If you set this to false, you will need to manually fetch symbols
-            diagnostics_trigger_update = true,
-
-            -- Set to false to not update the symbols when there are LSP errors
-            update_when_errors = true
-        },
-
-        treesitter = {
-            -- How long to wait (in ms) after a buffer change before updating
-            update_delay = 300
-        },
-
-        markdown = {
-            -- How long to wait (in ms) after a buffer change before updating
-            update_delay = 300
-        }
-    }
 
     -- Aerial does not set any mappings by default, so you'll want to set some up
 end
@@ -288,10 +218,10 @@ function config.navigator()
         border = single, -- "single",
         ts_fold = true,
         -- external = true, -- true: enable for goneovim multigrid otherwise false
-        lsp_signature_help = true,
+        lsp_signature_help = true
 
         -- default_mapping = false,
-  -- keymaps = key_maps, -- a list of key maps
+        -- keymaps = key_maps, -- a list of key maps
 
         -- lsp = {
         --     cpp = {cmd = {install_root_dir .. '/clangd/clangd/bin/clangd'}},

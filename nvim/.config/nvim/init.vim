@@ -9,12 +9,11 @@ source $HOME/.config/nvim/setters.vim
 "lua require('pack')
 " needs to be first before plugins init
 
-lua require('impatient')
 lua require('core')
 lua require('plugins')
 let g:floaterm_keymap_new    = '<C-T>'
-let g:floaterm_keymap_prev   = '[t'
-let g:floaterm_keymap_next   = ']t'
+" let g:floaterm_keymap_prev   = '[t'
+" let g:floaterm_keymap_next   = ']t'
 let g:floaterm_keymap_toggle = '<C-t>'
 
 

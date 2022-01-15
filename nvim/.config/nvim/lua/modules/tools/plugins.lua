@@ -57,19 +57,7 @@ tools['ThePrimeagen/harpoon'] = {
 -- }
 
 tools["wellle/targets.vim"] = {}
--- tools["williamboman/nvim-lsp-installer"] = {
--- cmd = "LspInstall",
--- config = function()
---   local lsp_installer = require("nvim-lsp-installer")
 
---   -- lsp_installer.on_server_ready(function (server)
---   --   print(vim.inspect(server))
---   --   local opts=require'navigator.lspclient.clients'.get_cfg(server.name)
---   --   opts.cmd = server:get_default_options().cmd
---   --   server:setup {opts}
---   -- end)
--- end
--- }
 tools["TimUntersberger/neogit"] = {cmd = {"Neogit"}, config = conf.neogit}
 
 tools["liuchengxu/vista.vim"] = {

@@ -26,9 +26,9 @@ function config.blankline()
         },
         show_trailing_blankline_indent = false,
         show_first_indent_level = false,
-        buftype_exclude = {"terminal"},
+        buftype_exclude = {"terminal", "dashboard"},
         space_char_blankline = " ",
-        use_treesitter = true,
+        use_treesitter = false,
         show_current_context = true,
         show_current_context_start = true,
         context_patterns = {
@@ -38,7 +38,8 @@ function config.blankline()
             "jsx_self_closing_element", "try_statement", "catch_clause",
             "import_statement", "operation_type"
         },
-        bufname_exclude = {"README.md"}
+        bufname_exclude = {"README.md"},
+ show_end_of_line = true,
     })
     -- useing treesitter instead of char highlight
     -- vim.g.indent_blankline_char_highlight_list =
@@ -214,6 +215,12 @@ call wilder#set_option('renderer', wilder#renderer_mux({
       \ '/': s:popupmenu_renderer,
       \ 'substitute': s:wildmenu_renderer,
       \ }))]])
+end
+
+function config.tabby()
+    require("tabby").setup({
+        tabline = require("tabby.presets").active_wins_at_tail
+    })
 end
 
 return config;

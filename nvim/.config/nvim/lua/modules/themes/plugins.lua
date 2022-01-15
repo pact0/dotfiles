@@ -48,6 +48,25 @@ theme["rebelot/kanagawa.nvim"] = {opt = true, config= conf.kangawa}
 
 theme["sainnhe/gruvbox-material"] = { opt = true, config = conf.gruvbox }
 
+theme["altercation/vim-colors-solarized"] = {opt=true}
+
 theme["lambdalisue/glyph-palette.vim"] = {}
+
+theme["xiyaowong/nvim-transparent"] = {opt=true, config = function()
+    require("transparent").setup({
+            enable = true, -- boolean: enable transparent
+            extra_groups = {}, -- table/string: additional groups that should be clear
+            -- In particular, when you set it to 'all', that means all avaliable groups
+            exclude = {
+            "IndentBlanklineIndent1",
+            "IndentBlanklineIndent2",
+            "IndentBlanklineIndent3",
+            "IndentBlanklineIndent4",
+            "IndentBlanklineIndent5",
+            "IndentBlanklineIndent6",
+                }, -- table: groups you don't want to clear
+            })
+end
+}
 
 return theme

@@ -31,4 +31,6 @@ ui["kyazdani42/nvim-tree.lua"] = {
 --     config = conf.wilder
 -- }
 
+ui["nanozuki/tabby.nvim"] = {opt = true, config = conf.tabby}
+
 return ui

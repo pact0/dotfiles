@@ -10,11 +10,11 @@ require 'debugHelper'
 -- require 'plugins.cmp'
 -- require 'plugins.gitsigns'
 -- require 'plugins.lspconfig'
---require 'plugins.lspkind'
+-- require 'plugins.lspkind'
 require 'plugins.lualine'
 -- require 'plugins.bqf'
 -- require 'plugins.treesitter'
---require 'plugins.harpoon'
+-- require 'plugins.harpoon'
 -- require 'plugins.telescope'
 require 'plugins.dap'
 -- require 'plugins.navigator'
@@ -27,16 +27,11 @@ require 'plugins.sort'
 -- require 'plugins.chad-tree'
 require 'plugins.dial'
 -- require 'plugins.dashboard'
-require 'plugins.barbar'
+-- require 'plugins.barbar'
 -- require 'plugins.diffview'
 require 'plugins.neovim-cmake'
 require 'plugins.presence'
 -- require 'plugins.project'
 
-require("lsp-colors").setup({
-    Error = "#db4b4b",
-    Warning = "#e0af68",
-    Information = "#0db9d7",
-    Hint = "#10B981",
-})
+
 require 'setters'

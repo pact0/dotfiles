@@ -111,8 +111,8 @@ map("n", leader .. leader,
 map("n", leader .. "<C-o>", ":lua require 'buffers'.close_others()<CR>")
 map("n", leader .. "q", ":lua require 'buffers'.close()<CR>")
 map("n", leader .. "w", ":update<CR>")
-map("n", "]b", "<Cmd>bnext<CR>")
-map("n", "[b", "<Cmd>bprev<CR>")
+-- map("n", "]b", "<Cmd>bnext<CR>")
+-- map("n", "[b", "<Cmd>bprev<CR>")
 
 -- Around line: with leading and trailing whitespace
 map('v', 'al', ':<c-u>silent! normal! 0v$<cr>', {silent = true})
