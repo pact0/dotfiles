@@ -26,7 +26,7 @@ function Lazyload()
         -- "github-nvim-theme",
     }
 
-    if daylight() == "light" then themes = {"ayu-vim"} end
+    -- if daylight() == "light" then themes = {"ayu-vim"} end
 
     local v = math.random(1, #themes)
     local loading_theme = themes[v]
@@ -86,6 +86,9 @@ function Lazyload()
     --
     print(load_lsp)
     if load_lsp then
+        loader("cmp-nvim-lsp")
+        loader("popfix")
+        loader("nvim-lsp-ts-utils")
         loader("nvim-lspconfig") -- null-ls.nvim
         loader("lsp_signature.nvim")
         loader("lspkind-nvim")
@@ -165,14 +168,15 @@ vim.cmd([[hi LineNr guifg=#505068]])
 vim.defer_fn(function()
     --  defer in time
     local loader = require("packer").loader
-    loader("trouble.nvim")
+    loader("sqlite.lua")
+    loader("telescope-frecency.nvim")
     loader("telescope.nvim telescope-zoxide project.nvim nvim-neoclip.lua")
     -- loader("neogen")
     loader("harpoon")
+    loader("tabby.nvim")
     loader("nvim-transparent")
     vim.cmd [[TransparentEnable]]
-    loader("tabby.nvim")
-    -- loader("windline.nvim")
-    -- require("modules.ui.eviline")
+    loader("windline.nvim")
+    require("modules.ui.eviline")
     -- require("wlfloatline").setup()
 end, lazy_timer + 100)

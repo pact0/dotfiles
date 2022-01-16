@@ -1,8 +1,8 @@
 return {
     lsp = function()
 
-        require 'plugins.lspconfig.handlers'
-        require 'plugins.lspconfig.diagnostics'
+        require 'modules.lsp.handlers'
+        require 'modules.lsp.diagnostics'
         local lspconfig = require 'lspconfig'
         local utils = require "utils"
 
@@ -118,14 +118,14 @@ return {
                 },
                 max_height = 4
             })
-            require("aerial").on_attach(client, bufnr)
-            if client.resolved_capabilities.document_formatting then
-                vim.api.nvim_command [[augroup Format]]
-                vim.api.nvim_command [[autocmd! * <buffer>]]
-                vim.api
-                    .nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync({},1500)]]
-                vim.api.nvim_command [[augroup END]]
-            end
+            -- require("aerial").on_attach(client, bufnr)
+            -- if client.resolved_capabilities.document_formatting then
+            --     vim.api.nvim_command [[augroup Format]]
+            --     vim.api.nvim_command [[autocmd! * <buffer>]]
+            --     vim.api
+            --         .nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync({},1500)]]
+            --     vim.api.nvim_command [[augroup END]]
+            -- end
             if client.resolved_capabilities.hover then
                 utils.map("n", "<CR>", "<cmd>lua vim.lsp.buf.hover()<CR>",
                           {buffer = true})
@@ -188,7 +188,7 @@ return {
             -- python = {autopep}
         }
 
-        local ts_utils_attach = require 'plugins.lsp-ts-utils'
+        local ts_utils_attach = require 'modules.lsp.lsp-ts-utils'
         -- local capabilities = vim.lsp.protocol.make_client_capabilities()
         local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
                                                                              .protocol

@@ -22,12 +22,12 @@ editor["andymass/vim-matchup"] = {
     end
 }
 
--- editor["ggandor/lightspeed.nvim"] = {
---   as = "lightspeed",
---   opt = true,
---   keys = {'f', 'F', 't', 'T', 'S', 's'},
---   config = conf.lightspeed
--- }
+editor["ggandor/lightspeed.nvim"] = {
+    as = "lightspeed",
+    opt = true,
+    keys = {'f', 'F', 't', 'T', 'S', 's'},
+    config = conf.lightspeed
+}
 
 editor["tpope/vim-surround"] = {
     opt = true,
@@ -55,11 +55,11 @@ editor["rrethy/vim-hexokinase"] = {
 --   -- fn = {'<Plug>MoveBlockDown', '<Plug>MoveBlockUp', '<Plug>MoveLineDown', '<Plug>MoveLineUp'}
 -- }
 
--- editor["kevinhwang91/nvim-hlslens"] = {
---   -- keys = {"/", "?", '*', '#'}, --'n', 'N', '*', '#', 'g'
---   -- opt = true,
---   -- config = conf.hlslens
--- }
+editor["kevinhwang91/nvim-hlslens"] = {
+  keys = {"/", "?", '*', '#'}, --'n', 'N', '*', '#', 'g'
+  opt = true,
+  config = conf.hlslens
+}
 
 editor["mg979/vim-visual-multi"] = {
     keys = {
@@ -125,17 +125,9 @@ editor["mg979/vim-visual-multi"] = {
 editor["numToStr/Comment.nvim"] = {
     keys = {"g", "<ESC>"},
     event = {"CursorMoved"},
-    config = conf.comment
+    config = conf.comment,
 }
 
--- editor["preservim/nerdcommenter"] = {
---   -- keys = {"<Leader>c<space>", "\\c ", "<D-/>", "<C-<Space>>", "<Leader>cc", "//", "<M-/>"},
---   keys = {'<Leader>c<space>', '\\c ', '<Leader>cc', '//', '<M-/>'},
---   setup = conf.nerdcommenter,
---   fn = {"NERDComment", "nerdcommenter#Comment"}
---   -- cmd = {'NERDCommenterToggle', 'NERDCommenterComment'}
---   -- opt = true,
--- }
 
 -- copy paste failed in block mode when clipboard = unnameplus"
 editor["bfredl/nvim-miniyank"] = {
@@ -175,9 +167,17 @@ editor["AndrewRadev/splitjoin.vim"] = {
 }
 
 editor["chaoren/vim-wordmotion"] = {
-    opt = true,
-    fn = {"<Plug>WordMotion_w"}
-    -- keys = {'w','W', 'gE', 'aW'}
+    -- opt = true,
+    -- fn = {"<Plug>WordMotion_w", "<Plug>WordMotion_b"},
+    -- keys = {'w','W'},
+    config = function ()
+      vim.g.wordmotion_nomap = 1
+      vim.cmd[[nmap w <Plug>WordMotion_w]]
+      vim.cmd[[nmap b <Plug>WordMotion_b]]
+      vim.g.wordmotion_mappings['aw'] = ''
+      vim.g.wordmotion_mappings['iw'] = ''
+      vim.g.wordmotion_mappings['ge'] = ''
+    end
 }
 
 editor["folke/zen-mode.nvim"] = {
@@ -202,5 +202,10 @@ editor["tpope/vim-abolish"] = {opt = true, cmd = {"Subvert", "Abolish"}}
 
 editor["junegunn/vim-easy-align"] = {opt = true, cmd = {"EasyAlign"}}
 
-editor["szw/vim-maximizer"] = {opt = true, cmd={"MaximizerToggle"}}
+editor["szw/vim-maximizer"] = {opt = true, cmd = {"MaximizerToggle"}}
+
+-- editor["haya14busa/incsearch.vim"] = {}
+
+editor["vim-scripts/UnconditionalPaste"] = {opt=true}
+
 return editor

@@ -66,6 +66,9 @@ theme["xiyaowong/nvim-transparent"] = {
                 -- "IndentBlanklineIndent4",
                 -- "IndentBlanklineIndent5",
                 -- "IndentBlanklineIndent6",
+                "Tabline",
+                "TablineSel",
+                "TablineFill",
             } -- table: groups you don't want to clear
         })
     end

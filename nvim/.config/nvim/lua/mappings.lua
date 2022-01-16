@@ -1,15 +1,15 @@
 local map = require("utils").map
 local leader = "<space>"
 
-map("n", "/", "<Plug>(incsearch-forward)", {noremap = false})
-map("n", "?", "<Plug>(incsearch-backward)", {noremap = false})
-map("n", "n", "<Plug>(incsearch-nohl-n)zz", {noremap = false})
-map("n", "N", "<Plug>(incsearch-nohl-N)zz", {noremap = false})
-map("n", "*", "<Plug>(incsearch-nohl-*)zz", {noremap = false})
-map("n", "#", "<Plug>(incsearch-nohl-#)zz", {noremap = false})
-map("n", "g*", "<Plug>(incsearch-nohl-g*)zz", {noremap = false})
-map("n", "g#", "<Plug>(incsearch-nohl-g#)zz", {noremap = false})
-
+-- map("n", "/", "<Plug>(incsearch-forward)", {noremap = false})
+-- map("n", "?", "<Plug>(incsearch-backward)", {noremap = false})
+-- map("n", "n", "<Plug>(incsearch-nohl-n)zz", {noremap = false})
+-- map("n", "N", "<Plug>(incsearch-nohl-N)zz", {noremap = false})
+-- map("n", "*", "<Plug>(incsearch-nohl-*)zz", {noremap = false})
+-- map("n", "#", "<Plug>(incsearch-nohl-#)zz", {noremap = false})
+-- map("n", "g*", "<Plug>(incsearch-nohl-g*)zz", {noremap = false})
+-- map("n", "g#", "<Plug>(incsearch-nohl-g#)zz", {noremap = false})
+--
 map("n", "x", '"_x')
 map("n", leader .. "oo", "o<esc>k")
 map("n", leader .. "O", "O<esc>j")
@@ -25,10 +25,7 @@ map('n', '-', [[expand('%') == '' ? ':e ' . getcwd() . '<cr>' : ':e %:h<cr>']],
     {expr = true})
 
 -- #region Navigator
-map("n", "<A-h>", "<CMD>lua require('Navigator').left()<CR>")
-map("n", "<A-j>", "<CMD>lua require('Navigator').down()<CR>")
-map("n", "<A-k>", "<CMD>lua require('Navigator').up()<CR>")
-map("n", "<A-l>", "<CMD>lua require('Navigator').right()<CR>")
+
 -- ###
 
 -- Remap for dealing with word wrap
@@ -41,17 +38,17 @@ map({"n", "o", "v"}, "L", "$")
 map({"n", "v"}, "J", "5j")
 map({"n", "v"}, "K", "5k")
 
-map("n", leader .. "gd",
-    ":set nosplitright<CR>:execute 'Gvdiffsplit ' .. g:git_base<CR>:set splitright<CR>")
-map("n", leader .. "gr", ":Gread<CR>")
-map("n", leader .. "gb", ":Git blame<CR>")
-map("n", leader .. "gs", ":Git<CR>")
-map("n", leader .. "gm", "<Plug>(git-messenger)", {noremap = false})
-map("n", leader .. "gc", ":0Gclog<CR>", {noremap = false})
-map("n", leader .. "gn",
-    ":lua require('lists').change_active('Quickfix')<CR>:Git mergetool<CR>")
-map("n", leader .. "gh", ":diffget //2<CR> :diffupdate<CR>")
-map("n", leader .. "gl", ":diffget //3<CR> :diffupdate<CR>")
+-- map("n", leader .. "gd",
+--     ":set nosplitright<CR>:execute 'Gvdiffsplit ' .. g:git_base<CR>:set splitright<CR>")
+-- map("n", leader .. "gr", ":Gread<CR>")
+-- map("n", leader .. "gb", ":Git blame<CR>")
+-- map("n", leader .. "gs", ":Git<CR>")
+-- map("n", leader .. "gm", "<Plug>(git-messenger)", {noremap = false})
+-- map("n", leader .. "gc", ":0Gclog<CR>", {noremap = false})
+-- map("n", leader .. "gn",
+--     ":lua require('lists').change_active('Quickfix')<CR>:Git mergetool<CR>")
+-- map("n", leader .. "gh", ":diffget //2<CR> :diffupdate<CR>")
+-- map("n", leader .. "gl", ":diffget //3<CR> :diffupdate<CR>")
 
 -- #visual mode
 map("v", "<", "<gv")
@@ -86,10 +83,6 @@ map("o", "iu", ':<c-u>lua require"treesitter-unit".select()<CR>',
 map("o", "au", ':<c-u>lua require"treesitter-unit".select(true)<CR>',
     {noremap = true})
 
-map("", "w", "<Plug>CamelCaseMotion_w", {noremap = false})
-map("", "b", "<Plug>CamelCaseMotion_b", {noremap = false})
-map("", "e", "<Plug>CamelCaseMotion_e", {noremap = false})
-map("", "ge", "<Plug>CamelCaseMotion_ge", {noremap = false})
 
 map("n", "<CLEAR-1>", "<Plug>UnconditionalPasteLineAfter", {noremap = false})
 map("n", "<CLEAR-2>", "<Plug>UnconditionalPasteLineBefore", {noremap = false})

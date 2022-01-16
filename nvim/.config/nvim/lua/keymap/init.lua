@@ -84,7 +84,8 @@ map_normal_leader = {
             name = "Stashes",
             l = {"<cmd>Telescope git_stash<CR>", "List stashes"},
             z = {"<cmd>:Git stash<CR>", "run git stash"}
-        }
+        },
+        M = {"<cmd>GitMessenger", "GitMessenger"}
     },
     t = {
         name = "Tabs",
@@ -110,9 +111,14 @@ map_normal_leader = {
         q = {"<cmd>Trouble quickfix<CR>", "Trouble quickfix"},
         r = {"<cmd>Trouble lsp_references<CR>", "Trouble lsp reference"}
     },
-    A = {"<cmd>AerialToggle<CR>", "Aerial toggle"},
     S = {"<cmd>SymbolsOutline<CR>", "Symbols outline"},
-    M = {"<cmd>MaximizerToggle<CR>", "MaximizerToggle"}
+    M = {"<cmd>MaximizerToggle<CR>", "MaximizerToggle"},
+    T = {
+      name = "TODO",
+      T = {"<cmd>TodoTrouble<CR>", "TODO trouble"},
+      F = {"<cmd>TodoTelescope<CR>", "TODO telescope"},
+  }
+
 }
 wk.register(map_normal_leader, {prefix = "<leader>"})
 
@@ -189,7 +195,6 @@ local open_brac = {
         "Prev trouble"
     },
     b = {"<Cmd>bprev<CR>", "Prev buffer"},
-    a = {"<cmd>AerialNextUp<CR>", "Aerial prev"}
 }
 wk.register(open_brac, {prefix = "["})
 
@@ -199,11 +204,14 @@ local close_brac = {
         "Next trouble"
     },
     b = {"<Cmd>bnext<CR>", "Next buffer"},
-    a = {"<cmd>AerialPrevUp<CR>", "Aerial prev"}
 }
 wk.register(close_brac, {prefix = "]"})
 
 -- map("n", leader .. "W", "<Plug>(wildfire-quick-select)<CR>")
 -- ohers
-vim.cmd[[nmap <leader>ga <Plug>(EasyAlign)]]
-vim.cmd[[xmap <leader>ga <Plug>(EasyAlign)]]
+map("n", "<A-h>", "<CMD>lua require('Navigator').left()<CR>")
+map("n", "<A-j>", "<CMD>lua require('Navigator').down()<CR>")
+map("n", "<A-k>", "<CMD>lua require('Navigator').up()<CR>")
+map("n", "<A-l>", "<CMD>lua require('Navigator').right()<CR>")
+
+

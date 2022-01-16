@@ -65,7 +65,7 @@ local load_core = function()
   end
 
   if pack.ensure_plugins() == "installed" then
-    -- require("core.options")
+    require("core.options")
     require("keymap")
     require("core.event")
     pack.load_compile()

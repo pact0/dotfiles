@@ -5,7 +5,8 @@ tools["numToStr/Navigator.nvim"] = {
     config = function() require('Navigator').setup() end
 }
 
-tools["zeertzjq/which-key.nvim"] = {branch = "patch-1"}
+-- tools["zeertzjq/which-key.nvim"] = {branch = "patch-1"}
+tools["folke/which-key.nvim"] = {}
 
 tools["kristijanhusak/vim-dadbod-ui"] = {
     cmd = {
@@ -108,6 +109,12 @@ tools["voldikss/vim-floaterm"] = {
     setup = conf.floaterm,
     opt = true
 }
+
+tools["akinsho/toggleterm.nvim"] = {
+    opt = true,
+    cmd = {"ToggleTerm"},
+    confit = conf.toggleterm
+}
 --
 tools["nanotee/zoxide.vim"] = {cmd = {"Z", "Lz", "Zi"}, config = function() end}
 
@@ -153,12 +160,12 @@ tools["ray-x/viewdoc.nvim"] = {
 --     config = conf.vgit
 -- }
 
--- tools["tpope/vim-fugitive"] = {
---     cmd = {
---         "Gvsplit", "Git", "Gedit", "Gstatus", "Gdiffsplit", "Gvdiffsplit", "G"
---     },
---     opt = true
--- }
+tools["tpope/vim-fugitive"] = {
+    cmd = {
+        "Gvsplit", "Git", "Gedit", "Gstatus", "Gdiffsplit", "Gvdiffsplit", "G"
+    },
+    opt = true
+}
 
 tools["rmagatti/auto-session"] = {config = conf.session}
 
@@ -167,6 +174,8 @@ tools['kevinhwang91/nvim-bqf'] = {
     event = {"CmdlineEnter", "QuickfixCmdPre"},
     config = conf.bqf
 }
+
+-- tools["romainl/vim-qf"] = {}
 
 tools["rcarriga/vim-ultest"] = {
     requires = {"vim-test/vim-test", setup = conf.vim_test, opt = true},
@@ -196,5 +205,62 @@ tools["tpope/vim-repeat"] = {}
 
 tools["rhysd/git-messenger.vim"] = {opt = true, cmd = {"GitMessenger"}}
 
--- lua require'telescope'.extensions.project.project{ display_type = 'full' }
+tools["monaqa/dial.nvim"] = {
+    opt = true,
+    cmd = {
+        "<Plug>>(dial-increment-additional)",
+        "<Plug>>(dial-decrement-additional)"
+    },
+    keys = {"<C-a>", "<C-x>"},
+    config = function()
+        local dial = require("dial")
+        dial.config.searchlist.normal = {
+            "number#decimal", "number#hex", "number#binary", "date#[%Y/%m/%d]",
+            "markup#markdown#header", 'date#[%Y-%m-%d]', 'date#[%H:%M:%S]',
+            'date#[%H:%M]'
+        }
+        -- toggle ture/false
+        dial.augends["custom#boolean"] =
+            dial.common.enum_cyclic {
+                name = "boolean",
+                strlist = {"true", "false"}
+            }
+
+        table.insert(dial.config.searchlist.normal, "custom#boolean")
+    vim.cmd[[nmap <C-a> <Plug>(dial-increment)]]
+    vim.cmd[[nmap <C-x> <Plug>(dial-decrement)]]
+    vim.cmd[[vmap <C-a> <Plug>(dial-increment)]]
+    vim.cmd[[vmap <C-x> <Plug>(dial-decrement)]]
+    vim.cmd[[vmap g<C-a> <Plug>(dial-increment-additional)]]
+    vim.cmd[[vmap g<C-x> <Plug>(dial-decrement-additional)]]
+    end
+}
+
+tools["lambdalisue/suda.vim"] = {
+    opt = true,
+    config = function() vim.g.suda_smart_edit = 1 end
+}
+
+tools["tpope/vim-dispatch"] = {}
+
+tools["folke/todo-comments.nvim"] = {
+  requires = {"nvim-lua/plenary.nvim"},
+  config = function()
+    require("todo-comments").setup {
+  keywords = {
+    FIX = {
+      icon = " ", -- icon used for the sign, and in search results
+      color = "error", -- can be a hex color, or a named color (see below)
+      alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+      -- signs = false, -- configure signs for some keywords individually
+    },
+    TODO = { icon = " ", color = "info" },
+    HACK = { icon = " ", color = "warning" },
+    WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+    PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+    NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+  },
+    }
+  end
+}
 return tools

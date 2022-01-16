@@ -32,6 +32,8 @@
       - taskwarrior
       - exa
       - fd-find
+      - sqlite3
+      - libsqlite3-dev
   tags:
     - install
     - terminal

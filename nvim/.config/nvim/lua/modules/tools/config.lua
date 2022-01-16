@@ -363,6 +363,10 @@ function config.floaterm()
     --  rg -l 'old-word' * | xargs -i@ sed -i 's/old-word/new-word/g' @
 end
 
+function config.toggleterm()
+
+end
+
 function config.spelunker()
     -- vim.cmd("command! Spell call spelunker#check()")
     vim.g.enable_spelunker_vim_on_readonly = 0

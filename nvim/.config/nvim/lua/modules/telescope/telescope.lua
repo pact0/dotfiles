@@ -7,7 +7,6 @@ end
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 local conf = require("telescope.config").values
-local trouble = require("trouble.providers.telescope")
 
 local layout = require("telescope.pickers.layout_strategies")
 local resolve = require("telescope.config.resolve")
@@ -19,6 +18,7 @@ local finders = require("telescope.finders")
 local builtin = require("telescope.builtin")
 local state = require("telescope.state")
 local action_set = require("telescope.actions.set")
+
 
 M = {}
 
@@ -213,7 +213,7 @@ function M.load_dotfiles()
     local themes = require("telescope.themes")
 
     local results = {}
-    local dotfiles = require("core.global").home .. "/dotfiles"
+    local dotfiles = require("core.global").home .. "/.dotfiles"
     for file in io.popen('find "' .. dotfiles .. '" -type f'):lines() do
       if not file:find("fonts") then
         table.insert(results, file)
@@ -306,7 +306,7 @@ end
 
 M.setup = function()
   telescope.setup({
-    defaults = {
+   defaults = {
       shorten_path = true,
       prompt_prefix = ">",
       layout_strategy = "flex",
@@ -374,10 +374,10 @@ M.setup = function()
             action_set.shift_selection(prompt_bufnr, -math.floor(height / 2))
           end,
           ["<C-q>"] = custom_actions.smart_send_to_qflist,
-           ["<c-t>"] = trouble.open_with_trouble,
+           -- ["<c-t>"] = require("trouble.providers.telescope").open_with_trouble,
         },
         i = {
-           ["<c-t>"] = trouble.open_with_trouble ,
+           -- ["<c-t>"] = require("trouble.providers.telescope").open_with_trouble ,
           ["<S-Down>"] = actions.cycle_history_next,
           ["<S-Up>"] = actions.cycle_history_prev,
           -- ['<Down>'] = actions.move_selection_next,
@@ -403,9 +403,10 @@ M.setup = function()
   })
 
   -- telescope.load_extension("dotfiles")
+  -- telescope.load_extension("gosource")
   -- telescope.load_extension("notify")
-require("telescope").load_extension "file_browser"
-  loader("telescope-fzy-native.nvim telescope-fzf-native.nvim telescope-live-grep-raw.nvim")
+
+  loader("telescope-fzy-native.nvim telescope-fzf-native.nvim telescope-live-grep-raw.nvim telescope-file-browser.nvim")
   loader("sqlite.lua")
   loader("telescope-frecency.nvim project.nvim telescope-zoxide nvim-neoclip.lua")
 
@@ -418,13 +419,23 @@ require("telescope").load_extension "file_browser"
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         -- the default case_mode is "smart_case"
       },
+      file_browser = {
+        theme = "ivy",
+        mappings = {
+          ["i"] = {
+            -- your custom insert mode mappings
+          },
+          ["n"] = {
+            -- your custom normal mode mappings
+          },
+        },
+      },
+      fzy_native = { override_generic_sorter = false, override_file_sorter = true },
     },
   })
 
-  -- telescope.load_extension("fzf")
-  telescope.setup({
-    extensions = { fzy_native = { override_generic_sorter = false, override_file_sorter = true } },
-  })
+  telescope.load_extension("fzf")
+  telescope.load_extension("file_browser")
   telescope.load_extension("fzy_native")
 end
 
