@@ -47,7 +47,9 @@ map_normal_leader = {
         S = {
             "<cmd>lua require('session-lens').search_session({theme_conf = {border = true},previewer = false,prompt_title = 'SESSIONS'})<CR>)",
             "Browse sessions"
-        }
+        },
+        d = {"<cmd>Telescope file_browser<CR>", "Browse directoriec"},
+        h = {"<cmd>Telescope frecency<CR>", "Browse directoriec"},
     },
     h = {
         name = "Hunk git",
@@ -85,7 +87,7 @@ map_normal_leader = {
             l = {"<cmd>Telescope git_stash<CR>", "List stashes"},
             z = {"<cmd>:Git stash<CR>", "run git stash"}
         },
-        M = {"<cmd>GitMessenger", "GitMessenger"}
+        M = {"<cmd>GitMessenger<CR>", "GitMessenger"}
     },
     t = {
         name = "Tabs",
@@ -209,6 +211,7 @@ wk.register(close_brac, {prefix = "]"})
 
 -- map("n", leader .. "W", "<Plug>(wildfire-quick-select)<CR>")
 -- ohers
+map("i", "<C-r>", "<cmd>Telescope registers<CR>")
 map("n", "<A-h>", "<CMD>lua require('Navigator').left()<CR>")
 map("n", "<A-j>", "<CMD>lua require('Navigator').down()<CR>")
 map("n", "<A-k>", "<CMD>lua require('Navigator').up()<CR>")

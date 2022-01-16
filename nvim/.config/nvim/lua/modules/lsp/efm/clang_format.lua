@@ -2,9 +2,9 @@
 --
 -- return {formatCommand = command, formatStdin = true}
 
-local fs = require 'efm.efm_helper'
+local fs = require 'modules.lsp.efm.efm_helper'
 local formatter = 'clang-format'
-local command = string.format('%s ${INPUT}', fs.executable(formatter))
+local command = string.format('%s ${INPUT} echo"aaaa"', fs.executable(formatter))
 
 return {
   formatCommand = command,

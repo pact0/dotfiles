@@ -171,13 +171,16 @@ editor["chaoren/vim-wordmotion"] = {
     -- fn = {"<Plug>WordMotion_w", "<Plug>WordMotion_b"},
     -- keys = {'w','W'},
     config = function ()
-      vim.g.wordmotion_nomap = 1
+      vim.g.wordmotion_nomap = 0
       vim.cmd[[nmap w <Plug>WordMotion_w]]
       vim.cmd[[nmap b <Plug>WordMotion_b]]
-      vim.g.wordmotion_mappings['aw'] = ''
-      vim.g.wordmotion_mappings['iw'] = ''
-      vim.g.wordmotion_mappings['ge'] = ''
-    end
+vim.cmd[[let g:wordmotion_mappings = {
+\ 'ge' : 'g<M-e>',
+\ 'aw' : 'a<M-w>',
+\ 'iw' : 'i<M-w>',
+\ '<C-R><C-W>' : '<C-R><M-w>'
+\ }]]
+  end
 }
 
 editor["folke/zen-mode.nvim"] = {

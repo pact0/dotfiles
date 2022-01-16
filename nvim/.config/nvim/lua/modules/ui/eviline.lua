@@ -96,7 +96,7 @@ local current_treesitter_context = function(width)
   --   context = string.format("%.200s", context)
   -- end
 
-  return " " .. context
+  return " " .. context
 end
 
 local current_function = function(width)
@@ -121,7 +121,7 @@ local current_signature = function(width)
     return ""
   end
   local sig = require("lsp_signature").status_line(80)
-  return sig.label .. "🐼" .. sig.hint
+  return sig.label .. " " .. sig.hint
 end
 
 local should_show = function()

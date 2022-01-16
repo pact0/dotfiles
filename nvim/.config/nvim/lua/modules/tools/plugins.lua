@@ -56,7 +56,7 @@ tools['ThePrimeagen/harpoon'] = {
 --   end
 -- }
 
-tools["wellle/targets.vim"] = {}
+-- tools["wellle/targets.vim"] = {}
 
 tools["TimUntersberger/neogit"] = {cmd = {"Neogit"}, config = conf.neogit}
 

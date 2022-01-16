@@ -1,4 +1,4 @@
-local fs = require 'efm.efm_helper'
+local fs = require 'modules.lsp.efm.efm_helper'
 
 local formatter = 'phpcbf'
 -- local command = string.format('%s -',

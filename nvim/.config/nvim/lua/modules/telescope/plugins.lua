@@ -37,7 +37,7 @@ telescope["jvgrootveld/telescope-zoxide"] = {
 
 telescope["AckslD/nvim-neoclip.lua"] = {
   opt = true,
-  keys = { "<M>", "<Leader>" },
+  keys = { "<M>" },
   after = { "telescope.nvim" },
   requires = { "tami5/sqlite.lua", module = "sqlite" },
   config = function()
@@ -47,7 +47,7 @@ telescope["AckslD/nvim-neoclip.lua"] = {
 }
 
 telescope["nvim-telescope/telescope-frecency.nvim"] = {
-  keys = { "<M>", "<Leader>" },
+  keys = { "<M>" },
   after = { "telescope.nvim" },
   requires = { "tami5/sqlite.lua", module = "sqlite", opt = true },
   opt = true,

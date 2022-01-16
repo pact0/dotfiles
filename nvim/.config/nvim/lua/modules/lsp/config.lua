@@ -87,11 +87,14 @@ return {
         end
 
         -- Formatting via efm
-        local prettier = require "efm/prettier"
-        local eslint = require "efm/eslint"
-        local luafmt = require "efm/luafmt"
-        local clang_format = require 'efm/clang_format'
-        local phpcbf = require 'efm/php_cs_fixer'
+        local prettier ={
+formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ${--config-precedence:configPrecedence} ${--tab-width:tabWidth} ${--single-quote:singleQuote} ${--trailing-comma:trailingComma}]],
+    formatStdin = true,
+}
+    local eslint = require "modules.lsp.efm.eslint"
+        local luafmt = require "modules.lsp.efm.luafmt"
+        local clang_format = require 'modules.lsp.efm.clang_format'
+        local phpcbf = require 'modules.lsp.efm.php_cs_fixer'
 
         local lsp_installer = require "nvim-lsp-installer"
 
@@ -118,14 +121,7 @@ return {
                 },
                 max_height = 4
             })
-            -- require("aerial").on_attach(client, bufnr)
-            -- if client.resolved_capabilities.document_formatting then
-            --     vim.api.nvim_command [[augroup Format]]
-            --     vim.api.nvim_command [[autocmd! * <buffer>]]
-            --     vim.api
-            --         .nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync({},1500)]]
-            --     vim.api.nvim_command [[augroup END]]
-            -- end
+
             if client.resolved_capabilities.hover then
                 utils.map("n", "<CR>", "<cmd>lua vim.lsp.buf.hover()<CR>",
                           {buffer = true})
@@ -210,7 +206,7 @@ return {
             .resolveSupport = {
             properties = {"documentation", "detail", "additionalTextEdits"}
         }
-        clangd_capabilities.offsetEncoding = {"utf-16"}
+        -- clangd_capabilities.offsetEncoding = {"utf-16"}
 
         lsp_installer.on_server_ready(function(server)
             local default_opts = {
