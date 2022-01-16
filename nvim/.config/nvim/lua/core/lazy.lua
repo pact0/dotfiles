@@ -77,10 +77,6 @@ function Lazyload()
     local plugins = "plenary.nvim" -- nvim-lspconfig navigator.lua   guihua.lua navigator.lua  -- gitsigns.nvim
     loader("plenary.nvim")
 
-    -- if vim.bo.filetype == "lua" then
-    --   loader("lua-dev.nvim")
-    -- end
-
     vim.g.vimsyn_embed = "lPr"
 
     local gitrepo = vim.fn.isdirectory(".git/index")
@@ -90,7 +86,6 @@ function Lazyload()
     --
     print(load_lsp)
     if load_lsp then
-        -- loader("aerial.nvim")
         loader("nvim-lspconfig") -- null-ls.nvim
         loader("lsp_signature.nvim")
         loader("lspkind-nvim")
@@ -101,6 +96,7 @@ function Lazyload()
 
     require("vscripts.cursorhold")
     require("vscripts.tools")
+
     if load_ts_plugins then
         -- print('load ts plugins')
         loader("nvim-treesitter")
@@ -173,9 +169,9 @@ vim.defer_fn(function()
     loader("telescope.nvim telescope-zoxide project.nvim nvim-neoclip.lua")
     -- loader("neogen")
     loader("harpoon")
-    loader("tabby.nvim")
     loader("nvim-transparent")
     vim.cmd [[TransparentEnable]]
+    loader("tabby.nvim")
     -- loader("windline.nvim")
     -- require("modules.ui.eviline")
     -- require("wlfloatline").setup()

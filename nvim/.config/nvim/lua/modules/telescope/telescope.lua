@@ -404,7 +404,7 @@ M.setup = function()
 
   -- telescope.load_extension("dotfiles")
   -- telescope.load_extension("notify")
-
+require("telescope").load_extension "file_browser"
   loader("telescope-fzy-native.nvim telescope-fzf-native.nvim telescope-live-grep-raw.nvim")
   loader("sqlite.lua")
   loader("telescope-frecency.nvim project.nvim telescope-zoxide nvim-neoclip.lua")

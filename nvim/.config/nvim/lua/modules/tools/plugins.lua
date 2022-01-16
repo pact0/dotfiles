@@ -5,7 +5,6 @@ tools["numToStr/Navigator.nvim"] = {
     config = function() require('Navigator').setup() end
 }
 
-
 tools["zeertzjq/which-key.nvim"] = {branch = "patch-1"}
 
 tools["kristijanhusak/vim-dadbod-ui"] = {
@@ -179,6 +178,23 @@ tools["rcarriga/vim-ultest"] = {
     config = function() vim.cmd [[UpdateRemotePlugins]] end,
     opt = true
 }
+
+tools["sQVe/sort.nvim"] = {
+    opt = true,
+    cmd = {"Sort"},
+    config = function()
+        require("sort").setup({
+            delimiters = {
+                ',', '|', ';', ':', 's', -- Space
+                't' -- Tab
+            }
+        })
+    end
+}
+
+tools["tpope/vim-repeat"] = {}
+
+tools["rhysd/git-messenger.vim"] = {opt = true, cmd = {"GitMessenger"}}
 
 -- lua require'telescope'.extensions.project.project{ display_type = 'full' }
 return tools

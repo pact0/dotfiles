@@ -9,17 +9,17 @@ local conf = require("modules.editor.config")
 -- I like this plugin, but 1) offscreen context is slow
 -- 2) it not friendly to lazyload and treesitter startup
 editor["andymass/vim-matchup"] = {
-  opt = true,
-  event = {"CursorMoved", "CursorMovedI"},
-  cmd = {'MatchupWhereAmI?'},
-  config = function()
-    vim.g.matchup_enabled = 1
-    vim.g.matchup_surround_enabled = 1
-    -- vim.g.matchup_transmute_enabled = 1
-    vim.g.matchup_matchparen_deferred = 1
-    vim.g.matchup_matchparen_offscreen = {method = 'popup'}
-    vim.cmd([[nnoremap <c-s-k> :<c-u>MatchupWhereAmI?<cr>]])
-  end
+    opt = true,
+    event = {"CursorMoved", "CursorMovedI"},
+    cmd = {'MatchupWhereAmI?'},
+    config = function()
+        vim.g.matchup_enabled = 1
+        vim.g.matchup_surround_enabled = 1
+        -- vim.g.matchup_transmute_enabled = 1
+        vim.g.matchup_matchparen_deferred = 1
+        vim.g.matchup_matchparen_offscreen = {method = 'popup'}
+        vim.cmd([[nnoremap <c-s-k> :<c-u>MatchupWhereAmI?<cr>]])
+    end
 }
 
 -- editor["ggandor/lightspeed.nvim"] = {
@@ -30,18 +30,18 @@ editor["andymass/vim-matchup"] = {
 -- }
 
 editor["tpope/vim-surround"] = {
-  opt = true,
-  event = "InsertEnter",
-  -- keys={'c', 'd'}
+    opt = true,
+    event = "InsertEnter"
+    -- keys={'c', 'd'}
 }
 
 -- nvim-colorizer replacement
 editor["rrethy/vim-hexokinase"] = {
-  -- ft = { 'html','css','sass','vim','typescript','typescriptreact'},
-  config = conf.hexokinase,
-  run = "make hexokinase",
-  opt = true,
-  cmd = { "HexokinaseTurnOn", "HexokinaseToggle" },
+    -- ft = { 'html','css','sass','vim','typescript','typescriptreact'},
+    config = conf.hexokinase,
+    run = "make hexokinase",
+    opt = true,
+    cmd = {"HexokinaseTurnOn", "HexokinaseToggle"}
 }
 
 -- booperlv/nvim-gomove
@@ -61,31 +61,36 @@ editor["rrethy/vim-hexokinase"] = {
 --   -- config = conf.hlslens
 -- }
 
--- editor["mg979/vim-visual-multi"] = {
---   keys = {
---     "<Ctrl>",
---     "<M>",
---     "<C-n>",
---     "<C-n>",
---     "<M-n>",
---     "<S-Down>",
---     "<S-Up>",
---     "<M-Left>",
---     "<M-i>",
---     "<M-Right>",
---     "<M-D>",
---     "<M-Down>",
---     "<C-d>",
---     "<C-Down>",
---     "<S-Right>",
---     "<C-LeftMouse>",
---     "<M-LeftMouse>",
---     "<M-C-RightMouse>",
---     "<Leader>",
---   },
---   opt = true,
---   setup = conf.vmulti,
--- }
+editor["mg979/vim-visual-multi"] = {
+    keys = {
+        "<Ctrl>", "<M>", "<C-n>", "<C-n>", "<M-n>", "<S-Down>", "<S-Up>",
+        "<M-Left>", "<M-i>", "<M-Right>", "<M-D>", "<M-Down>", "<C-d>",
+        "<C-Down>", "<S-Right>", "<C-LeftMouse>", "<M-LeftMouse>",
+        "<M-C-RightMouse>"
+    },
+    opt = true,
+    -- setup = conf.vmulti
+    config = function()
+        vim.g.VM_default_mappings = 0
+        vim.g.VM_mouse_mappings = 1
+        vim.cmd([[
+        let g:VM_maps = {}
+        let g:VM_maps['Find Under'] = '<C-n>'
+        let g:VM_maps['Find Subword Under'] = '<C-n>'
+        let g:VM_maps['Select All'] = '<C-M-n>'
+        let g:VM_maps['Seek Next'] = 'n'
+        let g:VM_maps['Seek Prev'] = 'N'
+        let g:VM_maps["Undo"] = 'u'
+        let g:VM_maps["Redo"] = '<C-r>'
+        let g:VM_maps["Remove Region"] = '<cr>'
+        let g:VM_maps["Add Cursor Down"] = '<M-Down>'
+        let g:VM_maps["Add Cursor Up"] = "<M-Up>"
+        let g:VM_maps["Mouse Cursor"] = "<M-LeftMouse>"
+        let g:VM_maps["Mouse Word"] = "<M-RightMouse>"
+        let g:VM_maps["Add Cursor At Pos"] = '<M-i>'
+    ]])
+    end
+}
 
 -- editor["indianboy42/hop-extensions"] = { after = "hop", opt = true }
 --
@@ -118,9 +123,9 @@ editor["rrethy/vim-hexokinase"] = {
 -- }
 
 editor["numToStr/Comment.nvim"] = {
-  keys = { "g", "<ESC>" },
-  event = { "CursorMoved" },
-  config = conf.comment,
+    keys = {"g", "<ESC>"},
+    event = {"CursorMoved"},
+    config = conf.comment
 }
 
 -- editor["preservim/nerdcommenter"] = {
@@ -134,69 +139,68 @@ editor["numToStr/Comment.nvim"] = {
 
 -- copy paste failed in block mode when clipboard = unnameplus"
 editor["bfredl/nvim-miniyank"] = {
-  keys = { "p", "y", "<C-v>" },
-  opt = true,
-  setup = function()
-    vim.api.nvim_command("map p <Plug>(miniyank-autoput)")
-    vim.api.nvim_command("map P <Plug>(miniyank-autoPut)")
-  end,
+    keys = {"p", "y", "<C-v>"},
+    opt = true,
+    setup = function()
+        vim.api.nvim_command("map p <Plug>(miniyank-autoput)")
+        vim.api.nvim_command("map P <Plug>(miniyank-autoPut)")
+    end
 }
-editor["dhruvasagar/vim-table-mode"] = { cmd = { "TableModeToggle" } }
+editor["dhruvasagar/vim-table-mode"] = {cmd = {"TableModeToggle"}}
 
 -- fix terminal color
 editor["norcalli/nvim-terminal.lua"] = {
-  opt = true,
-  ft = { "log", "terminal" },
-  config = function()
-    require("terminal").setup()
-  end,
+    opt = true,
+    ft = {"log", "terminal"},
+    config = function() require("terminal").setup() end
 }
 
 editor["simnalamburt/vim-mundo"] = {
-  opt = true,
-  cmd = { "MundoToggle", "MundoShow", "MundoHide" },
-  run = function()
-    vim.cmd([[packadd vim-mundo]])
-    vim.cmd([[UpdateRemotePlugins]])
-  end,
-  setup = function()
-    -- body
-    vim.g.mundo_prefer_python3 = 1
-  end,
+    opt = true,
+    cmd = {"MundoToggle", "MundoShow", "MundoHide"},
+    run = function()
+        vim.cmd([[packadd vim-mundo]])
+        vim.cmd([[UpdateRemotePlugins]])
+    end,
+    setup = function()
+        -- body
+        vim.g.mundo_prefer_python3 = 1
+    end
 }
-editor["mbbill/undotree"] = { opt = true, cmd = { "UndotreeToggle" } }
+editor["mbbill/undotree"] = {opt = true, cmd = {"UndotreeToggle"}}
 
 editor["AndrewRadev/splitjoin.vim"] = {
-  opt = true,
-  cmd = { "SplitjoinJoin", "SplitjoinSplit" },
-  setup = function()
-    vim.g.splitjoin_split_mapping = ""
-    vim.g.splitjoin_join_mapping = ""
-  end,
-  -- keys = {'<space>S', '<space>J'}
+    opt = true,
+    cmd = {"SplitjoinJoin", "SplitjoinSplit"}
 }
 
 editor["chaoren/vim-wordmotion"] = {
-  opt = true,
-  fn = { "<Plug>WordMotion_w" },
-  -- keys = {'w','W', 'gE', 'aW'}
+    opt = true,
+    fn = {"<Plug>WordMotion_w"}
+    -- keys = {'w','W', 'gE', 'aW'}
 }
 
 editor["folke/zen-mode.nvim"] = {
-  opt = true,
-  cmd = { "ZenMode" },
-  config = function()
-    require("zen-mode").setup({})
-  end,
+    opt = true,
+    cmd = {"ZenMode"},
+    config = function() require("zen-mode").setup({}) end
 }
 
 -- editor["nvim-neorg/neorg-telescope"] = {opt = true}
 editor["nvim-neorg/neorg"] = {
-  opt = true,
-  config = conf.neorg,
-  ft = "norg",
-  after = { "nvim-treesitter" },
-  setup = vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg"),
-  requires = { "nvim-neorg/neorg-telescope", ft = { "norg" } },
+    opt = true,
+    config = conf.neorg,
+    ft = "norg",
+    after = {"nvim-treesitter"},
+    setup = vim.cmd("autocmd BufRead,BufNewFile *.norg setlocal filetype=norg"),
+    requires = {"nvim-neorg/neorg-telescope", ft = {"norg"}}
 }
+
+editor["machakann/vim-sandwich"] = {opt = true, event = {"CursorMoved"}}
+
+editor["tpope/vim-abolish"] = {opt = true, cmd = {"Subvert", "Abolish"}}
+
+editor["junegunn/vim-easy-align"] = {opt = true, cmd = {"EasyAlign"}}
+
+editor["szw/vim-maximizer"] = {opt = true, cmd={"MaximizerToggle"}}
 return editor

@@ -1,4 +1,5 @@
 local map = require("keymap.bind").map
+local leader = " "
 
 -- avoid clashing with leader as space
 map("n", "<Space>", "<NOP>", {noremap = true, silent = true})
@@ -86,12 +87,12 @@ map_normal_leader = {
         }
     },
     t = {
-      name = "Tabs",
-      a = {"<cmd>$tabnew<CR>", "Tab add"},
-      c = {"<cmd>tabclose<CR>", "Tab close"},
-      o = {"<cmd>tabonly<CR>", "Tab only"},
-      n = {"<cmd>tabn<CR>", "Tab next"},
-      p = {"<cmd>tabp<CR>", "Tab prev"},
+        name = "Tabs",
+        a = {"<cmd>$tabnew<CR>", "Tab add"},
+        c = {"<cmd>tabclose<CR>", "Tab close"},
+        o = {"<cmd>tabonly<CR>", "Tab only"},
+        n = {"<cmd>tabn<CR>", "Tab next"},
+        p = {"<cmd>tabp<CR>", "Tab prev"}
 
     },
     Z = {M = {"<cmd>ZenMode<CR>", "Toggle ZenMode"}},
@@ -110,7 +111,8 @@ map_normal_leader = {
         r = {"<cmd>Trouble lsp_references<CR>", "Trouble lsp reference"}
     },
     A = {"<cmd>AerialToggle<CR>", "Aerial toggle"},
-    S = {"<cmd>SymbolsOutline<CR>", "Symbols outline"}
+    S = {"<cmd>SymbolsOutline<CR>", "Symbols outline"},
+    M = {"<cmd>MaximizerToggle<CR>", "MaximizerToggle"}
 }
 wk.register(map_normal_leader, {prefix = "<leader>"})
 
@@ -138,8 +140,10 @@ map_normal_g = {
         "<cmd>lua require('navigator.definition').definition_preview()<CR>",
         "Definition prev"
     },
-    T = {"<cmd>lua require('navigator.treesitter').buf_ts()<CR>", "Treesitter "}
+    T = {"<cmd>lua require('navigator.treesitter').buf_ts()<CR>", "Treesitter "},
     -- r = {"<cmd>Telescope lsp_references<CR>", "References"}
+    S = {"<cmd>SplitjoinSplit<CR>", "SplitjoinSplit"},
+    J = {"<cmd>SplitjoinJoin<CR>", "SplitjoinJoin"}
 }
 
 wk.register(map_normal_g, {prefix = "g"})
@@ -198,3 +202,8 @@ local close_brac = {
     a = {"<cmd>AerialPrevUp<CR>", "Aerial prev"}
 }
 wk.register(close_brac, {prefix = "]"})
+
+-- map("n", leader .. "W", "<Plug>(wildfire-quick-select)<CR>")
+-- ohers
+vim.cmd[[nmap <leader>ga <Plug>(EasyAlign)]]
+vim.cmd[[xmap <leader>ga <Plug>(EasyAlign)]]

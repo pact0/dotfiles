@@ -14,7 +14,7 @@ lang["nvim-treesitter/nvim-treesitter"] = {
         'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-neorg/tree-sitter-norg', 'David-Kunz/treesitter-unit',
         'windwp/nvim-ts-autotag', 'p00f/nvim-ts-rainbow',
-        'MDeiml/tree-sitter-markdown',
+        'MDeiml/tree-sitter-markdown'
 
         -- 'nvim-treesitter/nvim-treesitter-refactor',
         -- 'JoosepAlviste/nvim-ts-context-commentstring', 'windwp/nvim-ts-autotag',
@@ -78,15 +78,15 @@ lang["ray-x/web-tools.nvim"] = {
     config = function() require('web-tools').setup() end
 }
 
-lang["gcmt/wildfire.vim"] = {
-    setup = function()
-        -- vim.cmd([[nmap <leader>S <Plug>(wildfire-quick-select)]])
-    end,
-    fn = {
-        '<Plug>(wildfire-fuel)', '<Plug>(wildfire-water)',
-        '<Plug>(wildfire-quick-select)'
-    }
-}
+-- lang["gcmt/wildfire.vim"] = {
+--     setup = function()
+--         -- vim.cmd([[nmap <leader>S <Plug>(wildfire-quick-select)]])
+--     end,
+--     fn = {
+--         '<Plug>(wildfire-fuel)', '<Plug>(wildfire-water)',
+--         '<Plug>(wildfire-quick-select)'
+--     }
+-- }
 
 -- great plugin but not been maintained
 -- lang["ElPiloto/sidekick.nvim"] = {opt = true, fn = {'SideKickNoReload'}, setup = conf.sidekick}
@@ -190,8 +190,7 @@ lang["stevearc/aerial.nvim"] = {
             }
         })
     end
-  }
-
+}
 
 lang["simrat39/symbols-outline.nvim"] = {
     opt = true,

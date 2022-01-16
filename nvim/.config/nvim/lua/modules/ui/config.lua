@@ -28,7 +28,7 @@ function config.blankline()
         show_first_indent_level = false,
         buftype_exclude = {"terminal", "dashboard"},
         space_char_blankline = " ",
-        use_treesitter = false,
+        use_treesitter = true,
         show_current_context = true,
         show_current_context_start = true,
         context_patterns = {
@@ -38,8 +38,7 @@ function config.blankline()
             "jsx_self_closing_element", "try_statement", "catch_clause",
             "import_statement", "operation_type"
         },
-        bufname_exclude = {"README.md"},
- show_end_of_line = true,
+        bufname_exclude = {"README.md"}
     })
     -- useing treesitter instead of char highlight
     -- vim.g.indent_blankline_char_highlight_list =
