@@ -30,7 +30,7 @@ vim.lsp.handlers['workspace/symbol'] =
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                 {underline = true, update_in_insert = false})(...)
+                 {underline = true, update_in_insert = true})(...)
     pcall(vim.diagnostic.setloclist, {open = false})
 end
 

@@ -1,4 +1,5 @@
 local map = require("keymap.bind").map
+require("keymap.global")
 local leader = " "
 
 -- avoid clashing with leader as space
@@ -41,7 +42,7 @@ map_normal_leader = {
     f = {
         name = "Telescope",
         f = {"<cmd>Telescope git_files<CR>", "Search project files"},
-        w = {"<cmd>Telescope theme=get_dropdown<CR>", "Search word"},
+        w = {"<cmd>Telescope live_grep theme=get_dropdown<CR>", "Search word"},
         c = {"<cmd>Telescope git_bcommits<CR>", "Browse blame commits"},
         r = {"<cmd>Telescope  lsp_references<CR>", "Browse LSP references"},
         S = {
@@ -49,7 +50,7 @@ map_normal_leader = {
             "Browse sessions"
         },
         d = {"<cmd>Telescope file_browser<CR>", "Browse directoriec"},
-        h = {"<cmd>Telescope frecency<CR>", "Browse directoriec"},
+        h = {"<cmd>Telescope frecency<CR>", "Browse directoriec"}
     },
     h = {
         name = "Hunk git",
@@ -116,11 +117,10 @@ map_normal_leader = {
     S = {"<cmd>SymbolsOutline<CR>", "Symbols outline"},
     M = {"<cmd>MaximizerToggle<CR>", "MaximizerToggle"},
     T = {
-      name = "TODO",
-      T = {"<cmd>TodoTrouble<CR>", "TODO trouble"},
-      F = {"<cmd>TodoTelescope<CR>", "TODO telescope"},
-  }
-
+        name = "TODO",
+        T = {"<cmd>TodoTrouble<CR>", "TODO trouble"},
+        F = {"<cmd>TodoTelescope<CR>", "TODO telescope"}
+    }
 }
 wk.register(map_normal_leader, {prefix = "<leader>"})
 
@@ -196,7 +196,7 @@ local open_brac = {
         "<cmd>lua require('trouble').previous({skip_groups = true, jump = true})<CR>",
         "Prev trouble"
     },
-    b = {"<Cmd>bprev<CR>", "Prev buffer"},
+    b = {"<Cmd>bprev<CR>", "Prev buffer"}
 }
 wk.register(open_brac, {prefix = "["})
 
@@ -205,16 +205,54 @@ local close_brac = {
         "<cmd>lua require('trouble').next({skip_groups = true, jump = true})<CR>",
         "Next trouble"
     },
-    b = {"<Cmd>bnext<CR>", "Next buffer"},
+    b = {"<Cmd>bnext<CR>", "Next buffer"}
 }
 wk.register(close_brac, {prefix = "]"})
 
--- map("n", leader .. "W", "<Plug>(wildfire-quick-select)<CR>")
 -- ohers
 map("i", "<C-r>", "<cmd>Telescope registers<CR>")
 map("n", "<A-h>", "<CMD>lua require('Navigator').left()<CR>")
 map("n", "<A-j>", "<CMD>lua require('Navigator').down()<CR>")
 map("n", "<A-k>", "<CMD>lua require('Navigator').up()<CR>")
 map("n", "<A-l>", "<CMD>lua require('Navigator').right()<CR>")
+
+-- hop
+map("n", "hw", "<cmd> HopWordAC<CR>")
+map("n", "hW", "<cmd> HopWordBC<CR>")
+map("n", "hl", "<cmd> HopLineStartAC<CR>")
+map("n", "hL", "<cmd> HopLineStartBC<CR>")
+
+map("n", "f", "<cmd> lua Line_ft('f')<CR>")
+map("n", "F", "<cmd> lua Line_ft('F')<CR>")
+map("n", "t", "<cmd> lua Line_ft('t')<CR>")
+map("n", "T", "<cmd> lua Line_ft('T')<CR>")
+
+map("n", "s", "<cmd> lua hop1(1)<CR>")
+map("n", "S", "<cmd> lua hop1()<CR>")
+map("x", "s", "<cmd> lua hop1(1)<CR>")
+map("x", "S", "<cmd> lua hop1()<CR>")
+
+map("n", "<A-s>", "<cmd> HopChar2AC<CR>")
+map("n", "<A-S>", "<cmd> HopChar2BC<CR>")
+
+map("v", "<A-s>", "<cmd> HopChar2AC<CR>")
+map("v", "<A-S>", "<cmd> HopChar2BC<CR>")
+
+map("n", "<leader>H", "<cmd> HopPattern<CR>")
+map("n", "]p", "<cmd> HopPatternAC<CR>")
+map("n", "[p", "<cmd> HopPatternBC<CR>")
+
+vim.api.nvim_set_keymap("v", "<Leader>re",
+                        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+                        {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<Leader>rf",
+                        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+                        {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<Leader>rv",
+                        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+                        {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<Leader>ri",
+                        [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+                        {noremap = true, silent = true, expr = false})
 
 

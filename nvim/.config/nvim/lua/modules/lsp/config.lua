@@ -87,11 +87,8 @@ return {
         end
 
         -- Formatting via efm
-        local prettier ={
-formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier") --stdin-filepath ${INPUT} ${--config-precedence:configPrecedence} ${--tab-width:tabWidth} ${--single-quote:singleQuote} ${--trailing-comma:trailingComma}]],
-    formatStdin = true,
-}
-    local eslint = require "modules.lsp.efm.eslint"
+        local prettier = require "modules.lsp.efm.prettier"
+        local eslint = require "modules.lsp.efm.eslint"
         local luafmt = require "modules.lsp.efm.luafmt"
         local clang_format = require 'modules.lsp.efm.clang_format'
         local phpcbf = require 'modules.lsp.efm.php_cs_fixer'
@@ -100,7 +97,13 @@ formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "n
 
         -- Setup everything on lsp attach
         local on_attach = function(client, bufnr)
-            -- print("LSP started.");
+            if client.resolved_capabilities.document_formatting then
+                vim.api.nvim_command [[augroup Format]]
+                vim.api.nvim_command [[autocmd! * <buffer>]]
+                vim.api
+                    .nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync({},1500)]]
+                vim.api.nvim_command [[augroup END]]
+            end
             require"lsp_signature".on_attach({
                 bind = true,
                 -- doc_lines = 4,
@@ -232,7 +235,7 @@ formatCommand = [[$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "n
                             -- This makes sure tsserver is not used for formatting (I prefer prettier)
                             client.resolved_capabilities.document_formatting =
                                 false
-                            ts_utils_attach(client)
+                            -- ts_utils_attach(client)
                             on_attach(client, bufnr)
                         end,
                         settings = {documentFormatting = false},

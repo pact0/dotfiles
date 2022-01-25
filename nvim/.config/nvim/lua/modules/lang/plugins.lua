@@ -78,15 +78,15 @@ lang["ray-x/navigator.lua"] = {
 --     config = function() require('web-tools').setup() end
 -- }
 
-lang["gcmt/wildfire.vim"] = {
-    setup = function()
-    end,
-    keys = {"<CR>", "<BS>"},
-    fn = {
-        '<Plug>(wildfire-fuel)', '<Plug>(wildfire-water)',
-        '<Plug>(wildfire-quick-select)'
-    }
-}
+-- lang["gcmt/wildfire.vim"] = {
+--     setup = function()
+--     end,
+--     keys = {"<CR>", "<BS>"},
+--     fn = {
+--         '<Plug>(wildfire-fuel)', '<Plug>(wildfire-water)',
+--         '<Plug>(wildfire-quick-select)'
+--     }
+-- }
 
 -- great plugin but not been maintained
 -- lang["ElPiloto/sidekick.nvim"] = {opt = true, fn = {'SideKickNoReload'}, setup = conf.sidekick}

@@ -22,12 +22,12 @@ editor["andymass/vim-matchup"] = {
     end
 }
 
-editor["ggandor/lightspeed.nvim"] = {
-    as = "lightspeed",
-    opt = true,
-    keys = {'f', 'F', 't', 'T', 'S', 's'},
-    config = conf.lightspeed
-}
+-- editor["ggandor/lightspeed.nvim"] = {
+--     as = "lightspeed",
+--     opt = true,
+--     keys = {'f', 'F', 't', 'T', 'S', 's'},
+--     config = conf.lightspeed
+-- }
 
 editor["tpope/vim-surround"] = {
     opt = true,
@@ -54,11 +54,10 @@ editor["rrethy/vim-hexokinase"] = {
 --   event = { "CursorMoved", "CursorMovedI" },
 --   -- fn = {'<Plug>MoveBlockDown', '<Plug>MoveBlockUp', '<Plug>MoveLineDown', '<Plug>MoveLineUp'}
 -- }
-
 editor["kevinhwang91/nvim-hlslens"] = {
-  keys = {"/", "?", '*', '#'}, --'n', 'N', '*', '#', 'g'
-  opt = true,
-  config = conf.hlslens
+    keys = {"/", "?", '*', '#'}, -- 'n', 'N', '*', '#', 'g'
+    opt = true,
+    config = conf.hlslens
 }
 
 editor["mg979/vim-visual-multi"] = {
@@ -92,42 +91,32 @@ editor["mg979/vim-visual-multi"] = {
     end
 }
 
--- editor["indianboy42/hop-extensions"] = { after = "hop", opt = true }
---
--- -- EasyMotion in lua. -- maybe replace sneak
--- editor["phaazon/hop.nvim"] = {
---   as = "hop",
---   cmd = {
---     "HopWord",
---     "HopWordAC",
---     "HopWordBC",
---     "HopLine",
---     "HopChar1",
---     "HopChar1AC",
---     "HopChar1BC",
---     "HopChar2",
---     "HopChar2AC",
---     "HopChar2BC",
---     "HopPattern",
---     "HopPatternAC",
---     "HopPatternBC",
---     "HopChar1CurrentLineAC",
---     "HopChar1CurrentLineBC",
---     "HopChar1CurrentLine",
---   },
---   config = function()
---     -- you can configure Hop the way you like here; see :h hop-config
---     require("hop").setup({ keys = "adghklqwertyuiopzxcvbnmfjADHKLWERTYUIOPZXCVBNMFJ1234567890" })
---     -- vim.api.nvim_set_keymap('n', '$', "<cmd>lua require'hop'.hint_words()<cr>", {})
---   end,
--- }
+editor["indianboy42/hop-extensions"] = {after = "hop", opt = true}
+
+-- EasyMotion in lua. -- maybe replace sneak
+editor["phaazon/hop.nvim"] = {
+    as = "hop",
+    cmd = {
+        "HopWord", "HopWordAC", "HopWordBC", "HopLine", "HopChar1",
+        "HopChar1AC", "HopChar1BC", "HopChar2", "HopChar2AC", "HopChar2BC",
+        "HopPattern", "HopPatternAC", "HopPatternBC", "HopChar1CurrentLineAC",
+        "HopChar1CurrentLineBC", "HopChar1CurrentLine"
+    },
+    config = function()
+        -- you can configure Hop the way you like here; see :h hop-config
+        require("hop").setup({
+            keys = "adghklqwertyuiopzxcvbnmfjADHKLWERTYUIOPZXCVBNMFJ1234567890"
+        })
+        -- vim.api.nvim_set_keymap('n', '$', "<cmd>lua require'hop'.hint_words()<cr>", {})
+    end
+}
 
 editor["numToStr/Comment.nvim"] = {
     keys = {"g", "<ESC>"},
     event = {"CursorMoved"},
     config = conf.comment,
+    requires = {"JoosepAlviste/nvim-ts-context-commentstring"}
 }
-
 
 -- copy paste failed in block mode when clipboard = unnameplus"
 editor["bfredl/nvim-miniyank"] = {
@@ -170,17 +159,17 @@ editor["chaoren/vim-wordmotion"] = {
     -- opt = true,
     -- fn = {"<Plug>WordMotion_w", "<Plug>WordMotion_b"},
     -- keys = {'w','W'},
-    config = function ()
-      vim.g.wordmotion_nomap = 0
-      vim.cmd[[nmap w <Plug>WordMotion_w]]
-      vim.cmd[[nmap b <Plug>WordMotion_b]]
-vim.cmd[[let g:wordmotion_mappings = {
+    config = function()
+        vim.g.wordmotion_nomap = 0
+        vim.cmd [[nmap w <Plug>WordMotion_w]]
+        vim.cmd [[nmap b <Plug>WordMotion_b]]
+        vim.cmd [[let g:wordmotion_mappings = {
 \ 'ge' : 'g<M-e>',
 \ 'aw' : 'a<M-w>',
 \ 'iw' : 'i<M-w>',
 \ '<C-R><C-W>' : '<C-R><M-w>'
 \ }]]
-  end
+    end
 }
 
 editor["folke/zen-mode.nvim"] = {
@@ -209,6 +198,6 @@ editor["szw/vim-maximizer"] = {opt = true, cmd = {"MaximizerToggle"}}
 
 -- editor["haya14busa/incsearch.vim"] = {}
 
-editor["vim-scripts/UnconditionalPaste"] = {opt=true}
+editor["vim-scripts/UnconditionalPaste"] = {opt = true}
 
 return editor
