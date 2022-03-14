@@ -5,10 +5,10 @@
   "gfx_driver": "Intel (open-source)",
   "harddrives": ["/dev/nvme0n1"],
   "swap": true,
-  "hostname": "thinkpad-x1",
+  "hostname": "pacto",
   "kernels": ["linux", "linux-zen", "linux-lts"],
   "keyboard-language": "us",
-  "mirror-region": "Denmark",
+  "mirror-region": "Frankfurt",
   "nic": {
     "NetworkManager": true
   },
@@ -16,5 +16,5 @@
   "packages": ["git", "chezmoi"],
   "sys-encoding": "utf-8",
   "sys-language": "en_US",
-  "timezone": "Europe/Copenhagen"
+  "timezone": "Europe/Warsaw"
 }
