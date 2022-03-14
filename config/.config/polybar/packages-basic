@@ -1,7 +1,0 @@
-#!/usr/bin/bash
- 
-PACKAGE_COUNT=$(pacman -Qu | wc -l)
- 
-if [[ "${PACKAGE_COUNT}" -ge 0 ]]; then
-  echo " ${PACKAGE_COUNT}"
-fi

@@ -1,0 +1,28 @@
+private-bin bash,dbus-launch,dbus-send,env,firefox,sh,which
+include whitelist-runuser-common.inc
+
+# Uncomment or put in your firefox.local to enable native notifications.
+dbus-user.talk org.freedesktop.Notifications
+# Uncomment or put in your firefox.local to allow to inhibit screensavers
+dbus-user.talk org.freedesktop.ScreenSaver
+# Uncomment or put in your firefox.local for plasma browser integration
+dbus-user.own org.mpris.MediaPlayer2.plasma-browser-integration
+dbus-user.talk org.kde.JobViewServer
+dbus-user.talk org.kde.kuiserver
+# Uncomment or put in your firefox.local to allow screen sharing under wayland.
+ignore noroot
+whitelist ${RUNUSER}/pipewire-0
+whitelist /usr/share/pipewire/client.conf
+dbus-user.talk org.freedesktop.portal.*
+
+ignore private-tmp
+
+whitelist ${HOME}/pictures
+whitelist ${HOME}/go
+whitelist ${HOME}/git
+whitelist ${HOME}/documents
+whitelist ${HOME}/work
+whitelist ${HOME}/.config/tridactyl
+whitelist /usr/share/pipewire/
+
+include firefox-common-addons.profile

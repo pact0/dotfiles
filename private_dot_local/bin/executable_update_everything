@@ -1,0 +1,50 @@
+#!/bin/bash
+
+SOURCE_DIR=$(chezmoi source-path)
+
+. "$SOURCE_DIR/scripts/utils_install" &&
+	. "$SOURCE_DIR/scripts/utils"
+
+print_in_purple "Update yay packages\n"
+update
+
+print_in_purple "Update nnn plugins\n"
+install_nnn_plugins
+
+print_in_purple "Update fish\n"
+update_fish_plugins
+execute "fish -c 'fish_update_completions'" "Update fish completions"
+
+print_in_purple "Update neovim plugins\n"
+execute "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'" "Update neovim plugins"
+
+print_in_purple "Update GO packages\n"
+install_go_package "github.com/cosmos72/gomacro@latest" "gomacro"
+install_go_package "github.com/nametake/golangci-lint-langserver@latest" "golangci-lint-langserver"
+
+print_in_purple "Update pip packages\n"
+execute "pip list --user | cut -d'=' -f1 | xargs -n1 pip install -U" "Update pip packages"
+
+print_in_purple "Update npm packages\n"
+execute "npm update -g" "Update NPM packages"
+
+print_in_purple "Update tldr cache\n"
+execute "tldr -u" "Update tldr cache"
+
+print_in_purple "Update gh extensions\n"
+execute "gh extension upgrade --all" "Update gh extensions"
+
+print_in_purple "Update firmwares\n"
+ask_for_confirmation "Would you like to do it now? Can take a bit of time."
+if answer_is_yes; then
+	fwupdmgr update
+fi
+
+print_in_purple "Update hosts\n"
+ask_for_confirmation "Would you like to do it now? Latest hosts will be fetched from https://github.com/StevenBlack/hosts."
+if answer_is_yes; then
+	update_hosts
+fi
+
+clean_up_cache
+clean_up_unused_packages

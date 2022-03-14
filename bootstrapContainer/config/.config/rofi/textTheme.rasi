@@ -1,0 +1,61 @@
+configuration {
+    bw: 							0;
+    location: 						0;
+    padding: 						0;
+    font:                    "Iosevka Custom 13";
+    fixed-num-lines: 				true;
+    show-icons: 				true;
+    sidebar-mode: 					true;
+    separator-style: 				"beam";
+    hide-scrollbar: 				true;
+    scroll-method: 					0;
+    window-format: 					"[{w}] ··· {c} ···   {t}";
+    click-to-exit: 					true;
+    show-match: 					false;
+    combi-hide-mode-prefix: 		false;
+    display-window: 				"Window";
+    display-windowcd: 				"Windowcd";
+    display-run: 					"Commands";
+    display-ssh: 					"Ssh";
+    display-drun: 					"Start  ";
+    display-combi: 					"Combi";
+}
+
+* {
+    background-color:      #3c3836;
+    border-color:          #282828;
+    text-color:            #ebdbb2;
+}
+
+window {
+    anchor:     south;
+    location:   south;
+    width:     100%;
+    padding:    5px;
+    children:   [ horibox ];
+}
+
+horibox {
+    orientation: horizontal;
+    children:   [ prompt, entry, listview ];
+}
+
+listview {
+    layout:     horizontal;
+    spacing:    0px;
+    lines:      100;
+}
+
+entry {
+    expand:     false;
+    width:      14em;
+}
+
+element {
+    padding: 2px 5px;
+    color: #fabd2f;	
+}
+element selected {
+    background-color: #504945;
+    border-radius: 10px;
+}
