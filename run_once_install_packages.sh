@@ -39,7 +39,6 @@ install_package "git"
 install_package "handlr-bin"
 install_package "htop"
 install_package "httpie"
-install_package "neovim"
 install_package "nnn-nerd"
 install_package "python"
 install_package "ripgrep"
@@ -90,7 +89,6 @@ install_package "stylua"
 
 print_in_purple "Linters\n"
 
-install_package "checkmake"
 install_package "eslint"
 install_package "flake8"
 install_package "python-pylint"
@@ -98,19 +96,6 @@ install_package "rust-analyzer"
 install_package "shellcheck"
 install_package "sqlfluff"
 install_package "stylelint"
-
-print_in_purple "LSPs\n"
-
-install_package "bash-language-server"
-install_package "dockerfile-language-server-bin"
-install_package "efm-langserver"
-install_package "gopls"
-install_package "ltex-ls-bin"
-install_package "lua-language-server"
-install_package "pyright"
-install_package "tailwindcss-language-server"
-install_package "texlab"
-install_package "yaml-language-server"
 
 print_in_purple "Interpreters\n"
 
@@ -154,6 +139,7 @@ print_in_purple "Communication\n"
 
 install_package "caprine"
 install_package "slack-wayland"
+install_package "signal-desktop"
 
 print_in_purple "Multimedia\n"
 
@@ -294,7 +280,6 @@ install_package "linux-zen-headers"
 print_in_purple "Drivers\n"
 
 install_package "alsa-utils"
-install_package "earbuds"
 install_package "fwupd"
 install_package "intel-media-driver"
 install_package "mesa"
@@ -349,13 +334,13 @@ install_go_package "github.com/nametake/golangci-lint-langserver@latest" "golang
 print_in_purple "NPM packages\n"
 
 install_npm_package "typescript"
-install_npm_package "typescript-language-server"
-install_npm_package "vscode-langservers-extracted"
+#install_npm_package "typescript-language-server"
+#install_npm_package "vscode-langservers-extracted"
 # slidev - markdown based presentations with a lot of feature, but still in beta
-install_npm_package "@slidev/cli"
+#install_npm_package "@slidev/cli"
 # gitmoji-cli - gitmoji interactive client for using gitmojis on commit messages
-install_npm_package "gitmoji-cli"
-install_npm_package "@prisma/language-server"
+#install_npm_package "gitmoji-cli"
+#install_npm_package "@prisma/language-server"
 
 # print_in_purple "PIP packages\n"
 
