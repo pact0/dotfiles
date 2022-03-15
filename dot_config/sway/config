@@ -28,10 +28,10 @@ set $menu exec $term --app-id=launcher -e env FZF_DEFAULT_OPTS="--layout=reverse
 
 ### Output configuration
 set $wallpapers_path $HOME/pictures/wallpapers/unsplash/
-output * bg `find $wallpapers_path -type f | shuf -n 1` fill
+#output * bg `find $wallpapers_path -type f | shuf -n 1` fill
 # scale 2.0 give proper sized output for most of the wayland apps, but x ones gets pretty blurry
 # scale 1.0 give proper quality x windows, but all clients should be set for a suitable size one by one
-output eDP-1 scale 1.0 scale_filter nearest
+#output eDP-1 scale 1.0 scale_filter nearest
 
 # set custom swaylock command (swaylock-effects)
 set $lock swaylock --screenshots \
@@ -79,7 +79,7 @@ input type:pointer {
 }
 
 input type:keyboard {
-  xkb_layout "us,hu,dk"
+  xkb_layout "us,pl"
   xkb_options caps:escape,grp:rctrl_rshift_toggle
   repeat_delay 250
   repeat_rate 50
