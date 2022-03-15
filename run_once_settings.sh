@@ -28,8 +28,6 @@ if [ "$SHELL" != "/usr/bin/fish" ]; then
 	print_result $? "Set shell to fish"
 fi
 
-execute "if [ ! -d $HOME/.config/nvim ]; then git clone git@github.com:joelazar/nvim-config.git $HOME/.config/nvim; fi;" "Clone neovim config repo"
-
 execute "sudo firecfg" "Firejail auto config"
 
 execute "sudo timedatectl set-ntp true" "Turn on ntp"
@@ -54,6 +52,3 @@ execute "sudo sed -i '/Color$/s/^#//g' /etc/pacman.conf && \
          sudo sed -i '/TotalDownload$/s/^#//g' /etc/pacman.conf && \
          sudo sed -i '/CheckSpace$/s/^#//g' /etc/pacman.conf && \
          sudo sed -i '/VerbosePkgLists$/s/^#//g' /etc/pacman.conf" "Update pacman.conf"
-
-sudo ls /etc/wireguard/ | grep -q mullvad || (curl -LO https://mullvad.net/media/files/mullvad-wg.sh && chmod +x ./mullvad-wg.sh && ./mullvad-wg.sh && rm ./mullvad-wg.sh)
-print_result $? "Setup mullvad"
