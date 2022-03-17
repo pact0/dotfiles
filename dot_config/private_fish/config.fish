@@ -204,7 +204,7 @@ if status is-login
 end
 
 # ensure tmux is running
-alias tat="./.local/bin/tat"
+alias tat="exec ~/.local/bin/tat"
 if status is-interactive
 and not set -q TMUX
   tat

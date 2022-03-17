@@ -78,6 +78,12 @@ theme["mcchrish/zenbones.nvim"] = {}
 
 theme["cocopon/iceberg.vim"] = {}
 
-theme["EdenEast/nightfox.nvim"] = {}
+theme["EdenEast/nightfox.nvim"] = {
+    opt = true,
+    config = function()
+      vim.cmd("colorscheme nightfox")
+      vim.cmd("doautocmd ColorScheme")
+    end
+}
 
 return theme

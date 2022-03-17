@@ -8,6 +8,14 @@ SOURCE_DIR=$(chezmoi source-path)
 
 declare -r INSTALLED_PACKAGES=$((which yay &> /dev/null && [ ! $? -eq 0 ]) || yay -Q)
 
+install_tmux_plugin_manager() {
+  script_path="$HOME/.tmux/plugins/tpm"
+
+  if [ ! -f "$script_path" ]; then
+  execute "git clone https://github.com/tmux-plugins/tpm $script_path" "Install TMUX plugin manager"
+  fi
+}
+
 install_package_manager() {
   execute "(which yay &> /dev/null && [ $? -eq 0 ] ) || (git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay)" "YAY"
 }

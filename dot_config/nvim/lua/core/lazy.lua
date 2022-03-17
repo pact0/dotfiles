@@ -21,7 +21,7 @@ function Lazyload()
         -- "aurora",
         -- "gruvbox",
         -- "ayu-vim"
-        "gruvbox-material",
+        -- "gruvbox-material",
         "nightfox.nvim"
         -- "sonokai"
         -- "github-nvim-theme",
