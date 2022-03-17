@@ -21,7 +21,8 @@ function Lazyload()
         -- "aurora",
         -- "gruvbox",
         -- "ayu-vim"
-        "gruvbox-material"
+        "gruvbox-material",
+        "nightfox.nvim"
         -- "sonokai"
         -- "github-nvim-theme",
     }
@@ -91,7 +92,7 @@ function Lazyload()
         loader("nvim-lsp-ts-utils")
         loader("nvim-lspconfig") -- null-ls.nvim
         loader("lsp_signature.nvim")
-        loader("lspkind-nvim")
+        -- loader("lspkind-nvim")
         loader("nvim-lsputils")
         loader("nvim-lsp-installer")
         print("Loaded lsp")

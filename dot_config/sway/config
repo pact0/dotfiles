@@ -25,8 +25,7 @@ popup_during_fullscreen smart
 set $menu exec $term --app-id=launcher -e env FZF_DEFAULT_OPTS="--layout=reverse --info=inline" sway-launcher-desktop
 
 ### Output configuration
-set $wallpapers_path $HOME/pictures/wallpapers/unsplash/
-output * bg `find $wallpapers_path -type f | shuf -n 1` fill
+exec $HOME/.local/bin/random_wallpaper
 # scale 2.0 give proper sized output for most of the wayland apps, but x ones gets pretty blurry
 # scale 1.0 give proper quality x windows, but all clients should be set for a suitable size one by one
 #output eDP-1 scale 1.0 scale_filter nearest
@@ -94,8 +93,8 @@ bindsym $mod+Shift+q kill
 # Start your launcher
 bindsym $mod+d exec $menu
 
-gaps outer all set 20
-gaps inner all set 20
+gaps outer 10
+gaps inner 10
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
 # Despite the name, also works for non-floating windows.

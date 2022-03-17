@@ -9,7 +9,7 @@ lsp["ray-x/lsp_signature.nvim"] = {opt = true}
 
 lsp["neovim/nvim-lspconfig"] = {opt = true }
 
-lsp["onsails/lspkind-nvim"] = {opt = true}
+-- lsp["onsails/lspkind-nvim"] = {opt = true}
 
 lsp["RishabhRD/nvim-lsputils"] = {opt = true }
 

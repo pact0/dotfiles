@@ -78,4 +78,6 @@ theme["mcchrish/zenbones.nvim"] = {}
 
 theme["cocopon/iceberg.vim"] = {}
 
+theme["EdenEast/nightfox.nvim"] = {}
+
 return theme

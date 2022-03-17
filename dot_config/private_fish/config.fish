@@ -111,6 +111,9 @@ alias vi='nvim'
 alias vim='nvim'
 alias xdg-open="handlr open"
 alias yaegi='rlwrap yaegi'
+alias se="sudoedit"
+alias home="cd ~"
+
 
 # kubectl
 alias k='kubectl'
@@ -152,6 +155,7 @@ alias weather="http -b v2.wttr.in"
 starship init fish | source
 zoxide init fish | source
 direnv hook fish | source
+
 
 # Nightfox Color Palette
 # Style: nightfox
@@ -197,4 +201,11 @@ if status is-login
     if test -z "$DISPLAY" -a $XDG_VTNR = 1 -a (tty) = /dev/tty1 -a "(pgrep sway)"
         sway
     end
+end
+
+# ensure tmux is running
+alias tat="./.local/bin/tat"
+if status is-interactive
+and not set -q TMUX
+  tat
 end
