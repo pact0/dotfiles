@@ -269,6 +269,7 @@ install_package "unzip"
 install_package "viu"
 install_package "wireguard-dkms"
 install_package "wireguard-tools"
+install_package "obs-studio"
 
 print_in_purple "Linux kernels\n"
 

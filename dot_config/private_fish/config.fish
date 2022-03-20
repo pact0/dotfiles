@@ -83,6 +83,9 @@ set -gx NODE_PATH $HOME/.node/lib/node_modules
 # PARUZ config
 set -gx PARUZ yay
 
+# Cargo
+set -gx CARGO_NET_GIT_FETCH_WITH_CLI true
+
 if test -e $HOME/.config/fish/functions/local.fish
     source $HOME/.config/fish/functions/local.fish
 end
