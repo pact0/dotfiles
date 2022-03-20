@@ -324,6 +324,7 @@ install_package "wl-clipboard"
 install_package "wl-mirror"
 install_package "wlr-randr"
 install_package "wtype"
+install_package "xdg-desktop-portal"
 install_package "xdg-desktop-portal-wlr"
 install_package "xorg-xwayland"
 
