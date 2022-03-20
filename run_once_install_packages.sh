@@ -183,6 +183,7 @@ install_package "zathura"
 install_package "zathura-pdf-poppler"
 install_package "zbar"
 install_package "zstd"
+install_package "syncthing"
 
 install_nnn_plugins
 
