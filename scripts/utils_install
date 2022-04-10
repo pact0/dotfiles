@@ -16,6 +16,14 @@ install_tmux_plugin_manager() {
   fi
 }
 
+install_neovim() {
+  script_path="$HOME/neovim"
+
+  if [ ! -f "$script_path" ]; then
+  execute "git clone https://github.com/neovim/neovim.git $script_path && sudo make && sudo make install && sudo rm -rf $script_path" "Install neovim"
+  fi
+}
+
 install_package_manager() {
   execute "(which yay &> /dev/null && [ $? -eq 0 ] ) || (git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay)" "YAY"
 }
@@ -122,4 +130,76 @@ install_blackarch_repo() {
   if ! yay -Sg | grep -q "^blackarch" &>/dev/null; then
     execute "curl -s https://blackarch.org/strap.sh | sudo bash" "install blackarch repo"
   fi
+}
+
+install_sway() {
+  ask_for_confirmation "Do you want to install sway and wayland?\n"
+  if answer_is_yes; then
+	  print_in_purple "Sway\n"
+
+	  install_package "batsignal"
+	  install_package "blueman"
+	  install_package "bluez-utils"
+	  install_package "brightnessctl"
+	  install_package "clipman"
+	  install_package "gammastep"
+	  install_package "grim"
+	  install_package "kanshi"
+	  install_package "libappindicator-gtk3"
+	  install_package "libnotify"
+	  install_package "mako"
+	  install_package "materia-gtk-theme"
+	  install_package "networkmanager"
+	  install_package "pavucontrol"
+	  install_package "playerctl"
+	  install_package "polkit-kde-agent"
+	  install_package "pulsemixer"
+	  install_package "qt5-wayland"
+	  install_package "slurp"
+	  install_package "swappy"
+	  install_package "sway"
+	  install_package "sway-launcher-desktop"
+	  install_package "swayidle"
+	  install_package "swaylock-effects-git"
+	  install_package "tigervnc"
+	  install_package "waybar"
+	  install_package "wayvnc"
+	  install_package "wdisplays"
+	  install_package "wf-recorder"
+	  install_package "wl-clipboard"
+	  install_package "wl-mirror"
+	  install_package "wlr-randr"
+	  install_package "wtype"
+	  install_package "xdg-desktop-portal"
+	  install_package "xdg-desktop-portal-wlr"
+	  install_package "xorg-xwayland"
+  fi
+}
+
+install_drivers() {
+	ask_for_confirmation "Do you want to install drivers?\n"
+	if answer_is_yes; then
+		print_in_purple "Drivers\n"
+
+		install_package "alsa-utils"
+		install_package "fwupd"
+		install_package "intel-media-driver"
+		install_package "mesa"
+		install_package "pipewire"
+		install_package "pipewire-media-session"
+		install_package "sof-firmware"
+		install_package "vulkan-intel"
+	fi
+}
+
+install_kernels() {
+	ask_for_confirmation "Do you want to install kernelrs?\n"
+	if answer_is_yes; then
+		print_in_purple "Linux kernels\n"
+
+		install_package "linux-lts"
+		install_package "linux-lts-headers"
+		install_package "linux-zen"
+		install_package "linux-zen-headers"
+	fi
 }

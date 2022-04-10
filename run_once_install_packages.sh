@@ -16,9 +16,24 @@ ask_for_sudo
 
 install_package_manager
 
+
+print_in_purple "Essentials\n"
+
+install_package "make"
+install_package "cmake"
+install_package "gcc"
+install_package "base-devel"
+install_package "ninja"
+install_package "tree-sitter"
+install_package "curl"
+
 enable_multilib
 
 install_blackarch_repo
+
+install_tmux_plugin_manager
+
+install_neovim
 
 update
 
@@ -50,7 +65,6 @@ install_package "zoxide"
 print_in_purple "Infrastructure\n"
 
 install_package "docker-compose"
-install_package "google-cloud-sdk"
 install_package "helm"
 install_package "k9s"
 install_package "kubectl"
@@ -271,63 +285,13 @@ install_package "viu"
 install_package "wireguard-dkms"
 install_package "wireguard-tools"
 install_package "obs-studio"
+install_package "qbittorrent"
 
-print_in_purple "Linux kernels\n"
+install_kernels
 
-install_package "linux-lts"
-install_package "linux-lts-headers"
-install_package "linux-zen"
-install_package "linux-zen-headers"
+install_drivers
 
-print_in_purple "Drivers\n"
-
-install_package "alsa-utils"
-install_package "fwupd"
-install_package "intel-media-driver"
-install_package "mesa"
-install_package "pipewire"
-install_package "pipewire-media-session"
-install_package "sof-firmware"
-install_package "vulkan-intel"
-
-print_in_purple "Sway\n"
-
-install_package "batsignal"
-install_package "blueman"
-install_package "bluez-utils"
-install_package "brightnessctl"
-install_package "clipman"
-install_package "gammastep"
-install_package "grim"
-install_package "kanshi"
-install_package "libappindicator-gtk3"
-install_package "libnotify"
-install_package "mako"
-install_package "materia-gtk-theme"
-install_package "networkmanager"
-install_package "pavucontrol"
-install_package "playerctl"
-install_package "polkit-kde-agent"
-install_package "pulsemixer"
-install_package "qt5-wayland"
-install_package "slurp"
-install_package "swappy"
-install_package "sway"
-install_package "sway-launcher-desktop"
-install_package "swayidle"
-install_package "swaylock-effects-git"
-install_package "tigervnc"
-install_package "waybar"
-install_package "wayvnc"
-install_package "wdisplays"
-install_package "wf-recorder"
-install_package "wl-clipboard"
-install_package "wl-mirror"
-install_package "wlr-randr"
-install_package "wtype"
-install_package "xdg-desktop-portal"
-install_package "xdg-desktop-portal-wlr"
-install_package "xorg-xwayland"
+install_sway
 
 print_in_purple "GO packages\n"
 
