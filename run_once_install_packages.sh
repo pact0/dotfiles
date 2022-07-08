@@ -3,8 +3,8 @@
 SOURCE_DIR=$(chezmoi source-path)
 
 cd "$SOURCE_DIR" &&
-	. "$SOURCE_DIR/scripts/utils_install" &&
-	. "$SOURCE_DIR/scripts/utils"
+	source "$SOURCE_DIR/scripts/utils_install" &&
+	source "$SOURCE_DIR/scripts/utils"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
