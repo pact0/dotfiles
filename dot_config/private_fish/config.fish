@@ -34,7 +34,7 @@ set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # Customize PATH
 set -gx GOPATH $HOME/go
-set -gx PATH $HOME/.node/bin $HOME/.yarn/bin $HOME/.local/bin /usr/lib/go/bin $GOPATH/bin $HOME/.cargo/bin $PATH
+set -gx PATH $HOME/.node/bin $HOME/.yarn/bin $HOME/.local/bin /usr/lib/go/bin $GOPATH/bin $HOME/.cargo/bin $HOME/.local/share/gem/ruby/3.0.0/bin $PATH
 
 # FZF options
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git --exclude node_modules'
@@ -88,6 +88,11 @@ set -gx CARGO_NET_GIT_FETCH_WITH_CLI true
 
 if test -e $HOME/.config/fish/functions/local.fish
     source $HOME/.config/fish/functions/local.fish
+end
+
+if test -e $HOME/.config/fish/abbr
+    source $HOME/.config/fish/abbr/yarn.fish
+    source $HOME/.config/fish/abbr/docker.fish
 end
 
 alias c="clear"

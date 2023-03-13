@@ -244,6 +244,7 @@ install_fish_plugin "lgathy/google-cloud-sdk-fish-completion" "gcloud-completion
 install_fish_plugin "gazorby/fish-abbreviation-tips" "fish-abbreviation-tips"
 install_fish_plugin "nickeb96/puffer-fish" "puffer-fish"
 install_fish_plugin "jorgebucaran/replay.fish" "replay.fish"
+install_fish_plugin "meaningful-ooo/sponge" "sponge"
 
 print_in_purple "Utilities\n"
 
@@ -289,6 +290,9 @@ install_package "wireguard-dkms"
 install_package "wireguard-tools"
 install_package "obs-studio"
 install_package "qbittorrent"
+install_package "pipes.sh"
+
+gem install tmuxinator
 
 install_kernels
 
