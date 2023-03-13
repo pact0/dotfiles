@@ -44,8 +44,6 @@ execute "sudo systemctl enable tlp.service" "Turn on tlp"
 
 execute "systemctl --user enable pipewire-pulse" "Turn on pipewire pulseaudio server"
 
-execute "sudo systemctl enable bluetooth.service" "Turn on bluetooth"
-
 execute "sudo systemctl enable docker.service" "Turn on docker"
 
 execute "sudo systemctl enable syncthing@$USER.service" "Turn on syncthing"
