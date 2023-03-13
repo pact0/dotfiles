@@ -226,7 +226,6 @@ print_in_purple "Shell\n"
 install_package "alacritty"
 install_package "fish"
 install_package "fisher"
-install_package "foot"
 install_package "hyperfine"
 install_package "starship"
 install_package "theme.sh"
@@ -294,11 +293,11 @@ install_package "pipes.sh"
 
 gem install tmuxinator
 
-install_kernels
+#install_kernels
 
-install_drivers
+#install_drivers
 
-install_sway
+#install_sway
 
 print_in_purple "GO packages\n"
 
