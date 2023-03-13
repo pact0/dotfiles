@@ -241,6 +241,9 @@ install_fish_plugin "jorgebucaran/autopair.fish" "autopair.fish"
 install_fish_plugin "jorgebucaran/nvm.fish" "nvm.fish"
 install_fish_plugin "jorgebucaran/replay.fish" "replay"
 install_fish_plugin "lgathy/google-cloud-sdk-fish-completion" "gcloud-completion"
+install_fish_plugin "gazorby/fish-abbreviation-tips" "fish-abbreviation-tips"
+install_fish_plugin "nickeb96/puffer-fish" "puffer-fish"
+install_fish_plugin "jorgebucaran/replay.fish" "replay.fish"
 
 print_in_purple "Utilities\n"
 

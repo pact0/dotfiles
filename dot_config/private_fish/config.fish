@@ -17,7 +17,7 @@ set -gx FILE nnn
 set -gx READER zathura
 set -gx PAGER "bat --plain"
 set -gx STATUSBAR waybar
-set -gx TERMINAL footclient
+set -gx TERMINAL alacritty
 set -gx VISUAL ewrap
 
 # Set cursor theme
@@ -34,7 +34,7 @@ set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # Customize PATH
 set -gx GOPATH $HOME/go
-set -gx PATH $HOME/.node/bin $HOME/.yarn/bin $HOME/.local/bin /usr/lib/go/bin $GOPATH/bin $PATH
+set -gx PATH $HOME/.node/bin $HOME/.yarn/bin $HOME/.local/bin /usr/lib/go/bin $GOPATH/bin $HOME/.cargo/bin $PATH
 
 # FZF options
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git --exclude node_modules'
@@ -212,3 +212,11 @@ if status is-interactive
 and not set -q TMUX
   tat
 end
+
+# abbreviates
+set -U ABBR_TIPS_PROMPT "\n󰌵 \e[1m{{ .abbr }}\e[0m => {{ .cmd }}"
+set -U ABBR_TIPS_ALIAS_WHITELIST # Not set
+
+set -U ABBR_TIPS_REGEXES '(^(\w+\s+)+(-{1,2})\w+)(\s\S+)' '(^( ?\w+){3}).*' '(^( ?\w+){2}).*' '(^( ?\w+){1}).*'
+
+alias bsh=replay
