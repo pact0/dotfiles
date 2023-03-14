@@ -1,0 +1,5 @@
+export LIBVA_DERIVE_NAME=nvidia
+export XDG_SESSION_TYPE=wayland
+export GDM_BACKEND=navidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export WLR_NO_HARDWARE_CURSORS=1

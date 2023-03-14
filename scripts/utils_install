@@ -203,3 +203,46 @@ install_kernels() {
 		install_package "linux-zen-headers"
 	fi
 }
+
+install_nvidia() {
+	ask_for_confirmation "Do you want to install nvidia?\n"
+	if answer_is_yes; then
+		print_in_purple "Nvidia\n"
+
+		install_package "nvidia"
+		install_package "nvidia-libgl"
+		install_package "linux-headers"
+		install_package "base-devel"
+  fi
+}
+
+
+install_hyprland() {
+  ask_for_confirmation "Install Hyprland"
+  if answer_is_yes; then
+	  print_in_purple "Hyprland\n"
+
+		install_package "hyprland-git"
+		install_package "wofi"
+		install_package "dunst"
+		install_package "eww-wayland"
+		install_package "swayidle"
+		install_package "swaylock-effects-git"
+		install_package "swaylockd"
+		install_package "sway-audio-idle-inhibit-git"
+		install_package "pamixer"
+		install_package "light-git"
+		install_package "playerctl"
+		install_package "xdg-desktop-portal-wlr"
+		install_package "grim"
+		install_package "slurp"
+		install_package "wl-clipboard"
+		install_package "socat"
+		install_package "swappy"
+		install_package "cliphist"
+		install_package "nm-connection-editor "
+		install_package "dictd"
+		install_package "wl-clip-persist-git"
+		install_package "swww-git"
+  fi
+}

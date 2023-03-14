@@ -48,6 +48,8 @@ execute "sudo systemctl enable docker.service" "Turn on docker"
 
 execute "sudo systemctl enable syncthing@$USER.service" "Turn on syncthing"
 
+execute "sudo systemctl enable sddm" "Turn on syncthing"
+
 execute "sudo sed -i '/Color$/s/^#//g' /etc/pacman.conf && \
          sudo sed -i '/TotalDownload$/s/^#//g' /etc/pacman.conf && \
          sudo sed -i '/CheckSpace$/s/^#//g' /etc/pacman.conf && \

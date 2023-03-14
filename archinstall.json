@@ -1,12 +1,11 @@
 {
   "audio": "pipewire",
   "bootloader": "grub-install",
-  "filesystem": "btrfs",
-  "gfx_driver": "Intel (open-source)",
+  "filesystem": "ext4",
   "harddrives": ["/dev/nvme0n1"],
   "swap": true,
   "hostname": "pacto",
-  "kernels": ["linux", "linux-zen", "linux-lts"],
+  "kernels": ["linux"],
   "keyboard-language": "us",
   "mirror-region": "Frankfurt",
   "nic": {

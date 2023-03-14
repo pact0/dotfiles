@@ -51,7 +51,6 @@ install_package "exa"
 install_package "fd"
 install_package "firejail"
 install_package "git"
-install_package "handlr-bin"
 install_package "htop"
 install_package "httpie"
 install_package "nnn-nerd"
@@ -69,7 +68,6 @@ install_package "helm"
 install_package "k9s"
 install_package "kubectl"
 install_package "kubectx"
-install_package "kubeseal-bin"
 install_package "kubetail"
 install_package "kubeval-bin"
 install_package "minikube"
@@ -121,7 +119,6 @@ print_in_purple "Misc\n"
 install_package "go-swagger"
 install_package "golang-mockery"
 install_package "gomodifytags"
-install_package "gotestsum"
 install_package "python-coverage"
 install_package "python-notedown"
 install_package "python-pynvim"
@@ -152,7 +149,6 @@ install_package "visual-studio-code-bin"
 print_in_purple "Communication\n"
 
 install_package "caprine"
-install_package "slack-wayland"
 install_package "signal-desktop"
 
 print_in_purple "Multimedia\n"
@@ -172,7 +168,7 @@ install_package "acpi"
 install_package "acpi_call"
 install_package "aspell-en"
 install_package "bitwarden"
-install_package "bitwarden-cli"
+#install_package "bitwarden-cli"
 install_package "bleachbit"
 install_package "calibre"
 install_package "graphviz"
@@ -203,7 +199,6 @@ install_nnn_plugins
 
 print_in_purple "Fonts\n"
 
-install_package "nerd-fonts-hack"
 install_package "noto-fonts"
 install_package "noto-fonts-emoji"
 install_package "ttf-courier-prime"
@@ -260,6 +255,7 @@ install_package "etcher-bin"
 install_package "fzf"
 install_package "gvfs"
 install_package "jc"
+install_package "bc"
 install_package "jq"
 install_package "libreoffice-still"
 install_package "lsof"
@@ -279,8 +275,8 @@ install_package "strace"
 install_package "system-config-printer"
 install_package "sysz"
 install_package "tcpdump"
-install_package "timeshift"
-install_package "timeshift-autosnap"
+# install_package "timeshift"
+# install_package "timeshift-autosnap"
 install_package "tlp"
 install_package "tlp-rdw"
 install_package "unzip"
@@ -307,6 +303,10 @@ install_go_package "github.com/nametake/golangci-lint-langserver@latest" "golang
 print_in_purple "NPM packages\n"
 
 install_npm_package "typescript"
+
+install_nvidia
+
+install_hyprland
 #install_npm_package "typescript-language-server"
 #install_npm_package "vscode-langservers-extracted"
 # slidev - markdown based presentations with a lot of feature, but still in beta
@@ -319,8 +319,8 @@ install_npm_package "typescript"
 
 # install_pip_package "" ""
 
-print_in_purple "GH plugins\n"
-
-install_gh_plugin "dlvhdr/gh-prs"
+# print_in_purple "GH plugins\n"
+#
+# install_gh_plugin "dlvhdr/gh-prs"
 
 clean_up_cache

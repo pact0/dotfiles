@@ -21,13 +21,13 @@ set -gx TERMINAL alacritty
 set -gx VISUAL ewrap
 
 # Set cursor theme
-set -gx XCURSOR_THEME Adwaita
-set -gx SWAY_CURSOR_THEME Adwaita
-set -gx XCURSOR_SIZE 16
-set -gx SWAY_CURSOR_SIZE 16
+# set -gx XCURSOR_THEME Adwaita
+# set -gx SWAY_CURSOR_THEME Adwaita
+# set -gx XCURSOR_SIZE 16
+# set -gx SWAY_CURSOR_SIZE 16
 
 # Desktop settings for screen casting
-set -gx XDG_CURRENT_DESKTOP sway
+# set -gx XDG_CURRENT_DESKTOP sway
 
 # Set bat as man pager
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
@@ -205,11 +205,11 @@ set -U __done_min_cmd_duration 10000
 set -U __done_exclude n
 
 # Start Sway at login
-if status is-login
-    if test -z "$DISPLAY" -a $XDG_VTNR = 1 -a (tty) = /dev/tty1 -a "(pgrep sway)"
-        sway
-    end
-end
+# if status is-login
+#     if test -z "$DISPLAY" -a $XDG_VTNR = 1 -a (tty) = /dev/tty1 -a "(pgrep sway)"
+#         sway
+#     end
+# end
 
 # ensure tmux is running
 alias tat="exec ~/.local/bin/tat"
