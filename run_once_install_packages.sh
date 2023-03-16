@@ -161,6 +161,7 @@ install_package "mpv"
 install_package "ncspot"
 install_package "spotify"
 install_package "xournalpp"
+install_package "krita"
 
 print_in_purple "Miscellaneous\n"
 
@@ -289,6 +290,10 @@ install_package "pipes.sh"
 
 gem install tmuxinator
 
+print_in_purple "Games\n"
+install_package "steam"
+install_package "heroic-games-launcher-bin"
+
 #install_kernels
 
 #install_drivers
@@ -304,9 +309,13 @@ print_in_purple "NPM packages\n"
 
 install_npm_package "typescript"
 
-install_nvidia
+#spotify_perms
+
+#install_nvidia
+#install_audio
 
 install_hyprland
+
 #install_npm_package "typescript-language-server"
 #install_npm_package "vscode-langservers-extracted"
 # slidev - markdown based presentations with a lot of feature, but still in beta

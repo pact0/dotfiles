@@ -217,13 +217,34 @@ install_nvidia() {
 }
 
 
+install_audio() {
+	ask_for_confirmation "Do you want to install audio drivers?\n"
+	if answer_is_yes; then
+		print_in_purple "Pipewire Audio\n"
+
+		install_package "pipewire"
+		install_package "wireplumber"
+		install_package "lib32-pipewire"
+		install_package "pipewire-alsa"
+		install_package "pipewire-pulse"
+		install_package "pipewire-jack"
+		install_package "pavucontrol"
+		install_package "playerctl"
+		install_package "pavucontrol"
+		install_package "sddm-sugar-candy-git"
+		install_package "sddm"
+  fi
+}
+
 install_hyprland() {
   ask_for_confirmation "Install Hyprland"
   if answer_is_yes; then
 	  print_in_purple "Hyprland\n"
 
-		install_package "hyprland-git"
+		install_package "hyprland-nvidia-git"
 		install_package "wofi"
+		install_package "wofi-wifi-menu"
+		install_package "udev-block-notify"
 		install_package "dunst"
 		install_package "eww-wayland"
 		install_package "swayidle"
@@ -233,16 +254,28 @@ install_hyprland() {
 		install_package "pamixer"
 		install_package "light-git"
 		install_package "playerctl"
-		install_package "xdg-desktop-portal-wlr"
 		install_package "grim"
 		install_package "slurp"
 		install_package "wl-clipboard"
 		install_package "socat"
 		install_package "swappy"
 		install_package "cliphist"
-		install_package "nm-connection-editor "
+		install_package "nm-connection-editor"
 		install_package "dictd"
 		install_package "wl-clip-persist-git"
 		install_package "swww-git"
+		install_package "xdg-desktop-portal-hyprland-git"
+		install_package "xdg-desktop-portal"
+		install_package "qt6-wayland"
+		install_package "qt5-wayland"
+		install_package "polkit-kde-agent"
+		install_package "wlogout"
+		install_package "grimblast"
+		install_package "kcalc"
   fi
+}
+
+spotify_perms() {
+  chmod a+wr /opt/spotify
+  chmod a+wr /opt/spotify/Apps -R
 }

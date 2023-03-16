@@ -3,12 +3,12 @@ set -U fish_greeting
 fish_vi_key_bindings
 
 # Wayland specific envvars
-set -gx MOZ_ENABLE_WAYLAND 1
-set -gx MOZ_DBUS_REMOTE 1
-set -gx MOZ_WEBRENDER 1
-set -gx MOZ_ACCELERATED 1
-set -gx XDG_SESSION_TYPE wayland
-set -gx _JAVA_AWT_WM_NONREPARENTING 1
+#set -gx MOZ_ENABLE_WAYLAND 1
+#set -gx MOZ_DBUS_REMOTE 1
+#set -gx MOZ_WEBRENDER 1
+#set -gx MOZ_ACCELERATED 1
+#set -gx XDG_SESSION_TYPE wayland
+#set -gx _JAVA_AWT_WM_NONREPARENTING 1
 
 # Make default programs
 set -gx BROWSER firefox
@@ -28,6 +28,12 @@ set -gx VISUAL ewrap
 
 # Desktop settings for screen casting
 # set -gx XDG_CURRENT_DESKTOP sway
+
+#set LIBVA_DERIVE_NAME nvidia
+#set XDG_SESSION_TYPE wayland
+#set GDM_BACKEND navidia-drm
+#set __GLX_VENDOR_LIBRARY_NAME nvidia
+#set WLR_NO_HARDWARE_CURSORS 1
 
 # Set bat as man pager
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
