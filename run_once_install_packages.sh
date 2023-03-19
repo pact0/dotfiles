@@ -26,6 +26,7 @@ install_package "base-devel"
 install_package "ninja"
 install_package "tree-sitter"
 install_package "curl"
+install_package "wget"
 
 enable_multilib
 
@@ -33,7 +34,7 @@ install_blackarch_repo
 
 install_tmux_plugin_manager
 
-install_neovim
+#install_neovim
 
 update
 
@@ -60,6 +61,7 @@ install_package "sad"
 install_package "sd"
 install_package "tmux"
 install_package "zoxide"
+install_package "neovim-nightly-bin"
 
 print_in_purple "Infrastructure\n"
 
@@ -79,7 +81,7 @@ install_package "gcc"
 install_package "go"
 install_package "jdk-openjdk"
 install_package "nodejs"
-install_package "rust"
+install_package "rustup"
 
 print_in_purple "Package managers\n"
 
@@ -130,7 +132,6 @@ install_package "texlive-science"
 print_in_purple "Development tools\n"
 
 install_package "ctags"
-install_package "curl"
 install_package "direnv"
 install_package "exercism-bin"
 install_package "git-delta"
@@ -284,9 +285,10 @@ install_package "unzip"
 install_package "viu"
 install_package "wireguard-dkms"
 install_package "wireguard-tools"
-install_package "obs-studio"
+install_package "obs-studio-git"
 install_package "qbittorrent"
 install_package "pipes.sh"
+
 
 gem install tmuxinator
 

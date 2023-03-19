@@ -34,6 +34,7 @@ enable_multilib() {
 
 install_nnn_plugins() {
   script_path="$HOME/.config/nnn/plugins/getplugs"
+  mkdir -p "$HOME/.config/nnn/plugins"
 
   if [ ! -f "$script_path" ]; then
     wget https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs -O "$script_path"
@@ -243,7 +244,7 @@ install_hyprland() {
 
 		install_package "hyprland-nvidia-git"
 		install_package "wofi"
-		install_package "wofi-wifi-menu"
+		install_package "wofi-wifi-menu-git"
 		install_package "udev-block-notify"
 		install_package "dunst"
 		install_package "eww-wayland"
@@ -270,7 +271,7 @@ install_hyprland() {
 		install_package "qt5-wayland"
 		install_package "polkit-kde-agent"
 		install_package "wlogout"
-		install_package "grimblast"
+		install_package "grimblast-git"
 		install_package "kcalc"
   fi
 }
