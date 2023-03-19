@@ -24,3 +24,9 @@ options nvidia-drm modeset=1
 ` sudo mkinitcpio -P `
 
 
+### Env
+
+/usr/share/sddm/scripts/wayland-session
+```
+export WLR_NO_HARDWARE_CURSORS=1
+```
