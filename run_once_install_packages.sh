@@ -287,9 +287,11 @@ install_package "wireguard-dkms"
 install_package "wireguard-tools"
 install_package "obs-studio-git"
 install_package "qbittorrent"
+install_package "discord-screenaudio"
 install_package "pipes.sh"
 
 
+cargo install hyprsome
 gem install tmuxinator
 
 print_in_purple "Games\n"
@@ -314,7 +316,7 @@ install_npm_package "typescript"
 #spotify_perms
 
 #install_nvidia
-#install_audio
+install_audio
 
 install_hyprland
 

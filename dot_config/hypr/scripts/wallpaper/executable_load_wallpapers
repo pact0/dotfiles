@@ -1,0 +1,21 @@
+#!/bin/bash
+
+source $HOME/.config/hypr/scripts/variables/env_common
+
+
+all_monitors=$(hyprctl monitors | grep "^Monitor" | cut -d"(" -f1 | cut -d" " -f2-)
+
+while read -r monitor; do
+  checkENVDir $monitor
+  wall=$(cat "$save_location/$monitor")
+  f="$save_location/$monitor"
+  #echo "wall $wall monitor $monitor f $f"
+
+  if [ -s $f ]; then
+    #echo "The file contains text"
+    $HOME/.config/hypr/scripts/wallpaper/set_wallpaper $wall $monitor
+  else
+    #echo "File is empty"
+    $HOME/.config/hypr/scripts/wallpaper/wallpaper_random $monitor
+  fi
+done <<< "$all_monitors"

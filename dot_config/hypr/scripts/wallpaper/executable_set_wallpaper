@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#perform cleanup and exit
+if ! swww query; then
+    swww init
+fi
+
+swww img -t any --transition-bezier 0.0,0.0,1.0,1.0 --transition-duration .8 --transition-step 255 --transition-fps 60 $1 -o $2
+$HOME/.config/hypr/scripts/variables/set_env_bg $2 $1
+

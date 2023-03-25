@@ -1,0 +1,26 @@
+#!/bin/bash
+
+folder="$HOME/Pictures/wallpapers"
+
+output=$(find "$folder" -type f | while read file; do
+    # If the file is in a subfolder, display it in the format "subfolder/file"
+    if [[ "$file" != "$folder/"* ]]; then
+        subfolder="$(dirname "$file" | sed "s|^$folder/||")"
+        echo "$subfolder/$(basename "$file")" | sed "s|^$folder/||"
+    else
+        # Otherwise, just display the filename
+        echo "$file" | sed "s|^$folder/||"
+    fi
+done)
+
+wallpaper_location="$folder/$(echo "$output" | wofi --show dmenu)"
+
+current_monitor=$(hyprctl monitors | grep -B 10 "focused: yes" | head -n 1 | sed -E 's/^Monitor ([^[:space:]]+) \(ID [^)]+\):/\1/')
+
+hypr=$HOME/.config/hypr
+
+if [ $# -eq 0 ]; then
+  $hypr/scripts/wallpaper/set_wallpaper "$wallpaper_location" "$current_monitor" 
+else
+  $hypr/scripts/wallpaper/set_wallpaper "$wallpaper_location" $1
+fi

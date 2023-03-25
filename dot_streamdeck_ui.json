@@ -1,0 +1,239 @@
+{
+  "streamdeck_ui_version": 1,
+  "state": {
+    "DL49K1A66204": {
+      "buttons": {
+        "0": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {
+            "switch_page": 2,
+            "text": ">",
+            "icon": "/home/pacto/icons/Arrow_pointing_to_right_1_1.gif"
+          }
+        },
+        "1": {
+          "0": {
+            "keys": "",
+            "text": "",
+            "command": "/home/pacto/.config/dunst/scripts/volume toggle_mute_mic",
+            "icon": "/home/pacto/icons/Mic_2_1_1.gif"
+          },
+          "1": {
+            "text": "",
+            "command": "/home/pacto/.config/dunst/scripts/volume mute",
+            "icon": "/home/pacto/icons/Music_Note_1_1.gif"
+          },
+          "2": {
+            "text": "",
+            "text_vertical_align": "middle-bottom",
+            "icon": "/home/pacto/icons/Music_Headphones_1_1.gif",
+            "command": "pactl set-default-sink alsa_output.usb-iFi__by_AMR__iFi__by_AMR__HD_USB_Audio_0003-00.pro-output-0"
+          },
+          "3": {
+            "text": "",
+            "keys": "",
+            "text_vertical_align": "middle-bottom",
+            "icon": "/home/pacto/icons/Announcer_1_1.gif",
+            "command": "pactl set-default-sink alsa_output.usb-DisplayLink_ThinkPad_Hybrid_USB-C_with_USB-A_Dock_12232287-02.analog-stereo"
+          },
+          "4": {
+            "write": "",
+            "command": "/home/pacto/.config/tmux/plugins/tmux-pomodoro-plus/scripts start",
+            "keys": "",
+            "icon": "/home/pacto/icons/BUG_1_1.gif"
+          },
+          "5": {
+            "command": "playerctl position 5-",
+            "text": "",
+            "icon": "/home/pacto/icons/Double_angle_left_1_1.gif"
+          },
+          "6": {
+            "command": "playerctl previous",
+            "text": "",
+            "icon": "/home/pacto/icons/Angle_Arrow_Left_1_1.gif"
+          },
+          "7": {
+            "command": "playerctl play-pause",
+            "text": "",
+            "icon": "/home/pacto/icons/Circle_otline_1_1.gif"
+          },
+          "8": {
+            "command": "playerctl next",
+            "text": "",
+            "icon": "/home/pacto/icons/Angle_arrow_Right_1_1.gif"
+          },
+          "9": {
+            "text": "",
+            "command": "playerctl position 5+",
+            "icon": "/home/pacto/icons/Double_angle_right_1_1.gif"
+          },
+          "10": {
+            "switch_page": 1,
+            "text": "",
+            "icon": "/home/pacto/icons/Arrow_pointing_to_left_1_1.gif"
+          },
+          "11": {},
+          "12": {},
+          "13": {
+            "text": "OBS start",
+            "command": "ydotool key 125:1 68:1 68:0 125:0",
+            "keys": ""
+          },
+          "14": {
+            "icon": "/home/pacto/icons/Arrow_pointing_to_right_1_1.gif"
+          }
+        },
+        "2": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        },
+        "3": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        },
+        "4": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        },
+        "5": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        },
+        "6": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        },
+        "7": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        },
+        "8": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        },
+        "9": {
+          "0": {},
+          "1": {},
+          "2": {},
+          "3": {},
+          "4": {},
+          "5": {},
+          "6": {},
+          "7": {},
+          "8": {},
+          "9": {},
+          "10": {},
+          "11": {},
+          "12": {},
+          "13": {},
+          "14": {}
+        }
+      },
+      "page": 1
+    }
+  }
+}

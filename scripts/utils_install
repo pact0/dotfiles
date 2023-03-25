@@ -232,8 +232,6 @@ install_audio() {
 		install_package "pavucontrol"
 		install_package "playerctl"
 		install_package "pavucontrol"
-		install_package "sddm-sugar-candy-git"
-		install_package "sddm"
   fi
 }
 
@@ -273,10 +271,21 @@ install_hyprland() {
 		install_package "wlogout"
 		install_package "grimblast-git"
 		install_package "kcalc"
+		install_package "hyprpicker"
+		install_package "sddm-sugar-candy-git"
+		install_package "sddm-git"
+		install_package "spicetify-cli"
   fi
 }
 
 spotify_perms() {
   chmod a+wr /opt/spotify
   chmod a+wr /opt/spotify/Apps -R
+
+  spicetify backup apply
+
+  spicetify config extensions dribbblish.js
+  spicetify config current_theme Dribbblish color_scheme apatheia
+  spicetify config inject_css 1 replace_colors 1 overwrite_assets 1
+  spicetify apply
 }

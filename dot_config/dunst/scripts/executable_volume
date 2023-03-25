@@ -28,8 +28,20 @@ else
 fi
 }
 
+toggle_mute_mic() {
+muted="$(pamixer --default-source --get-mute)"
+if $muted; then
+  pamixer --default-source -u
+  dunstify -a "VOLUME" "MIC UNMUTED" -i audio-input-microphone-symbolic -r 2593 -u normal
+else 
+  pamixer --default-source -m
+  dunstify -a "VOLUME" "MIC MUTED" -i audio-input-microphone-muted-symbolic -r 2593 -u normal
+fi
+}
+
 case "$1" in
   up) up;;
   down) down;;
   mute) mute;;
+  toggle_mute_mic) toggle_mute_mic;;
 esac
