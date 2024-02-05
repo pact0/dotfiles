@@ -34,4 +34,4 @@ for id in "${NB_MONITORS[@]}"; do
 done
 
 
-# hyprctl dispatch focusmonitor "$PRIMARY_MONITOR_ID"
+hyprctl dispatch focusmonitor "$PRIMARY_MONITOR_ID"

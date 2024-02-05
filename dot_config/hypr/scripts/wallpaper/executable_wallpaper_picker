@@ -15,7 +15,7 @@ done)
 
 wallpaper_location="$folder/$(echo "$output" | wofi --show dmenu)"
 
-current_monitor=$(hyprctl monitors | grep -B 10 "focused: yes" | head -n 1 | sed -E 's/^Monitor ([^[:space:]]+) \(ID [^)]+\):/\1/')
+current_monitor=$(hyprctl monitors | grep -B 11 "focused: yes" | head -n 1 | sed -E 's/^Monitor ([^[:space:]]+) \(ID [^)]+\):/\1/')
 
 hypr=$HOME/.config/hypr
 
