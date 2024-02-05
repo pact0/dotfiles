@@ -223,6 +223,28 @@ alias tat="exec ~/.local/bin/tat"
 #and not set -q TMUX
 #  tat
 #end
+#
+
+function nvim-chad
+    env NVIM_APPNAME=nvim-chad nvim
+end
+
+function nvim-astro
+    env NVIM_APPNAME=nvim-astro nvim
+end
+
+function nvims
+    set items nvim-astro nvim-chad nvim-chadder
+    set config (printf "%s\n" $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+    if [ -z $config ]
+        echo "Nothing selected"
+        return 0
+    else if [ $config = "default" ]
+        set config ""
+    end
+    env NVIM_APPNAME=$config nvim $argv
+end
+
 
 # abbreviates
 set -U ABBR_TIPS_PROMPT "\n󰌵 \e[1m{{ .abbr }}\e[0m => {{ .cmd }}"

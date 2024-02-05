@@ -236,7 +236,7 @@ install_audio() {
 }
 
 install_hyprland() {
-  ask_for_confirmation "Install Hyprland"
+  ask_for_confirmation "Install Hyprland"scrip
   if answer_is_yes; then
 	  print_in_purple "Hyprland\n"
 
@@ -272,8 +272,8 @@ install_hyprland() {
 		install_package "grimblast-git"
 		install_package "kcalc"
 		install_package "hyprpicker"
-		install_package "sddm-sugar-candy-git"
 		install_package "sddm-git"
+		install_package "sddm-sugar-candy-git"
 		install_package "spicetify-cli"
   fi
 }

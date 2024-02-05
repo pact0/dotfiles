@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source $HOME/.config/hypr/scripts/variables/env_common
+
+checkENVDir "PRIMARY_MONITOR"
+echo $1 > "$save_location/PRIMARY_MONITOR"
