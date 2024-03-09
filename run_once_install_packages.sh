@@ -128,6 +128,7 @@ install_package "python-numpy"
 install_package "python-matplotlib"
 install_package "texlive-latexextra"
 install_package "texlive-science"
+install_package "smassh"
 
 print_in_purple "Development tools\n"
 
